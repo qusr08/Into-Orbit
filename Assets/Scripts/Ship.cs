@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ship : GravityObject {
 	[Header("--- Ship Class ---")]
-	[SerializeField] private GameObject particlePrefab;
+	[SerializeField] private Collider2D launchingCollider;
 	[Space]
 	[SerializeField] private bool IsDead;
 
@@ -22,12 +22,14 @@ public class Ship : GravityObject {
 		}
 	}
 
+	private void OnMouseOver ( ) {
+
+	}
+
 	private void Death ( ) {
 		IsDead = true;
 
-		for (int i = 0; i < Constants.SHIP_PARTICLE_COUNT; i++) {
-			Instantiate(particlePrefab, transform.position, Quaternion.identity);
-		}
+		levelManager.SpawnParticles(transform.position, Constants.SHIP_PARTICLE_COUNT);
 
 		Destroy(gameObject);
 	}
@@ -39,10 +41,10 @@ public class Ship : GravityObject {
 		// Generate Vertices
 		List<Vector3> verticesList = new List<Vector3>( );
 
-		verticesList.Add(new Vector3(0, 0, 0));
-		verticesList.Add(new Vector3(0, Size, 0));
-		verticesList.Add(new Vector3(Size, Size, 0));
-		verticesList.Add(new Vector3(Size, 0, 0));
+		verticesList.Add(new Vector3(-Size / 2, -Size / 2, 0));
+		verticesList.Add(new Vector3(-Size / 2, Size / 2, 0));
+		verticesList.Add(new Vector3(Size / 2, Size / 2, 0));
+		verticesList.Add(new Vector3(Size / 2, -Size / 2, 0));
 
 		Vector3[ ] vertices = verticesList.ToArray( );
 

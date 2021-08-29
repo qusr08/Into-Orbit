@@ -14,9 +14,9 @@ public class Particle : GravityObject {
 		// Generate Vertices
 		List<Vector3> verticesList = new List<Vector3>( );
 
-		verticesList.Add(new Vector3(0, 0, 0));
-		verticesList.Add(new Vector3(0, Size, 0));
-		verticesList.Add(new Vector3(Size, 0, 0));
+		verticesList.Add(new Vector3(-Size / 2, -Size / 2, 0));
+		verticesList.Add(new Vector3(-Size / 2, Size / 2, 0));
+		verticesList.Add(new Vector3(Size / 2, -Size / 2, 0));
 
 		Vector3[ ] vertices = verticesList.ToArray( );
 

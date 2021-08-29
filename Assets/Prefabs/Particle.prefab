@@ -109,9 +109,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0}
-      - {x: 0, y: 0.05}
-      - {x: 0.05, y: 0}
+    - - {x: -0.025, y: -0.025}
+      - {x: -0.025, y: 0.025}
+      - {x: 0.025, y: -0.025}
 --- !u!50 &1654005443914306766
 Rigidbody2D:
   serializedVersion: 4

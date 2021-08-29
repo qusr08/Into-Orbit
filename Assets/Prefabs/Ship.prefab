@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8439090764092802915}
   - component: {fileID: 8439090764092802916}
   - component: {fileID: 8439090764092802917}
+  - component: {fileID: 6443677246469986241}
   - component: {fileID: 8439090764092802919}
   - component: {fileID: 456327539268551528}
   m_Layer: 0
@@ -109,10 +110,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0}
-      - {x: 0, y: 0.1}
-      - {x: 0.1, y: 0.1}
-      - {x: 0.1, y: 0}
+    - - {x: -0.05, y: -0.05}
+      - {x: -0.05, y: 0.05}
+      - {x: 0.05, y: 0.05}
+      - {x: 0.05, y: -0.05}
+--- !u!58 &6443677246469986241
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439090764092802905}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!50 &8439090764092802919
 Rigidbody2D:
   serializedVersion: 4
@@ -155,5 +172,5 @@ MonoBehaviour:
   ColorR: 247
   ColorG: 56
   ColorB: 89
-  particlePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
+  launchingCollider: {fileID: 0}
   IsDead: 0

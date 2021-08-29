@@ -15,7 +15,7 @@ public abstract class GravityObject : MonoBehaviour {
 	[SerializeField] [Range(0, 255)] protected float ColorG;
 	[SerializeField] [Range(0, 255)] protected float ColorB;
 
-	private LevelManager levelManager;
+	protected LevelManager levelManager;
 
 	public float Mass {
 		get {

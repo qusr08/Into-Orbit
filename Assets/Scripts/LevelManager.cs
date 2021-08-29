@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 	[Header("--- Level Manager Class ---")]
+	[SerializeField] private GameObject particlePrefab;
+	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 
 	private void OnValidate ( ) {
@@ -32,5 +34,11 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		return gravityForce;
+	}
+
+	public void SpawnParticles (Vector2 position, int amount) {
+		for (int i = 0; i < amount; i++) {
+			Instantiate(particlePrefab, position, Quaternion.identity);
+		}
 	}
 }
