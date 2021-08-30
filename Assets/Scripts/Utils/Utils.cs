@@ -17,6 +17,8 @@ public static class Utils {
 		return value;
 	}
 
+	#region Random Methods
+
 	public static float RandFloat (float min, float max) {
 		return (float) (random.NextDouble( ) * (max - min)) + min;
 	}
@@ -24,4 +26,6 @@ public static class Utils {
 	public static Vector2 RandNormVect2 ( ) {
 		return new Vector2(RandFloat(-1, 1), RandFloat(-1, 1));
 	}
+
+	#endregion
 }

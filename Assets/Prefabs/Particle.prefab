@@ -150,7 +150,9 @@ MonoBehaviour:
   meshRenderer: {fileID: 1654005443914306768}
   polyCollider: {fileID: 1654005443914306769}
   IsLocked: 0
+  MeshType: 3
   Size: 0.05
+  SizeToMassRatio: 1
   ColorR: 247
   ColorG: 56
   ColorB: 89
