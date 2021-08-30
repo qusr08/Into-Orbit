@@ -11,18 +11,17 @@ public enum MeshType {
 
 public abstract class GravityObject : MonoBehaviour {
 	[Header("--- Gravity Object Class ---")]
+	[SerializeField] private Material baseMaterial;
 	[SerializeField] protected Rigidbody2D rigidBody;
-	[SerializeField] public MeshFilter meshFilter;
-	[SerializeField] public MeshRenderer meshRenderer;
-	[SerializeField] public PolygonCollider2D polyCollider;
+	[SerializeField] protected MeshFilter meshFilter;
+	[SerializeField] protected MeshRenderer meshRenderer;
+	[SerializeField] protected PolygonCollider2D polyCollider;
 	[Space]
 	[SerializeField] public bool IsLocked;
 	[SerializeField] public MeshType MeshType;
 	[SerializeField] public float Size;
 	[SerializeField] public float SizeToMassRatio;
-	[SerializeField] [Range(0, 255)] protected float ColorR;
-	[SerializeField] [Range(0, 255)] protected float ColorG;
-	[SerializeField] [Range(0, 255)] protected float ColorB;
+	[SerializeField] protected SerializableColor color;
 
 	protected LevelManager levelManager;
 
@@ -38,6 +37,10 @@ public abstract class GravityObject : MonoBehaviour {
 	public Vector2 Position {
 		get {
 			return transform.position;
+		}
+
+		set {
+			transform.position = value;
 		}
 	}
 
@@ -165,7 +168,7 @@ public abstract class GravityObject : MonoBehaviour {
 		mesh.vertices = vertices;
 		mesh.triangles = triangles;
 		mesh.normals = normals;
-		meshRenderer.sharedMaterial.SetColor("_Color", new Color(ColorR / 255f, ColorG / 255f, ColorB / 255f));
+		SetColor(color);
 
 		// Edit the collider of the game object to take the shape of the mesh
 		polyCollider.pathCount = 1;
@@ -177,5 +180,13 @@ public abstract class GravityObject : MonoBehaviour {
 
 		Vector2[ ] path = pathList.ToArray( );
 		polyCollider.SetPath(0, path);
+	}
+
+	public void SetColor (Color color) {
+		this.color = color;
+
+		Material material = new Material(baseMaterial);
+		material.SetColor("_Color", color);
+		meshRenderer.material = material;
 	}
 }

@@ -29,3 +29,29 @@ public static class Utils {
 
 	#endregion
 }
+
+[System.Serializable]
+public class SerializableColor {
+	// https://answers.unity.com/questions/772235/cannot-serialize-color.html
+
+	public float[ ] colorValues = new float[3] { 1f, 1f, 1f };
+	public Color Color {
+		get {
+			return new Color(colorValues[0], colorValues[1], colorValues[2]);
+		}
+
+		set {
+			colorValues = new float[3] { value.r, value.g, value.b };
+		}
+	}
+
+	// Makes this class usable as Color, Color normalColor = mySerializableColor;
+	public static implicit operator Color (SerializableColor instance) {
+		return instance.Color;
+	}
+
+	// Makes this class assignable by Color, SerializableColor myColor = Color.white;
+	public static implicit operator SerializableColor (Color color) {
+		return new SerializableColor { Color = color };
+	}
+}

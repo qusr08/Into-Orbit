@@ -36,15 +36,23 @@ public class LevelManager : MonoBehaviour {
 		return gravityForce;
 	}
 
-	public void SpawnParticles (Transform parent, int amount, MeshType meshType, bool setParent = false) {
+	public List<Particle> SpawnParticles (Transform parent, int amount, MeshType meshType, Color color, bool setParent = false, bool disableColliders = false) {
+		List<Particle> particles = new List<Particle>( );
+
 		for (int i = 0; i < amount; i++) {
 			GameObject particle = particlePrefab;
 			particle.GetComponent<Particle>( ).MeshType = meshType;
+			particle.GetComponent<Particle>( ).SetColor(color);
+			particle.GetComponent<PolygonCollider2D>( ).enabled = !disableColliders;
 
 			particle = Instantiate(particle, parent.position, Quaternion.identity);
 			if (setParent) {
 				particle.transform.SetParent(parent);
 			}
+
+			particles.Add(particle.GetComponent<Particle>( ));
 		}
+
+		return particles;
 	}
 }
