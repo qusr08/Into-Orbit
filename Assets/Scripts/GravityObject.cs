@@ -58,6 +58,7 @@ public abstract class GravityObject : MonoBehaviour {
 		levelManager = FindObjectOfType<LevelManager>( );
 
 		rigidBody.isKinematic = IsLocked;
+		OnValidate( );
 	}
 
 	protected void FixedUpdate ( ) {

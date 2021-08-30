@@ -36,21 +36,27 @@ public class LevelManager : MonoBehaviour {
 		return gravityForce;
 	}
 
-	public List<Particle> SpawnParticles (Transform parent, int amount, MeshType meshType, Color color, bool setParent = false, bool disableColliders = false) {
+	public List<Particle> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, bool giveRandomForce = true, bool disableColliders = false) {
 		List<Particle> particles = new List<Particle>( );
 
 		for (int i = 0; i < amount; i++) {
-			GameObject particle = particlePrefab;
-			particle.GetComponent<Particle>( ).MeshType = meshType;
-			particle.GetComponent<Particle>( ).SetColor(color);
-			particle.GetComponent<PolygonCollider2D>( ).enabled = !disableColliders;
+			particlePrefab.GetComponent<Particle>( ).MeshType = meshType;
+			particlePrefab.GetComponent<Particle>( ).Size = size;
+			particlePrefab.GetComponent<Particle>( ).SetColor(color);
+			particlePrefab.GetComponent<PolygonCollider2D>( ).enabled = !disableColliders;
+			/*
+			if (setTransformParent) {
+				particlePrefab.transform.SetParent(parent);
+			}
+			*/
 
-			particle = Instantiate(particle, parent.position, Quaternion.identity);
-			if (setParent) {
-				particle.transform.SetParent(parent);
+			Particle particle = Instantiate(particlePrefab, parent.position, Quaternion.identity).GetComponent<Particle>( );
+
+			if (giveRandomForce) {
+				particle.GiveRandomForce(parent.GetComponent<Rigidbody2D>( ));
 			}
 
-			particles.Add(particle.GetComponent<Particle>( ));
+			particles.Add(particle);
 		}
 
 		return particles;
