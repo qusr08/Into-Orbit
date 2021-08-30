@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// The type of mesh (shape) that the object will be
 public enum MeshType {
 	Circle,
 	RoughCircle,
@@ -17,10 +18,10 @@ public abstract class GravityObject : MonoBehaviour {
 	[SerializeField] protected MeshRenderer meshRenderer;
 	[SerializeField] protected PolygonCollider2D polyCollider;
 	[Space]
-	[SerializeField] public bool IsLocked;
-	[SerializeField] public MeshType MeshType;
-	[SerializeField] public float Size;
-	[SerializeField] public float SizeToMassRatio;
+	[SerializeField] public bool IsLocked = false;
+	[SerializeField] public MeshType MeshType = MeshType.Circle;
+	[SerializeField] public float Size = 1;
+	[SerializeField] public float SizeToMassRatio = 1;
 	[SerializeField] protected SerializableColor color;
 
 	protected LevelManager levelManager;
@@ -46,22 +47,43 @@ public abstract class GravityObject : MonoBehaviour {
 
 	protected void OnValidate ( ) => UnityEditor.EditorApplication.delayCall += _OnValidate;
 	private void _OnValidate ( ) {
+		// This is used to suppress warnings that Unity oh so kindy throws when editting meshes in OnValidate
 		UnityEditor.EditorApplication.delayCall -= _OnValidate;
 		if (this == null)
 			return;
 
+		// Make sure all components of the object are not null
+		if (rigidBody == null) {
+			rigidBody = GetComponent<Rigidbody2D>( );
+		}
+		if (meshFilter == null) {
+			meshFilter = GetComponent<MeshFilter>( );
+		}
+		if (meshRenderer == null) {
+			meshRenderer = GetComponent<MeshRenderer>( );
+		}
+		if (polyCollider == null) {
+			polyCollider = GetComponent<PolygonCollider2D>( );
+		}
+
+		// Regenerate the mesh of the object
 		GenerateMesh( );
+		// Recalculate the mass of the object
 		Mass = Size * SizeToMassRatio;
 	}
 
 	protected void Awake ( ) {
+		// Find the level manager (so gravitational forces can be calculated)
 		levelManager = FindObjectOfType<LevelManager>( );
 
+		// If the object is locked, it should not be able to move
 		rigidBody.isKinematic = IsLocked;
+		// Call OnValidate one more time just to make sure the Mass and mesh are calculated correctly
 		OnValidate( );
 	}
 
 	protected void FixedUpdate ( ) {
+		// As long as the object is not locked, calculate the force that should be applied to it
 		if (!IsLocked) {
 			rigidBody.AddForce(levelManager.CalculateGravityForce(this), ForceMode2D.Force);
 		}
@@ -69,13 +91,15 @@ public abstract class GravityObject : MonoBehaviour {
 
 	protected void GenerateMesh ( ) {
 		// https://stackoverflow.com/questions/50606756/creating-a-2d-circular-mesh-in-unity
-
+		
+		// Create a new blank mesh
 		Mesh mesh = new Mesh( );
 		meshFilter.mesh = mesh;
 
 		// Generate Vertices
 		List<Vector3> verticesList = new List<Vector3>( );
 
+		// Based on the type (shape) of mesh specified, generate the vertices
 		switch (MeshType) {
 			case MeshType.Circle:
 				float x1;
@@ -119,6 +143,7 @@ public abstract class GravityObject : MonoBehaviour {
 		// Generate Triangles from vertices
 		List<int> trianglesList = new List<int>( );
 
+		// Based on the type (shape) of the mesh, generate the triangles from the vertices
 		switch (MeshType) {
 			case MeshType.Circle:
 				for (int i = 0; i < (Constants.CIRCLE_PRECISION - 2); i++) {
@@ -175,6 +200,7 @@ public abstract class GravityObject : MonoBehaviour {
 		polyCollider.pathCount = 1;
 		List<Vector2> pathList = new List<Vector2>( );
 
+		// *** Make sure the vertices are in a circular order or else the poly collider will be messed up
 		for (int i = 0; i < vertices.Length; i++) {
 			pathList.Add(new Vector2(vertices[i].x, vertices[i].y));
 		}
@@ -186,8 +212,12 @@ public abstract class GravityObject : MonoBehaviour {
 	public void SetColor (Color color) {
 		this.color = color;
 
+		// Create a new temporary material from the base material
 		Material material = new Material(baseMaterial);
+		// Set the temporary material color
 		material.SetColor("_Color", color);
+		// Set the mesh material to this temporary materal
+		// This is needed so objects can all have the same material but all be different colors
 		meshRenderer.material = material;
 	}
 }

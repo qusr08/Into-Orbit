@@ -8,12 +8,14 @@ public class Planet : GravityObject {
 	protected new void Awake ( ) {
 		base.Awake( );
 
+		// Generate a random rotation speed
 		rotationSpeed = Utils.RandFloat(-10, 10);
 	}
 
 	protected new void FixedUpdate ( ) {
 		base.FixedUpdate( );
 
+		// Rotate the planet a random amount as time goes on
 		transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
 	}
 }
