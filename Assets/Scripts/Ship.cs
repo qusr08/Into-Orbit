@@ -23,8 +23,8 @@ public class Ship : GravityObject {
 	}
 
 	private void Death ( ) {
-		levelManager.SpawnParticles(transform.position, Constants.SHIP_PARTICLE_COUNT);
+		levelManager.SpawnParticles(transform, Constants.SHIP_PARTICLE_COUNT, MeshType.Circle, true);
 
-		Destroy(gameObject);
+		// Destroy(gameObject);
 	}
 }

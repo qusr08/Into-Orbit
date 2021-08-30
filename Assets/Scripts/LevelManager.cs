@@ -36,9 +36,15 @@ public class LevelManager : MonoBehaviour {
 		return gravityForce;
 	}
 
-	public void SpawnParticles (Vector2 position, int amount) {
+	public void SpawnParticles (Transform parent, int amount, MeshType meshType, bool setParent = false) {
 		for (int i = 0; i < amount; i++) {
-			Instantiate(particlePrefab, position, Quaternion.identity);
+			GameObject particle = particlePrefab;
+			particle.GetComponent<Particle>( ).MeshType = meshType;
+
+			particle = Instantiate(particle, parent.position, Quaternion.identity);
+			if (setParent) {
+				particle.transform.SetParent(parent);
+			}
 		}
 	}
 }
