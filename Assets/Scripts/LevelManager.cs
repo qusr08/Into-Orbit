@@ -7,6 +7,11 @@ public class LevelManager : MonoBehaviour {
 	[SerializeField] private GameObject particlePrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
+	[Space]
+	[SerializeField] public SerializableColor Color1;
+	[SerializeField] public SerializableColor Color2;
+	[SerializeField] public SerializableColor Color3;
+	[SerializeField] public SerializableColor Color4;
 
 	private void OnValidate ( ) {
 		// Find all planet objects in the scene and add it to this list

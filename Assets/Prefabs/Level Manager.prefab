@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6491601482367616714}
   - component: {fileID: 6491601482367616715}
   m_Layer: 0
-  m_Name: World
+  m_Name: Level Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,3 +48,23 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  Color1:
+    colorValues:
+    - 0.09019608
+    - 0.09019608
+    - 0.09019608
+  Color2:
+    colorValues:
+    - 0.26666668
+    - 0.26666668
+    - 0.26666668
+  Color3:
+    colorValues:
+    - 0.85490197
+    - 0
+    - 0.21568628
+  Color4:
+    colorValues:
+    - 0.92941177
+    - 0.92941177
+    - 0.92941177

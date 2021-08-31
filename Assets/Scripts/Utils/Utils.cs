@@ -43,6 +43,14 @@ public static class Utils {
 	}
 
 	#endregion
+
+	#region Vector Methods
+
+	public static Vector3 SetZ (Vector3 vector, float z) {
+		return new Vector3(vector.x, vector.y, z);
+	}
+
+	#endregion
 }
 
 [System.Serializable]
