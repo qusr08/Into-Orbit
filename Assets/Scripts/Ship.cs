@@ -17,7 +17,7 @@ public class Ship : GravityObject {
 		// If the ship collides with a planet, it should be destroyed
 		if (collision2D.transform.tag.Equals("Planet")) {
 			// Create particle pieces of the ship as it gets destroyed to make for a cool effect
-			levelManager.SpawnParticles(transform, Constants.SHIP_PARTICLE_COUNT, color);
+			levelManager.SpawnParticles(transform, Constants.SHIP_PARTICLE_COUNT, color, layerType: LayerType.Ship);
 
 			// Destroy this ship gameobject
 			Destroy(gameObject);
@@ -31,7 +31,7 @@ public class Ship : GravityObject {
 			isLaunching = true;
 
 			// Create particles for the trail
-			launchingParticles = levelManager.SpawnParticles(transform, Constants.LAUNCH_PARTICLE_COUNT, Color.white, size: 0.05f, meshType: MeshType.Circle, giveRandomForce: false, disableColliders: true);
+			launchingParticles = levelManager.SpawnParticles(transform, Constants.LAUNCH_PARTICLE_COUNT, Color.white, size: 0.05f, meshType: MeshType.Circle, layerType: LayerType.ShipDetail, giveRandomForce: false, disableColliders: true);
 			// Make sure to lock all of the particles because the ones for the trail should not move
 			foreach (Particle particle in launchingParticles) {
 				particle.IsLocked = true;

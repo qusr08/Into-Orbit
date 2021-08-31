@@ -152,6 +152,7 @@ MonoBehaviour:
   polyCollider: {fileID: 1654005443914306769}
   IsLocked: 0
   MeshType: 3
+  LayerType: 0
   Size: 0.05
   SizeToMassRatio: 1
   color:

@@ -15,17 +15,23 @@ public class Particle : GravityObject {
 		}
 	}
 
-	public void Initialize (Transform parent, Color color, float size, MeshType meshType, bool disableColliders) {
+	public void Initialize (Transform parent, Color color, float size, MeshType meshType, LayerType layerType, bool disableColliders) {
 		// Set all values of the particle based on the arguments given
 		MeshType = meshType;
+		LayerType = layerType;
 		Size = size;
-		SetColor(color);
-		GetComponent<PolygonCollider2D>( ).enabled = !disableColliders;
 		/*
 		if (setTransformParent) {
 			particle.transform.SetParent(parent);
 		}
 		*/
+		
+		// Run OnValidate just to make sure all components are found
+		OnValidate( );
+
+		// Update components
+		SetColor(color);
+		polyCollider.enabled = !disableColliders;
 
 		// Since the values of this particle were set, the particle object is now intialized and can appear in the scene
 		IsInitialized = true;

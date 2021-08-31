@@ -10,6 +10,14 @@ public enum MeshType {
 	Triangle
 }
 
+public enum LayerType {
+	Back = 100,
+	Environment = 70,
+	ShipDetail = 40,
+	Ship = 30,
+	Front = 0
+}
+
 public abstract class GravityObject : MonoBehaviour {
 	[Header("--- Gravity Object Class ---")]
 	[SerializeField] private Material baseMaterial;
@@ -20,6 +28,7 @@ public abstract class GravityObject : MonoBehaviour {
 	[Space]
 	[SerializeField] public bool IsLocked = false;
 	[SerializeField] public MeshType MeshType = MeshType.Circle;
+	[SerializeField] public LayerType LayerType = LayerType.Front;
 	[SerializeField] public float Size = 1;
 	[SerializeField] public float SizeToMassRatio = 1;
 	[SerializeField] protected SerializableColor color;
@@ -41,7 +50,7 @@ public abstract class GravityObject : MonoBehaviour {
 		}
 
 		set {
-			transform.position = value;
+			transform.position = new Vector3(value.x, value.y, transform.position.z);
 		}
 	}
 
@@ -65,6 +74,9 @@ public abstract class GravityObject : MonoBehaviour {
 		if (polyCollider == null) {
 			polyCollider = GetComponent<PolygonCollider2D>( );
 		}
+
+		// Update the layer
+		transform.position = new Vector3(transform.position.x, transform.position.y, (int) LayerType);
 
 		// Regenerate the mesh of the object
 		GenerateMesh( );
@@ -91,7 +103,7 @@ public abstract class GravityObject : MonoBehaviour {
 
 	protected void GenerateMesh ( ) {
 		// https://stackoverflow.com/questions/50606756/creating-a-2d-circular-mesh-in-unity
-		
+
 		// Create a new blank mesh
 		Mesh mesh = new Mesh( );
 		meshFilter.mesh = mesh;
