@@ -150,15 +150,15 @@ MonoBehaviour:
   meshFilter: {fileID: 1654005443914306771}
   meshRenderer: {fileID: 1654005443914306768}
   polyCollider: {fileID: 1654005443914306769}
-  IsLocked: 0
   MeshType: 3
   LayerType: 0
-  Size: 0.05
-  SizeToMassRatio: 1
   color:
     colorValues:
     - 0.85490197
     - 0
     - 0.21568628
+  Size: 0.05
+  SizeToMassRatio: 1
   CIRCLE_MESH_PRECISION: 20
+  IsLocked: 0
   IsInitialized: 0
