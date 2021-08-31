@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public static class Utils {
@@ -23,6 +24,29 @@ public static class Utils {
 
 	public static bool CloseEnough (Vector3 vector1, Vector3 vector2) {
 		return Vector3.Distance(vector1, vector2) < 0.01f;
+	}
+
+	public static Color Hex2RGB (string hexString) {
+		// https://www.devx.com/tips/dot-net/c-sharp/convert-hex-to-rgb-190527095529.html
+
+		// Replace # occurences
+		if (hexString.IndexOf('#') != -1) {
+			hexString = hexString.Replace("#", "");
+		}
+
+		// Make sure that the hex string doesn't break the code below (and so Unity doesn't throw 129830712 errors)
+		if (hexString.Length != 6) {
+			return Color.white;
+		}
+
+		// Get RGB values based on hex code
+		int r, g, b = 0;
+		r = int.Parse(hexString.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+		g = int.Parse(hexString.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+		b = int.Parse(hexString.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+
+		// Return the color with the RGB values on a scale from 0 to 1
+		return new Color(r / 255f, g / 255f, b / 255f);
 	}
 
 	#region Random Methods

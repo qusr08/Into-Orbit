@@ -7,11 +7,6 @@ public class LevelManager : MonoBehaviour {
 	[SerializeField] private GameObject particlePrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
-	[Space]
-	[SerializeField] public SerializableColor Color1;
-	[SerializeField] public SerializableColor Color2;
-	[SerializeField] public SerializableColor Color3;
-	[SerializeField] public SerializableColor Color4;
 	[Header("--- Level Manager Constants ---")]
 	[SerializeField] private float G = 0.75f;
 
@@ -19,12 +14,6 @@ public class LevelManager : MonoBehaviour {
 		// Find all planet objects in the scene and add it to this list
 		planets.Clear( );
 		planets.AddRange(FindObjectsOfType<Planet>( ));
-
-		/*
-		foreach (Planet planet in planets) {
-			planet.transform.SetParent(transform);
-		}
-		*/
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject) {
@@ -45,14 +34,14 @@ public class LevelManager : MonoBehaviour {
 		return gravityForce;
 	}
 
-	public List<Particle> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool disableColliders = false) {
+	public List<Particle> SpawnParticles (Transform parent, int amount, string colorHex, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool disableColliders = false) {
 		List<Particle> particles = new List<Particle>( );
 
 		// Create the particles with set values
 		for (int i = 0; i < amount; i++) {
 			// Instatiate a new particle object and initialize its values
 			Particle particle = Instantiate(particlePrefab, parent.position, Quaternion.identity).GetComponent<Particle>( );
-			particle.Initialize(parent, color, size, meshType, layerType, disableColliders);
+			particle.Initialize(parent, colorHex, size, meshType, layerType, disableColliders);
 
 			// Launch the particle in a random direction if told to do so
 			if (giveRandomForce) {

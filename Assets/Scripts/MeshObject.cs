@@ -12,6 +12,9 @@ public enum MeshType {
 
 public enum LayerType {
 	Back = 100,
+	WormholeOutside = 82,
+	WormholeMiddle = 81,
+	WormholeInside = 80,
 	Environment = 70,
 	ShipDetail = 40,
 	Ship = 30,
@@ -28,14 +31,16 @@ public class MeshObject : MonoBehaviour {
 	[Space]
 	[SerializeField] public MeshType MeshType = MeshType.Circle;
 	[SerializeField] public LayerType LayerType = LayerType.Front;
-	[SerializeField] protected SerializableColor color;
+	[SerializeField] protected string colorHex = "FFFFFF";
 	[Space]
 	[SerializeField] public float Size = 1;
 	[SerializeField] public float SizeToMassRatio = 1;
+	[SerializeField] public bool DisableColliders = false;
 	[Header("--- Mesh Object Constants ---")]
 	[SerializeField] private int CIRCLE_MESH_PRECISION = 20;
 
 	protected LevelManager levelManager;
+	protected Color color;
 
 	public float Mass {
 		get {
@@ -63,27 +68,37 @@ public class MeshObject : MonoBehaviour {
 		if (this == null)
 			return;
 
+		// Set the color based on the hex value given
+		color = Utils.Hex2RGB(colorHex);
+
 		// Make sure all components of the object are not null
 		if (rigidBody == null) {
-			rigidBody = GetComponent<Rigidbody2D>( );
+			rigidBody = (GetComponent<Rigidbody2D>( ) == null) ? gameObject.AddComponent<Rigidbody2D>( ) : GetComponent<Rigidbody2D>( );
 		}
 		if (meshFilter == null) {
-			meshFilter = GetComponent<MeshFilter>( );
+			meshFilter = (GetComponent<MeshFilter>( ) == null) ? gameObject.AddComponent<MeshFilter>( ) : GetComponent<MeshFilter>( );
 		}
 		if (meshRenderer == null) {
-			meshRenderer = GetComponent<MeshRenderer>( );
+			meshRenderer = (GetComponent<MeshRenderer>( ) == null) ? gameObject.AddComponent<MeshRenderer>( ) : GetComponent<MeshRenderer>( );
 		}
 		if (polyCollider == null) {
-			polyCollider = GetComponent<PolygonCollider2D>( );
+			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
+
+		// Reset and update component variables
+		rigidBody.gravityScale = 0;
+		rigidBody.angularDrag = 0;
+		rigidBody.drag = 0;
+		polyCollider.enabled = !DisableColliders;
+
+		// Recalculate the mass of the object
+		Mass = Size * SizeToMassRatio;
 
 		// Update the layer
 		transform.position = new Vector3(transform.position.x, transform.position.y, (int) LayerType);
 
 		// Regenerate the mesh of the object
 		GenerateMesh( );
-		// Recalculate the mass of the object
-		Mass = Size * SizeToMassRatio;
 	}
 
 	protected void Awake ( ) {
@@ -199,7 +214,7 @@ public class MeshObject : MonoBehaviour {
 		mesh.vertices = vertices;
 		mesh.triangles = triangles;
 		mesh.normals = normals;
-		SetColor(color);
+		UpdateColor( );
 
 		// Edit the collider of the game object to take the shape of the mesh
 		polyCollider.pathCount = 1;
@@ -214,9 +229,7 @@ public class MeshObject : MonoBehaviour {
 		polyCollider.SetPath(0, path);
 	}
 
-	public void SetColor (Color color) {
-		this.color = color;
-
+	public void UpdateColor ( ) {
 		// Create a new temporary material from the base material
 		Material material = new Material(baseMaterial);
 		// Set the temporary material color

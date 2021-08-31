@@ -4,13 +4,19 @@ using UnityEngine;
 
 public abstract class GravityObject : MeshObject {
 	[Header("--- Gravity Object Class ---")]
-	[SerializeField] public bool IsLocked = false;
+	[SerializeProperty("IsLocked")] public bool isLocked = false;
 
-	private new void Awake ( ) {
-		base.Awake( );
+	public bool IsLocked {
+		get {
+			return isLocked;
+		}
 
-		// If the object is locked, it should not be able to move
-		rigidBody.isKinematic = IsLocked;
+		set {
+			isLocked = value;
+
+			// If the object is locked, it should not be able to move
+			rigidBody.isKinematic = isLocked;
+		}
 	}
 
 	protected void FixedUpdate ( ) {
