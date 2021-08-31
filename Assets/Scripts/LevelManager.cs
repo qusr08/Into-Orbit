@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour {
 	[SerializeField] public SerializableColor Color2;
 	[SerializeField] public SerializableColor Color3;
 	[SerializeField] public SerializableColor Color4;
+	[Header("--- Level Manager Constants ---")]
+	[SerializeField] private float G = 0.75f;
 
 	private void OnValidate ( ) {
 		// Find all planet objects in the scene and add it to this list
@@ -36,7 +38,7 @@ public class LevelManager : MonoBehaviour {
 			Vector2 direction = (planet.Position - gravityObject.Position).normalized;
 
 			// Calculate the gravitational force that the planet is applying onto the object
-			float currForce = (Constants.G * gravityObject.Mass * planet.Mass) / Mathf.Pow(distance, 2);
+			float currForce = (G * gravityObject.Mass * planet.Mass) / Mathf.Pow(distance, 2);
 			gravityForce += direction * currForce;
 		}
 

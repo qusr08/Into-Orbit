@@ -160,4 +160,5 @@ MonoBehaviour:
     - 0.85490197
     - 0
     - 0.21568628
+  CIRCLE_MESH_PRECISION: 20
   IsInitialized: 0

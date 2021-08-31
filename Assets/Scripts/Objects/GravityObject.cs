@@ -32,6 +32,8 @@ public abstract class GravityObject : MonoBehaviour {
 	[SerializeField] public float Size = 1;
 	[SerializeField] public float SizeToMassRatio = 1;
 	[SerializeField] protected SerializableColor color;
+	[Header("--- Gravity Object Constants ---")]
+	[SerializeField] private int CIRCLE_MESH_PRECISION = 20;
 
 	protected LevelManager levelManager;
 
@@ -116,9 +118,9 @@ public abstract class GravityObject : MonoBehaviour {
 			case MeshType.Circle:
 				float x1;
 				float y1;
-				for (int i = 0; i < Constants.CIRCLE_PRECISION; i++) {
-					x1 = Size * Mathf.Sin((2 * Mathf.PI * i) / Constants.CIRCLE_PRECISION);
-					y1 = Size * Mathf.Cos((2 * Mathf.PI * i) / Constants.CIRCLE_PRECISION);
+				for (int i = 0; i < CIRCLE_MESH_PRECISION; i++) {
+					x1 = Size * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+					y1 = Size * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
 
 					verticesList.Add(new Vector3(x1, y1, 0f));
 				}
@@ -127,9 +129,9 @@ public abstract class GravityObject : MonoBehaviour {
 			case MeshType.RoughCircle:
 				float x2;
 				float y2;
-				for (int i = 0; i < Constants.CIRCLE_PRECISION; i++) {
-					x2 = (Size + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / Constants.CIRCLE_PRECISION);
-					y2 = (Size + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / Constants.CIRCLE_PRECISION);
+				for (int i = 0; i < CIRCLE_MESH_PRECISION; i++) {
+					x2 = (Size + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+					y2 = (Size + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
 
 					verticesList.Add(new Vector3(x2, y2, 0f));
 				}
@@ -158,7 +160,7 @@ public abstract class GravityObject : MonoBehaviour {
 		// Based on the type (shape) of the mesh, generate the triangles from the vertices
 		switch (MeshType) {
 			case MeshType.Circle:
-				for (int i = 0; i < (Constants.CIRCLE_PRECISION - 2); i++) {
+				for (int i = 0; i < (CIRCLE_MESH_PRECISION - 2); i++) {
 					trianglesList.Add(0);
 					trianglesList.Add(i + 1);
 					trianglesList.Add(i + 2);
@@ -166,7 +168,7 @@ public abstract class GravityObject : MonoBehaviour {
 
 				break;
 			case MeshType.RoughCircle:
-				for (int i = 0; i < (Constants.CIRCLE_PRECISION - 2); i++) {
+				for (int i = 0; i < (CIRCLE_MESH_PRECISION - 2); i++) {
 					trianglesList.Add(0);
 					trianglesList.Add(i + 1);
 					trianglesList.Add(i + 2);
