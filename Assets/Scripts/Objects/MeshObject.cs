@@ -111,6 +111,7 @@ public class MeshObject : MonoBehaviour {
 		color = Utils.Hex2RGB(colorHex);
 
 		// Reset and update component variables
+		rigidBody.bodyType = RigidbodyType2D.Dynamic;
 		rigidBody.gravityScale = 0;
 		rigidBody.angularDrag = 0;
 		rigidBody.drag = 0;

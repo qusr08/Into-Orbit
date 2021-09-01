@@ -15,7 +15,7 @@ public abstract class GravityObject : MeshObject {
 			isLocked = value;
 
 			// If the object is locked, it should not be able to move
-			rigidBody.isKinematic = isLocked;
+			rigidBody.constraints = (isLocked) ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.None;
 		}
 	}
 

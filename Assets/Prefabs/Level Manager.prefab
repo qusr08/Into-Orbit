@@ -46,25 +46,4 @@ MonoBehaviour:
   particlePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
   planets:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Color1:
-    colorValues:
-    - 0.09019608
-    - 0.09019608
-    - 0.09019608
-  Color2:
-    colorValues:
-    - 0.26666668
-    - 0.26666668
-    - 0.26666668
-  Color3:
-    colorValues:
-    - 0.85490197
-    - 0
-    - 0.21568628
-  Color4:
-    colorValues:
-    - 0.92941177
-    - 0.92941177
-    - 0.92941177
+  G: 0.6
