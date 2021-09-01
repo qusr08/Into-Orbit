@@ -16,11 +16,12 @@ public class Particle : GravityObject {
 		}
 	}
 
-	public void Initialize (Transform parent, Color color, float size, MeshType meshType, LayerType layerType, bool disableColliders) {
+	public void Initialize (Transform parent, Color color, float size, MeshType meshType, LayerType layerType, bool showTrail, bool disableColliders) {
 		// Set all values of the particle based on the arguments given
 		MeshType = meshType;
 		LayerType = layerType;
 		Size = size;
+		ShowTrail = showTrail;
 		DisableColliders = disableColliders;
 		Color = color;
 

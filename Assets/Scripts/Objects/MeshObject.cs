@@ -26,6 +26,8 @@ public enum LayerType {
 public class MeshObject : MonoBehaviour {
 	[Header("--- Mesh Object Class ---")]
 	[SerializeField] private Material baseMaterial;
+	[Space]
+	[SerializeField] protected TrailRenderer trailRenderer;
 	[SerializeField] protected Rigidbody2D rigidBody;
 	[SerializeField] protected MeshFilter meshFilter;
 	[SerializeField] protected MeshRenderer meshRenderer;
@@ -37,10 +39,14 @@ public class MeshObject : MonoBehaviour {
 	[Space]
 	[SerializeField] private float size = 1;
 	[SerializeField] private float sizeToMassRatio = 1;
+	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
 	[SerializeField] private bool disableColliders = false;
 	[Header("--- Mesh Object Constants ---")]
 	[SerializeField] private int CIRCLE_MESH_PRECISION = 20;
+	[SerializeField] [Range(0f, 1f)] private float TRAIL_END_ALPHA = 75 / 255f;
+	[SerializeField] private float TRAIL_LENGTH = 0.25f;
+	[SerializeField] [Range(0f, 1f)] private float TRAIL_TO_OBJECT_SCALE = 1;
 
 	protected LevelManager levelManager;
 
@@ -87,7 +93,10 @@ public class MeshObject : MonoBehaviour {
 			size = value;
 
 			// Update the mass
-			Mass = Size * SizeToMassRatio;
+			Mass = size * SizeToMassRatio;
+
+			// Update trail size
+			trailRenderer.startWidth = TRAIL_TO_OBJECT_SCALE * size;
 
 			// Regenerate the mesh because the size has changed
 			GenerateMesh( );
@@ -103,6 +112,17 @@ public class MeshObject : MonoBehaviour {
 
 			// Update the mass
 			Mass = Size * sizeToMassRatio;
+		}
+	}
+	public bool ShowTrail {
+		get {
+			return showTrail;
+		}
+
+		set {
+			showTrail = value;
+
+			trailRenderer.enabled = showTrail;
 		}
 	}
 	public bool IsLocked {
@@ -167,6 +187,9 @@ public class MeshObject : MonoBehaviour {
 		if (polyCollider == null) {
 			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
+		if (trailRenderer == null) {
+			trailRenderer = (GetComponent<TrailRenderer>( ) == null) ? gameObject.AddComponent<TrailRenderer>( ) : GetComponent<TrailRenderer>( );
+		}
 
 		UpdateVariables( );
 	}
@@ -183,12 +206,23 @@ public class MeshObject : MonoBehaviour {
 		rigidBody.angularDrag = 0;
 		rigidBody.drag = 0;
 
+		trailRenderer.time = TRAIL_LENGTH;
+		trailRenderer.endWidth = 0;
+		trailRenderer.material = new Material(baseMaterial);
+		Color trailColor = Utils.Hex2Color("EDEDED");
+		trailRenderer.startColor = trailColor;
+		trailRenderer.endColor = new Color(trailColor.r, trailColor.g, trailColor.b, TRAIL_END_ALPHA);
+
+		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
+		trailRenderer.transform.position = Utils.SetZ(transform.position, ((int) LayerType) + 1);
+
 		// Update all class variables
 		MeshType = MeshType;
 		LayerType = LayerType;
 		Color = Color;
 		Size = Size;
 		SizeToMassRatio = SizeToMassRatio;
+		ShowTrail = ShowTrail;
 		IsLocked = IsLocked;
 		DisableColliders = DisableColliders;
 
