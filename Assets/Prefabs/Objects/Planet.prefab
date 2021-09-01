@@ -141,7 +141,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   MeshType: 0
   LayerType: 70
   colorHex: 444444
-  Size: 1
+  size: 2
   SizeToMassRatio: 50
   DisableColliders: 0
   CIRCLE_MESH_PRECISION: 20

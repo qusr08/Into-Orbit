@@ -12,6 +12,8 @@ public enum MeshType {
 
 public enum LayerType {
 	Back = 100,
+	EnvironmentGlowBack = 95,
+	EnvironmentGlowFront = 94,
 	WormholeOutside = 82,
 	WormholeMiddle = 81,
 	WormholeInside = 80,
@@ -33,7 +35,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] public LayerType LayerType = LayerType.Front;
 	[SerializeField] protected string colorHex = "FFFFFF";
 	[Space]
-	[SerializeField] public float Size = 1;
+	[SerializeProperty("Size")] public float size = 1;
 	[SerializeField] public float SizeToMassRatio = 1;
 	[SerializeField] public bool DisableColliders = false;
 	[Header("--- Mesh Object Constants ---")]
@@ -42,6 +44,17 @@ public class MeshObject : MonoBehaviour {
 	protected LevelManager levelManager;
 	protected Color color;
 
+	public float Size {
+		get {
+			return size;
+		}
+
+		set {
+			size = value;
+
+			GenerateMesh( );
+		}
+	}
 	public float Mass {
 		get {
 			return rigidBody.mass;
@@ -129,8 +142,8 @@ public class MeshObject : MonoBehaviour {
 				float x1;
 				float y1;
 				for (int i = 0; i < CIRCLE_MESH_PRECISION; i++) {
-					x1 = Size * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
-					y1 = Size * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+					x1 = (Size / 2) * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+					y1 = (Size / 2) * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
 
 					verticesList.Add(new Vector3(x1, y1, 0f));
 				}
@@ -140,8 +153,8 @@ public class MeshObject : MonoBehaviour {
 				float x2;
 				float y2;
 				for (int i = 0; i < CIRCLE_MESH_PRECISION; i++) {
-					x2 = (Size + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
-					y2 = (Size + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+					x2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+					y2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
 
 					verticesList.Add(new Vector3(x2, y2, 0f));
 				}

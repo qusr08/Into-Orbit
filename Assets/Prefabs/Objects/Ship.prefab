@@ -310,7 +310,7 @@ MonoBehaviour:
   MeshType: 2
   LayerType: 30
   colorHex: DA0037
-  Size: 0.1
+  size: 0.1
   SizeToMassRatio: 1
   DisableColliders: 0
   CIRCLE_MESH_PRECISION: 20

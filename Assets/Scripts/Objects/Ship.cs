@@ -38,7 +38,7 @@ public class Ship : GravityObject {
 			isLaunching = true;
 
 			// Create particles for the trail
-			launchingParticles = levelManager.SpawnParticles(transform, LAUNCH_PARTICLE_COUNT, "EDEDED", size: 0.05f, meshType: MeshType.Circle, layerType: LayerType.ShipDetail, giveRandomForce: false, disableColliders: true);
+			launchingParticles = levelManager.SpawnParticles(transform, LAUNCH_PARTICLE_COUNT, "EDEDED", size: 0.1f, meshType: MeshType.Circle, layerType: LayerType.ShipDetail, giveRandomForce: false, disableColliders: true);
 			// Make sure to lock all of the particles because the ones for the trail should not move
 			foreach (Particle particle in launchingParticles) {
 				particle.IsLocked = true;
