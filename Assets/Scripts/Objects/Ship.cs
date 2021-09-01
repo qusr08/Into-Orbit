@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ship : GravityObject {
+	[Header("--- Ship Class ---")]
+	[SerializeField] private Transform trail;
 	[Header("--- Ship Constants ---")]
 	[SerializeField] private int SHIP_PARTICLE_COUNT = 8;
 	[SerializeField] private int LAUNCH_PARTICLE_COUNT = 10;
@@ -10,6 +12,13 @@ public class Ship : GravityObject {
 
 	private bool isLaunching; // Whether or not the player is currently launching the ship
 	private List<Particle> launchingParticles; // All of the particles that make up the trail while launching
+
+	private new void OnValidate ( ) {
+		base.OnValidate( );
+
+		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
+		trail.position = Utils.SetZ(transform.position, ((int) LayerType) + 1);
+	}
 
 	protected void OnCollisionEnter2D (Collision2D collision2D) {
 		// If the ship collides with a planet, it should be destroyed
