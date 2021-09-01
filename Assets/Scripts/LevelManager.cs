@@ -34,14 +34,14 @@ public class LevelManager : MonoBehaviour {
 		return gravityForce;
 	}
 
-	public List<Particle> SpawnParticles (Transform parent, int amount, string colorHex, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool disableColliders = false) {
+	public List<Particle> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool disableColliders = false) {
 		List<Particle> particles = new List<Particle>( );
 
 		// Create the particles with set values
 		for (int i = 0; i < amount; i++) {
 			// Instatiate a new particle object and initialize its values
 			Particle particle = Instantiate(particlePrefab, parent.position, Quaternion.identity).GetComponent<Particle>( );
-			particle.Initialize(parent, colorHex, size, meshType, layerType, disableColliders);
+			particle.Initialize(parent, color, size, meshType, layerType, disableColliders);
 
 			// Launch the particle in a random direction if told to do so
 			if (giveRandomForce) {

@@ -26,13 +26,8 @@ public static class Utils {
 		return Vector3.Distance(vector1, vector2) < 0.01f;
 	}
 
-	public static Color Hex2RGB (string hexString) {
+	public static Color Hex2Color (string hexString) {
 		// https://www.devx.com/tips/dot-net/c-sharp/convert-hex-to-rgb-190527095529.html
-
-		// Replace # occurences
-		if (hexString.IndexOf('#') != -1) {
-			hexString = hexString.Replace("#", "");
-		}
 
 		// Make sure that the hex string doesn't break the code below (and so Unity doesn't throw 129830712 errors)
 		if (hexString.Length != 6) {
@@ -47,6 +42,17 @@ public static class Utils {
 
 		// Return the color with the RGB values on a scale from 0 to 1
 		return new Color(r / 255f, g / 255f, b / 255f);
+	}
+
+	public static string Color2Hex (Color color) {
+		string hexString = $"{color.r:X2}{color.g:X2}{color.b:X2}";
+
+		// Make sure that the hex string doesn't break the code below (and so Unity doesn't throw 129830712 errors)
+		if (hexString.Length != 6) {
+			return "FFFFFF";
+		}
+
+		return hexString;
 	}
 
 	#region Random Methods
@@ -81,14 +87,14 @@ public static class Utils {
 public class SerializableColor {
 	// https://answers.unity.com/questions/772235/cannot-serialize-color.html
 
-	public float[ ] colorValues = new float[3] { 1f, 1f, 1f };
+	public int[ ] colorValues = new int[3] { 255, 255, 255 };
 	public Color Color {
 		get {
-			return new Color(colorValues[0], colorValues[1], colorValues[2]);
+			return new Color(colorValues[0] / 255f, colorValues[1] / 255f, colorValues[2] / 255f);
 		}
 
 		set {
-			colorValues = new float[3] { value.r, value.g, value.b };
+			colorValues = new int[3] { (int) (value.r * 255), (int) (value.g * 255), (int) (value.b * 255) };
 		}
 	}
 

@@ -31,19 +31,53 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] protected MeshRenderer meshRenderer;
 	[SerializeField] protected PolygonCollider2D polyCollider;
 	[Space]
-	[SerializeField] public MeshType MeshType = MeshType.Circle;
-	[SerializeField] public LayerType LayerType = LayerType.Front;
-	[SerializeField] protected string colorHex = "FFFFFF";
+	[SerializeField] private MeshType meshType = MeshType.Circle;
+	[SerializeField] private LayerType layerType = LayerType.Front;
+	[SerializeField] private SerializableColor color;
 	[Space]
-	[SerializeProperty("Size")] public float size = 1;
-	[SerializeField] public float SizeToMassRatio = 1;
-	[SerializeField] public bool DisableColliders = false;
+	[SerializeField] private float size = 1;
+	[SerializeField] private float sizeToMassRatio = 1;
+	[SerializeField] private bool isLocked = false;
+	[SerializeField] private bool disableColliders = false;
 	[Header("--- Mesh Object Constants ---")]
 	[SerializeField] private int CIRCLE_MESH_PRECISION = 20;
 
 	protected LevelManager levelManager;
-	protected Color color;
 
+	public MeshType MeshType {
+		get {
+			return meshType;
+		}
+
+		set {
+			meshType = value;
+
+			GenerateMesh( );
+		}
+	}
+	public LayerType LayerType {
+		get {
+			return layerType;
+		}
+
+		set {
+			layerType = value;
+
+			// Update the layer
+			transform.position = new Vector3(transform.position.x, transform.position.y, (int) LayerType);
+		}
+	}
+	public Color Color {
+		get {
+			return color;
+		}
+
+		set {
+			color = value;
+
+			UpdateColor( );
+		}
+	}
 	public float Size {
 		get {
 			return size;
@@ -52,7 +86,46 @@ public class MeshObject : MonoBehaviour {
 		set {
 			size = value;
 
+			// Update the mass
+			Mass = Size * SizeToMassRatio;
+
+			// Regenerate the mesh because the size has changed
 			GenerateMesh( );
+		}
+	}
+	public float SizeToMassRatio {
+		get {
+			return sizeToMassRatio;
+		}
+
+		set {
+			sizeToMassRatio = value;
+
+			// Update the mass
+			Mass = Size * sizeToMassRatio;
+		}
+	}
+	public bool IsLocked {
+		get {
+			return isLocked;
+		}
+
+		set {
+			isLocked = value;
+
+			// If the object is locked, it should not be able to move
+			rigidBody.constraints = (isLocked) ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.None;
+		}
+	}
+	public bool DisableColliders {
+		get {
+			return disableColliders;
+		}
+
+		set {
+			disableColliders = value;
+
+			polyCollider.enabled = !DisableColliders;
 		}
 	}
 	public float Mass {
@@ -95,35 +168,31 @@ public class MeshObject : MonoBehaviour {
 			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
 
-		RecalculateVariables( );
+		UpdateVariables( );
 	}
 
 	protected void Awake ( ) {
 		// Find the level manager (so gravitational forces can be calculated)
 		levelManager = FindObjectOfType<LevelManager>( );
-
-		// Call OnValidate one more time just to make sure the Mass and mesh are calculated correctly
-		RecalculateVariables( );
 	}
 
-	protected void RecalculateVariables ( ) {
-		// Set the color based on the hex value given
-		color = Utils.Hex2RGB(colorHex);
-
+	protected void UpdateVariables ( ) {
 		// Reset and update component variables
 		rigidBody.bodyType = RigidbodyType2D.Dynamic;
 		rigidBody.gravityScale = 0;
 		rigidBody.angularDrag = 0;
 		rigidBody.drag = 0;
-		polyCollider.enabled = !DisableColliders;
 
-		// Recalculate the mass of the object
-		Mass = Size * SizeToMassRatio;
+		// Update all class variables
+		MeshType = MeshType;
+		LayerType = LayerType;
+		Color = Color;
+		Size = Size;
+		SizeToMassRatio = SizeToMassRatio;
+		IsLocked = IsLocked;
+		DisableColliders = DisableColliders;
 
-		// Update the layer
-		transform.position = new Vector3(transform.position.x, transform.position.y, (int) LayerType);
-
-		// Regenerate the mesh of the object
+		// Regenerate the mesh;
 		GenerateMesh( );
 	}
 
@@ -251,7 +320,7 @@ public class MeshObject : MonoBehaviour {
 		// Create a new temporary material from the base material
 		Material material = new Material(baseMaterial);
 		// Set the temporary material color
-		material.SetColor("_Color", color);
+		material.SetColor("_Color", Color);
 		// Set the mesh material to this temporary materal
 		// This is needed so objects can all have the same material but all be different colors
 		meshRenderer.material = material;

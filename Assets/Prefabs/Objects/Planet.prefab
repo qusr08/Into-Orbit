@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &223014123553274984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,11 +167,12 @@ MonoBehaviour:
   meshFilter: {fileID: 223014123553274991}
   meshRenderer: {fileID: 223014123553274990}
   polyCollider: {fileID: 223014123553274985}
-  MeshType: 0
-  LayerType: 70
-  colorHex: 444444
+  meshType: 0
+  layerType: 70
+  color:
+    colorValues: 440000004400000044000000
   size: 2
-  SizeToMassRatio: 25
-  DisableColliders: 0
-  CIRCLE_MESH_PRECISION: 20
+  sizeToMassRatio: 25
   isLocked: 1
+  disableColliders: 0
+  CIRCLE_MESH_PRECISION: 20

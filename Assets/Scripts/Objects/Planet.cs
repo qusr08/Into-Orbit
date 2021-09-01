@@ -16,6 +16,8 @@ public class Planet : GravityObject {
 		base.FixedUpdate( );
 
 		// Rotate the planet a random amount as time goes on
-		transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
+		if (!IsLocked) {
+			transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime);
+		}
 	}
 }

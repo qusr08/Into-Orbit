@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108119555060976539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -18}
+  m_LocalPosition: {x: 0, y: 0, z: 82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7194867593288736889}
@@ -130,26 +130,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.25}
-      - {x: 0.07725425, y: 0.23776414}
-      - {x: 0.14694631, y: 0.20225425}
-      - {x: 0.20225425, y: 0.14694631}
-      - {x: 0.23776414, y: 0.07725424}
-      - {x: 0.25, y: -0.000000010927847}
-      - {x: 0.23776412, y: -0.07725426}
-      - {x: 0.20225425, y: -0.1469463}
-      - {x: 0.1469463, y: -0.20225427}
-      - {x: 0.0772542, y: -0.23776415}
-      - {x: -0.000000021855694, y: -0.25}
-      - {x: -0.07725424, y: -0.23776414}
-      - {x: -0.14694634, y: -0.20225424}
-      - {x: -0.20225428, y: -0.14694627}
-      - {x: -0.23776412, y: -0.07725427}
-      - {x: -0.25, y: 0.0000000029812202}
-      - {x: -0.23776412, y: 0.07725428}
-      - {x: -0.2022542, y: 0.14694637}
-      - {x: -0.14694624, y: 0.20225431}
-      - {x: -0.077254236, y: 0.23776414}
+    - - {x: 0, y: 0.35}
+      - {x: 0.10815595, y: 0.3328698}
+      - {x: 0.20572484, y: 0.28315595}
+      - {x: 0.28315595, y: 0.20572484}
+      - {x: 0.3328698, y: 0.108155936}
+      - {x: 0.35, y: -0.000000015298985}
+      - {x: 0.33286977, y: -0.10815596}
+      - {x: 0.28315595, y: -0.2057248}
+      - {x: 0.2057248, y: -0.28315598}
+      - {x: 0.10815588, y: -0.3328698}
+      - {x: -0.00000003059797, y: -0.35}
+      - {x: -0.108155936, y: -0.3328698}
+      - {x: -0.20572488, y: -0.28315592}
+      - {x: -0.28315598, y: -0.20572478}
+      - {x: -0.33286977, y: -0.10815598}
+      - {x: -0.35, y: 0.000000004173708}
+      - {x: -0.33286977, y: 0.10815599}
+      - {x: -0.2831559, y: 0.20572491}
+      - {x: -0.20572473, y: 0.28315604}
+      - {x: -0.10815593, y: 0.3328698}
 --- !u!114 &8165472760491356156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,12 +167,14 @@ MonoBehaviour:
   meshFilter: {fileID: 6242589126311822848}
   meshRenderer: {fileID: 2353142673571160128}
   polyCollider: {fileID: 859562718750783622}
-  MeshType: 0
-  LayerType: 82
-  colorHex: '#FF0EC3'
-  size: 0.5
-  SizeToMassRatio: 1
-  DisableColliders: 1
+  meshType: 0
+  layerType: 82
+  color:
+    colorValues: ff0000000e000000c3000000
+  size: 0.7
+  sizeToMassRatio: 1
+  isLocked: 0
+  disableColliders: 1
   CIRCLE_MESH_PRECISION: 20
 --- !u!1 &7194867592227703377
 GameObject:
@@ -203,7 +205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7194867592227703377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -19}
+  m_LocalPosition: {x: 0, y: 0, z: 81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7194867593288736889}
@@ -221,7 +223,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.3
+  m_Mass: 0.35
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -304,26 +306,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.15}
-      - {x: 0.04635255, y: 0.14265849}
-      - {x: 0.08816779, y: 0.12135255}
-      - {x: 0.12135255, y: 0.08816779}
-      - {x: 0.14265849, y: 0.046352547}
-      - {x: 0.15, y: -0.0000000065567085}
-      - {x: 0.14265847, y: -0.046352558}
-      - {x: 0.12135255, y: -0.08816778}
-      - {x: 0.08816778, y: -0.12135256}
-      - {x: 0.04635252, y: -0.1426585}
-      - {x: -0.000000013113417, y: -0.15}
-      - {x: -0.046352547, y: -0.14265849}
-      - {x: -0.08816781, y: -0.121352546}
-      - {x: -0.121352576, y: -0.088167764}
-      - {x: -0.14265847, y: -0.046352565}
-      - {x: -0.15, y: 0.0000000017887322}
-      - {x: -0.14265847, y: 0.04635257}
-      - {x: -0.12135253, y: 0.088167824}
-      - {x: -0.08816774, y: 0.12135259}
-      - {x: -0.046352543, y: 0.14265849}
+    - - {x: 0, y: 0.175}
+      - {x: 0.054077975, y: 0.1664349}
+      - {x: 0.10286242, y: 0.14157797}
+      - {x: 0.14157797, y: 0.10286242}
+      - {x: 0.1664349, y: 0.054077968}
+      - {x: 0.175, y: -0.000000007649493}
+      - {x: 0.16643488, y: -0.05407798}
+      - {x: 0.14157797, y: -0.1028624}
+      - {x: 0.1028624, y: -0.14157799}
+      - {x: 0.05407794, y: -0.1664349}
+      - {x: -0.000000015298985, y: -0.175}
+      - {x: -0.054077968, y: -0.1664349}
+      - {x: -0.10286244, y: -0.14157796}
+      - {x: -0.14157799, y: -0.10286239}
+      - {x: -0.16643488, y: -0.05407799}
+      - {x: -0.175, y: 0.000000002086854}
+      - {x: -0.16643488, y: 0.054077994}
+      - {x: -0.14157794, y: 0.102862455}
+      - {x: -0.102862366, y: 0.14157802}
+      - {x: -0.054077964, y: 0.1664349}
 --- !u!114 &6885995332116067915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,12 +343,14 @@ MonoBehaviour:
   meshFilter: {fileID: 7848046134956608345}
   meshRenderer: {fileID: 8218315661045461952}
   polyCollider: {fileID: 4507028873184872426}
-  MeshType: 0
-  LayerType: 81
-  colorHex: '#da00a4'
-  size: 0.3
-  SizeToMassRatio: 1
-  DisableColliders: 1
+  meshType: 0
+  layerType: 81
+  color:
+    colorValues: da00000000000000a4000000
+  size: 0.35
+  sizeToMassRatio: 1
+  isLocked: 0
+  disableColliders: 1
   CIRCLE_MESH_PRECISION: 20
 --- !u!1 &7194867592848969169
 GameObject:
@@ -377,7 +381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7194867592848969169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7194867593288736889}
@@ -515,12 +519,14 @@ MonoBehaviour:
   meshFilter: {fileID: 7194867592848969162}
   meshRenderer: {fileID: 7194867592848969173}
   polyCollider: {fileID: 7194867592848969172}
-  MeshType: 0
-  LayerType: 80
-  colorHex: '#ad0082'
+  meshType: 0
+  layerType: 80
+  color:
+    colorValues: ad0000000000000082000000
   size: 0.1
-  SizeToMassRatio: 1
-  DisableColliders: 1
+  sizeToMassRatio: 1
+  isLocked: 0
+  disableColliders: 1
   CIRCLE_MESH_PRECISION: 20
 --- !u!1 &7194867593288736888
 GameObject:
@@ -551,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7194867593288736888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7194867592848969174}
@@ -582,7 +588,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!33 &1729492881590358217
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -694,12 +700,14 @@ MonoBehaviour:
   meshFilter: {fileID: 1729492881590358217}
   meshRenderer: {fileID: 9038311469850397287}
   polyCollider: {fileID: 790988973428880649}
-  MeshType: 0
-  LayerType: 100
-  colorHex: FFFFFF
+  meshType: 0
+  layerType: 0
+  color:
+    colorValues: 010000000100000001000000
   size: 0
-  SizeToMassRatio: 1
-  DisableColliders: 1
+  sizeToMassRatio: 1
+  isLocked: 1
+  disableColliders: 1
   CIRCLE_MESH_PRECISION: 20
   rings:
   - {fileID: 7194867592848969175}
@@ -738,7 +746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7194867593940989059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7194867593288736889}
@@ -876,12 +884,14 @@ MonoBehaviour:
   meshFilter: {fileID: 7593435977194651912}
   meshRenderer: {fileID: 8626481101938436896}
   polyCollider: {fileID: 992256617000331027}
-  MeshType: 0
-  LayerType: 95
-  colorHex: 191919
+  meshType: 0
+  layerType: 95
+  color:
+    colorValues: 190000001900000019000000
   size: 5
-  SizeToMassRatio: 1
-  DisableColliders: 1
+  sizeToMassRatio: 1
+  isLocked: 0
+  disableColliders: 1
   CIRCLE_MESH_PRECISION: 20
 --- !u!1 &7592952351148918129
 GameObject:
@@ -912,7 +922,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7592952351148918129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6}
+  m_LocalPosition: {x: 0, y: 0, z: 94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7194867593288736889}
@@ -1050,10 +1060,12 @@ MonoBehaviour:
   meshFilter: {fileID: 7728267047989029734}
   meshRenderer: {fileID: 6255305577600284966}
   polyCollider: {fileID: 847947406334782633}
-  MeshType: 0
-  LayerType: 94
-  colorHex: 202020
+  meshType: 0
+  layerType: 94
+  color:
+    colorValues: 200000002000000020000000
   size: 2.5
-  SizeToMassRatio: 1
-  DisableColliders: 1
+  sizeToMassRatio: 1
+  isLocked: 0
+  disableColliders: 1
   CIRCLE_MESH_PRECISION: 20

@@ -307,14 +307,15 @@ MonoBehaviour:
   meshFilter: {fileID: 8439090764092802915}
   meshRenderer: {fileID: 8439090764092802916}
   polyCollider: {fileID: 8439090764092802917}
-  MeshType: 2
-  LayerType: 30
-  colorHex: DA0037
+  meshType: 2
+  layerType: 30
+  color:
+    colorValues: da0000000000000037000000
   size: 0.1
-  SizeToMassRatio: 1
-  DisableColliders: 0
-  CIRCLE_MESH_PRECISION: 20
+  sizeToMassRatio: 1
   isLocked: 1
+  disableColliders: 0
+  CIRCLE_MESH_PRECISION: 20
   trail: {fileID: 6971250122396805438}
   SHIP_PARTICLE_COUNT: 8
   LAUNCH_PARTICLE_COUNT: 10
