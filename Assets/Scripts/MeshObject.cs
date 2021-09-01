@@ -68,9 +68,6 @@ public class MeshObject : MonoBehaviour {
 		if (this == null)
 			return;
 
-		// Set the color based on the hex value given
-		color = Utils.Hex2RGB(colorHex);
-
 		// Make sure all components of the object are not null
 		if (rigidBody == null) {
 			rigidBody = (GetComponent<Rigidbody2D>( ) == null) ? gameObject.AddComponent<Rigidbody2D>( ) : GetComponent<Rigidbody2D>( );
@@ -84,6 +81,21 @@ public class MeshObject : MonoBehaviour {
 		if (polyCollider == null) {
 			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
+
+		RecalculateVariables( );
+	}
+
+	protected void Awake ( ) {
+		// Find the level manager (so gravitational forces can be calculated)
+		levelManager = FindObjectOfType<LevelManager>( );
+
+		// Call OnValidate one more time just to make sure the Mass and mesh are calculated correctly
+		RecalculateVariables( );
+	}
+
+	protected void RecalculateVariables ( ) {
+		// Set the color based on the hex value given
+		color = Utils.Hex2RGB(colorHex);
 
 		// Reset and update component variables
 		rigidBody.gravityScale = 0;
@@ -99,14 +111,6 @@ public class MeshObject : MonoBehaviour {
 
 		// Regenerate the mesh of the object
 		GenerateMesh( );
-	}
-
-	protected void Awake ( ) {
-		// Find the level manager (so gravitational forces can be calculated)
-		levelManager = FindObjectOfType<LevelManager>( );
-
-		// Call OnValidate one more time just to make sure the Mass and mesh are calculated correctly
-		OnValidate( );
 	}
 
 	protected void GenerateMesh ( ) {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Particle : GravityObject {
-	public bool IsInitialized;
+	[Header("--- Particle Class ---")]
+	[SerializeField] public bool IsInitialized;
 
 	private void Start ( ) {
 		// The particle class must be itialized beforehand to make sure the parameters are correct
@@ -22,6 +23,8 @@ public class Particle : GravityObject {
 		Size = size;
 		DisableColliders = disableColliders;
 		this.colorHex = colorHex;
+
+		RecalculateVariables( );
 
 		// Since the values of this particle were set, the particle object is now intialized and can appear in the scene
 		IsInitialized = true;

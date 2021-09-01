@@ -152,7 +152,7 @@ MonoBehaviour:
   polyCollider: {fileID: 1654005443914306769}
   MeshType: 3
   LayerType: 0
-  colorHex: 
+  colorHex: FFFFFF
   Size: 0.05
   SizeToMassRatio: 1
   DisableColliders: 0
