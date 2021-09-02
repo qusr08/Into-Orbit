@@ -72,6 +72,24 @@ public static class Utils {
 		return new Vector2(Mathf.Cos(angleChange + centerAngle), Mathf.Sin(angleChange + centerAngle)) * arcCenter.magnitude;
 	}
 
+	public static Color RandColorInRange (Color color, float maxOffset, bool keepHue = true) {
+		float newR, newG, newB = 0;
+
+		if (!keepHue) {
+			newR = color.r + RandFloat(-maxOffset, maxOffset);
+			newG = color.g + RandFloat(-maxOffset, maxOffset);
+			newB = color.b + RandFloat(-maxOffset, maxOffset);
+		} else {
+			float colorOffset = RandFloat(-maxOffset, maxOffset);
+
+			newR = color.r + colorOffset;
+			newG = color.g + colorOffset;
+			newB = color.b + colorOffset;
+		}
+
+		return new Color(Limit(newR, 0f, 1f), Limit(newG, 0f, 1f), Limit(newB, 0f, 1f));
+	}
+
 	#endregion
 
 	#region Vector Methods

@@ -36,6 +36,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] private MeshType meshType = MeshType.Circle;
 	[SerializeField] private LayerType layerType = LayerType.Front;
 	[SerializeField] private SerializableColor color;
+	// [SerializeField] [Range(0f, 1f)] private float colorOffset;
 	[Space]
 	[SerializeField] private float size = 1;
 	[SerializeField] private float sizeToMassRatio = 1;
@@ -331,9 +332,50 @@ public class MeshObject : MonoBehaviour {
 
 		Vector3[ ] normals = normalsList.ToArray( );
 
+		/*
+		
+		SO BASICALLY this is some 11/10 code but I dont think we are gonna use it currently. I do want to keep it doe
+		
+		I encountered a problem where I couldnt find a material that was unlit and had the ability to set the vertex color. I tried
+		the Standard Particle Unlit material but that had some weird settings that caused the color of the objects to change and not
+		be what I set them to. Eventually I came to the conclusion that (at least for now) a plain color might look better than the
+		textured one I wanted to do originally.
+
+		// https://stackoverflow.com/questions/45854076/set-color-for-each-vertex-in-a-triangle
+		// Split the mesh up so each triangle has 3 unique vertices
+		// When you color a mesh, you color the vertices, not the triangles. To make all triangles different colors, you need
+		//	to individually color the vertices.
+		int numTriangles = triangles.Length;
+		Vector3[ ] splitVertices = new Vector3[numTriangles];
+		Vector3[ ] splitNormals = new Vector3[numTriangles];
+
+		// Make the new vertices based on the triangle count
+		for (int i = 0; i < numTriangles; i++) {
+			splitVertices[i] = vertices[triangles[i]];
+			splitNormals[i] = normals[triangles[i]];
+			triangles[i] = i;
+		}
+
+		vertices = splitVertices;
+		normals = splitNormals;
+
+		// Add colors to the vertices
+		Color[ ] colors = new Color[vertices.Length];
+		Color currentColor = new Color( );
+		for (int i = 0; i < colors.Length; i++) {
+			if (i % 3 == 0) {
+				currentColor = Utils.RandColorInRange(Color, colorOffset);
+			}
+
+			colors[i] = currentColor;
+		}
+
+		*/
+
 		// Initialize the mesh with all of the calculated values
 		mesh.vertices = vertices;
 		mesh.triangles = triangles;
+		// mesh.colors = colors;
 		mesh.normals = normals;
 		UpdateColor( );
 
