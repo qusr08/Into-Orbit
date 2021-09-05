@@ -156,7 +156,6 @@ MonoBehaviour:
   layerType: 0
   color:
     colorValues: ff000000ff000000ff000000
-  colorOffset: 0.198
   size: 1
   sizeToMassRatio: 1
   showTrail: 1

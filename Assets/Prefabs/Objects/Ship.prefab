@@ -113,8 +113,6 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -0.05, y: -0.05}
       - {x: -0.05, y: 0.05}
-      - {x: 0.05, y: -0.05}
-      - {x: -0.05, y: 0.05}
       - {x: 0.05, y: 0.05}
       - {x: 0.05, y: -0.05}
 --- !u!58 &6443677246469986241
@@ -176,7 +174,6 @@ MonoBehaviour:
   layerType: 30
   color:
     colorValues: da0000000000000037000000
-  colorOffset: 0
   size: 0.1
   sizeToMassRatio: 1
   showTrail: 1
