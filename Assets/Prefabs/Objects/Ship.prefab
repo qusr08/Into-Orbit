@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8439090764092802918}
+  - component: {fileID: 456327539268551528}
   - component: {fileID: 8439090764092802915}
   - component: {fileID: 8439090764092802916}
   - component: {fileID: 8439090764092802917}
   - component: {fileID: 6443677246469986241}
   - component: {fileID: 8439090764092802919}
-  - component: {fileID: 456327539268551528}
   - component: {fileID: 1561994434057342133}
   m_Layer: 6
   m_Name: Ship
@@ -37,6 +37,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &456327539268551528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8439090764092802905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f8e642172c4cb4e8a02a878d774dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: 1561994434057342133}
+  rigidBody: {fileID: 8439090764092802919}
+  meshFilter: {fileID: 8439090764092802915}
+  meshRenderer: {fileID: 8439090764092802916}
+  polyCollider: {fileID: 8439090764092802917}
+  meshType: 2
+  size: 0.1
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 30
+  color:
+    colorValues: da0000000000000037000000
+  trailStartAlpha: 0.25
+  trailEndAlpha: 0
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 1
+  isLocked: 1
+  disableColliders: 0
+  explosionPrefab: {fileID: 2881110983041004528, guid: c9c9e2874fd54d04aba7b2a3fc94b452, type: 3}
+  crashParticleCount: 8
+  launchParticleCount: 10
+  maxLaunchDistance: 5
 --- !u!33 &8439090764092802915
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -148,46 +185,10 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
---- !u!114 &456327539268551528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8439090764092802905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f8e642172c4cb4e8a02a878d774dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 1561994434057342133}
-  rigidBody: {fileID: 8439090764092802919}
-  meshFilter: {fileID: 8439090764092802915}
-  meshRenderer: {fileID: 8439090764092802916}
-  polyCollider: {fileID: 8439090764092802917}
-  meshType: 2
-  size: 0.1
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 30
-  color:
-    colorValues: da0000000000000037000000
-  trailStartAlpha: 0.25
-  trailEndAlpha: 0
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 1
-  isLocked: 1
-  disableColliders: 0
-  crashParticleCount: 8
-  launchParticleCount: 10
-  maxLaunchDistance: 5
 --- !u!96 &1561994434057342133
 TrailRenderer:
   serializedVersion: 2

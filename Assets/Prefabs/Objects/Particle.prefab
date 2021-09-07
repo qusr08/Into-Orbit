@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1654005443914306770}
+  - component: {fileID: 1654005443914306767}
   - component: {fileID: 1654005443914306771}
   - component: {fileID: 1654005443914306768}
   - component: {fileID: 1654005443914306769}
   - component: {fileID: 1654005443914306766}
-  - component: {fileID: 1654005443914306767}
   - component: {fileID: 4357440262241640254}
   m_Layer: 7
   m_Name: Particle
@@ -36,6 +36,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1654005443914306767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654005443914306764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0057f1876b6ae2d49b5ea829d190cbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: 4357440262241640254}
+  rigidBody: {fileID: 1654005443914306766}
+  meshFilter: {fileID: 1654005443914306771}
+  meshRenderer: {fileID: 1654005443914306768}
+  polyCollider: {fileID: 1654005443914306769}
+  meshType: 3
+  size: 1
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 0
+  color:
+    colorValues: ff000000ff000000ff000000
+  trailStartAlpha: 0.2
+  trailEndAlpha: 0
+  trailLength: 0.15
+  trailToObjectScale: 1
+  showTrail: 1
+  isLocked: 0
+  disableColliders: 0
+  IsInitialized: 0
 --- !u!33 &1654005443914306771
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -132,42 +166,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &1654005443914306767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654005443914306764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0057f1876b6ae2d49b5ea829d190cbe5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 4357440262241640254}
-  rigidBody: {fileID: 1654005443914306766}
-  meshFilter: {fileID: 1654005443914306771}
-  meshRenderer: {fileID: 1654005443914306768}
-  polyCollider: {fileID: 1654005443914306769}
-  meshType: 3
-  size: 1
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 0
-  color:
-    colorValues: ff000000ff000000ff000000
-  trailStartAlpha: 0.2
-  trailEndAlpha: 0
-  trailLength: 0.15
-  trailToObjectScale: 1
-  showTrail: 1
-  isLocked: 0
-  disableColliders: 0
-  IsInitialized: 0
 --- !u!96 &4357440262241640254
 TrailRenderer:
   serializedVersion: 2

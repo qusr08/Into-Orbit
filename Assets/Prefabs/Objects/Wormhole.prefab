@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6023516425424814369}
+  - component: {fileID: 8165472760491356156}
   - component: {fileID: 7882063805838718817}
   - component: {fileID: 6242589126311822848}
   - component: {fileID: 2353142673571160128}
   - component: {fileID: 859562718750783622}
-  - component: {fileID: 8165472760491356156}
   - component: {fileID: -6815047246642831312}
   m_Layer: 0
   m_Name: Outside
@@ -36,6 +36,39 @@ Transform:
   m_Father: {fileID: 7194867593288736889}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8165472760491356156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108119555060976539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: -6815047246642831312}
+  rigidBody: {fileID: 7882063805838718817}
+  meshFilter: {fileID: 6242589126311822848}
+  meshRenderer: {fileID: 2353142673571160128}
+  polyCollider: {fileID: 859562718750783622}
+  meshType: 0
+  size: 0.7
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 82
+  color:
+    colorValues: ff0000000e000000c3000000
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 0
+  isLocked: 0
+  disableColliders: 1
 --- !u!50 &7882063805838718817
 Rigidbody2D:
   serializedVersion: 4
@@ -151,39 +184,6 @@ PolygonCollider2D:
       - {x: -0.2831559, y: 0.20572491}
       - {x: -0.20572473, y: 0.28315604}
       - {x: -0.10815593, y: 0.3328698}
---- !u!114 &8165472760491356156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108119555060976539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: -6815047246642831312}
-  rigidBody: {fileID: 7882063805838718817}
-  meshFilter: {fileID: 6242589126311822848}
-  meshRenderer: {fileID: 2353142673571160128}
-  polyCollider: {fileID: 859562718750783622}
-  meshType: 0
-  size: 0.7
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 82
-  color:
-    colorValues: ff0000000e000000c3000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 0
-  isLocked: 0
-  disableColliders: 1
 --- !u!96 &-6815047246642831312
 TrailRenderer:
   serializedVersion: 2
@@ -300,11 +300,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6090020397542122956}
+  - component: {fileID: 6324243544782016932}
   - component: {fileID: 2243889864477787204}
   - component: {fileID: 2014893221111582658}
   - component: {fileID: 1170579971079255151}
   - component: {fileID: 3762487623843389204}
-  - component: {fileID: 6324243544782016932}
   - component: {fileID: 3108896204922727279}
   m_Layer: 0
   m_Name: Environment Glow Front
@@ -327,6 +327,39 @@ Transform:
   m_Father: {fileID: 7194867593288736889}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6324243544782016932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270037869780585852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: 3108896204922727279}
+  rigidBody: {fileID: 2243889864477787204}
+  meshFilter: {fileID: 2014893221111582658}
+  meshRenderer: {fileID: 1170579971079255151}
+  polyCollider: {fileID: 3762487623843389204}
+  meshType: 0
+  size: 2.5
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 94
+  color:
+    colorValues: 200000002000000020000000
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 0
+  isLocked: 0
+  disableColliders: 1
 --- !u!50 &2243889864477787204
 Rigidbody2D:
   serializedVersion: 4
@@ -442,39 +475,6 @@ PolygonCollider2D:
       - {x: -1.011271, y: 0.73473185}
       - {x: -0.7347312, y: 1.0112716}
       - {x: -0.38627118, y: 1.1888207}
---- !u!114 &6324243544782016932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2270037869780585852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 3108896204922727279}
-  rigidBody: {fileID: 2243889864477787204}
-  meshFilter: {fileID: 2014893221111582658}
-  meshRenderer: {fileID: 1170579971079255151}
-  polyCollider: {fileID: 3762487623843389204}
-  meshType: 0
-  size: 2.5
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 94
-  color:
-    colorValues: 200000002000000020000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 0
-  isLocked: 0
-  disableColliders: 1
 --- !u!96 &3108896204922727279
 TrailRenderer:
   serializedVersion: 2
@@ -591,11 +591,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7194867592227703382}
+  - component: {fileID: 6885995332116067915}
   - component: {fileID: 7454160646821922916}
   - component: {fileID: 7848046134956608345}
   - component: {fileID: 8218315661045461952}
   - component: {fileID: 4507028873184872426}
-  - component: {fileID: 6885995332116067915}
   - component: {fileID: -2888300286274830686}
   m_Layer: 0
   m_Name: Middle
@@ -618,6 +618,39 @@ Transform:
   m_Father: {fileID: 7194867593288736889}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6885995332116067915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194867592227703377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: -2888300286274830686}
+  rigidBody: {fileID: 7454160646821922916}
+  meshFilter: {fileID: 7848046134956608345}
+  meshRenderer: {fileID: 8218315661045461952}
+  polyCollider: {fileID: 4507028873184872426}
+  meshType: 0
+  size: 0.35
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 81
+  color:
+    colorValues: da00000000000000a4000000
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 0
+  isLocked: 0
+  disableColliders: 1
 --- !u!50 &7454160646821922916
 Rigidbody2D:
   serializedVersion: 4
@@ -733,39 +766,6 @@ PolygonCollider2D:
       - {x: -0.14157794, y: 0.102862455}
       - {x: -0.102862366, y: 0.14157802}
       - {x: -0.054077964, y: 0.1664349}
---- !u!114 &6885995332116067915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7194867592227703377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: -2888300286274830686}
-  rigidBody: {fileID: 7454160646821922916}
-  meshFilter: {fileID: 7848046134956608345}
-  meshRenderer: {fileID: 8218315661045461952}
-  polyCollider: {fileID: 4507028873184872426}
-  meshType: 0
-  size: 0.35
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 81
-  color:
-    colorValues: da00000000000000a4000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 0
-  isLocked: 0
-  disableColliders: 1
 --- !u!96 &-2888300286274830686
 TrailRenderer:
   serializedVersion: 2
@@ -882,11 +882,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7194867592848969174}
+  - component: {fileID: 7194867592848969175}
   - component: {fileID: 7194867592848969163}
   - component: {fileID: 7194867592848969162}
   - component: {fileID: 7194867592848969173}
   - component: {fileID: 7194867592848969172}
-  - component: {fileID: 7194867592848969175}
   - component: {fileID: 7377698152013579376}
   m_Layer: 0
   m_Name: Center
@@ -909,6 +909,39 @@ Transform:
   m_Father: {fileID: 7194867593288736889}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7194867592848969175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194867592848969169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: 7377698152013579376}
+  rigidBody: {fileID: 7194867592848969163}
+  meshFilter: {fileID: 7194867592848969162}
+  meshRenderer: {fileID: 7194867592848969173}
+  polyCollider: {fileID: 7194867592848969172}
+  meshType: 0
+  size: 0.1
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 80
+  color:
+    colorValues: ad0000000000000082000000
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 0
+  isLocked: 0
+  disableColliders: 1
 --- !u!50 &7194867592848969163
 Rigidbody2D:
   serializedVersion: 4
@@ -1024,39 +1057,6 @@ PolygonCollider2D:
       - {x: -0.04045084, y: 0.029389275}
       - {x: -0.029389247, y: 0.040450864}
       - {x: -0.015450847, y: 0.047552828}
---- !u!114 &7194867592848969175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7194867592848969169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 7377698152013579376}
-  rigidBody: {fileID: 7194867592848969163}
-  meshFilter: {fileID: 7194867592848969162}
-  meshRenderer: {fileID: 7194867592848969173}
-  polyCollider: {fileID: 7194867592848969172}
-  meshType: 0
-  size: 0.1
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 80
-  color:
-    colorValues: ad0000000000000082000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 0
-  isLocked: 0
-  disableColliders: 1
 --- !u!96 &7377698152013579376
 TrailRenderer:
   serializedVersion: 2
@@ -1173,11 +1173,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7194867593288736889}
+  - component: {fileID: 5744315218278610605}
   - component: {fileID: 5250277663680291429}
   - component: {fileID: 1729492881590358217}
   - component: {fileID: 9038311469850397287}
   - component: {fileID: 790988973428880649}
-  - component: {fileID: 5744315218278610605}
   - component: {fileID: -5705050627691467121}
   m_Layer: 0
   m_Name: Wormhole
@@ -1205,6 +1205,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5744315218278610605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194867593288736888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e735d168d23a7448f03afec6b15c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: -5705050627691467121}
+  rigidBody: {fileID: 5250277663680291429}
+  meshFilter: {fileID: 1729492881590358217}
+  meshRenderer: {fileID: 9038311469850397287}
+  polyCollider: {fileID: 790988973428880649}
+  meshType: 0
+  size: 0
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 100
+  color:
+    colorValues: 010000000100000001000000
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 0
+  isLocked: 1
+  disableColliders: 1
+  rings:
+  - {fileID: 7194867592848969175}
+  - {fileID: 6885995332116067915}
+  - {fileID: 8165472760491356156}
+  - {fileID: 6324243544782016932}
+  - {fileID: 1538485992090486561}
+  oscSpeed: 0.01
+  scaleRange: 0.2
 --- !u!50 &5250277663680291429
 Rigidbody2D:
   serializedVersion: 4
@@ -1320,47 +1361,6 @@ PolygonCollider2D:
       - {x: -0, y: 0}
       - {x: -0, y: 0}
       - {x: -0, y: 0}
---- !u!114 &5744315218278610605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7194867593288736888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e735d168d23a7448f03afec6b15c4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: -5705050627691467121}
-  rigidBody: {fileID: 5250277663680291429}
-  meshFilter: {fileID: 1729492881590358217}
-  meshRenderer: {fileID: 9038311469850397287}
-  polyCollider: {fileID: 790988973428880649}
-  meshType: 0
-  size: 0
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 100
-  color:
-    colorValues: 010000000100000001000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 0
-  isLocked: 1
-  disableColliders: 1
-  rings:
-  - {fileID: 7194867592848969175}
-  - {fileID: 6885995332116067915}
-  - {fileID: 8165472760491356156}
-  - {fileID: 6324243544782016932}
-  - {fileID: 1538485992090486561}
-  oscSpeed: 0.01
-  scaleRange: 0.2
 --- !u!96 &-5705050627691467121
 TrailRenderer:
   serializedVersion: 2
@@ -1477,11 +1477,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7194867593940989056}
+  - component: {fileID: 1538485992090486561}
   - component: {fileID: 5653317525300404293}
   - component: {fileID: 7593435977194651912}
   - component: {fileID: 8626481101938436896}
   - component: {fileID: 992256617000331027}
-  - component: {fileID: 1538485992090486561}
   - component: {fileID: 6610412655452378107}
   m_Layer: 0
   m_Name: Environment Glow Back
@@ -1504,6 +1504,39 @@ Transform:
   m_Father: {fileID: 7194867593288736889}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1538485992090486561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194867593940989059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
+  trailRenderer: {fileID: 6610412655452378107}
+  rigidBody: {fileID: 5653317525300404293}
+  meshFilter: {fileID: 7593435977194651912}
+  meshRenderer: {fileID: 8626481101938436896}
+  polyCollider: {fileID: 992256617000331027}
+  meshType: 0
+  size: 5
+  sizeToMassRatio: 1
+  meshPrecision: 20
+  layerType: 95
+  color:
+    colorValues: 190000001900000019000000
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
+  showTrail: 0
+  isLocked: 0
+  disableColliders: 1
 --- !u!50 &5653317525300404293
 Rigidbody2D:
   serializedVersion: 4
@@ -1619,39 +1652,6 @@ PolygonCollider2D:
       - {x: -2.022542, y: 1.4694637}
       - {x: -1.4694624, y: 2.0225432}
       - {x: -0.77254236, y: 2.3776414}
---- !u!114 &1538485992090486561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7194867593940989059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30e9fbeaba275414db32c05fb5ee1e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 6610412655452378107}
-  rigidBody: {fileID: 5653317525300404293}
-  meshFilter: {fileID: 7593435977194651912}
-  meshRenderer: {fileID: 8626481101938436896}
-  polyCollider: {fileID: 992256617000331027}
-  meshType: 0
-  size: 5
-  sizeToMassRatio: 1
-  meshPrecision: 20
-  layerType: 95
-  color:
-    colorValues: 190000001900000019000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
-  trailLength: 0.25
-  trailToObjectScale: 1
-  showTrail: 0
-  isLocked: 0
-  disableColliders: 1
 --- !u!96 &6610412655452378107
 TrailRenderer:
   serializedVersion: 2

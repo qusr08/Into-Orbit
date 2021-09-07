@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ship : GravityObject {
 	[Header("--- Ship Class ---")]
+	[SerializeField] private GameObject explosionPrefab;
+	[Space]
 	[SerializeField] private int crashParticleCount = 8;
 	[SerializeField] private int launchParticleCount = 10;
 	[SerializeField] private float maxLaunchDistance = 5;
@@ -16,6 +18,9 @@ public class Ship : GravityObject {
 		if (collision2D.transform.tag.Equals("Planet")) {
 			// Create particle pieces of the ship as it gets destroyed to make for a cool effect
 			levelManager.SpawnParticles(transform, crashParticleCount, Color, layerType: LayerType.Ship);
+
+			// Spawn explosion
+			Instantiate(explosionPrefab, Utils.SetZ(transform.position, (int) LayerType.Front), Quaternion.identity);
 
 			// Destroy this ship gameobject
 			Destroy(gameObject);
