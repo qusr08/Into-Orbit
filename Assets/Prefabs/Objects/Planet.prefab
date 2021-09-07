@@ -163,25 +163,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da283a5e4cdeb73478898b5d7c763ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
   trailRenderer: {fileID: 8174508949168210144}
   rigidBody: {fileID: 223014123553274988}
   meshFilter: {fileID: 223014123553274991}
   meshRenderer: {fileID: 223014123553274990}
   polyCollider: {fileID: 223014123553274985}
   meshType: 0
+  size: 2
+  sizeToMassRatio: 25
+  meshPrecision: 20
   layerType: 70
   color:
     colorValues: 440000004400000044000000
-  size: 2
-  sizeToMassRatio: 25
+  trailStartAlpha: 1
+  trailEndAlpha: 0.2941177
+  trailLength: 0.25
+  trailToObjectScale: 1
   showTrail: 0
   isLocked: 1
   disableColliders: 0
-  CIRCLE_MESH_PRECISION: 20
-  TRAIL_END_ALPHA: 0.2941177
-  TRAIL_LENGTH: 0.25
-  TRAIL_TO_OBJECT_SCALE: 1
+  rotationSpeed: 0
 --- !u!96 &8174508949168210144
 TrailRenderer:
   serializedVersion: 2

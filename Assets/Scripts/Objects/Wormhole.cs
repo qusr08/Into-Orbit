@@ -5,9 +5,9 @@ using UnityEngine;
 public class Wormhole : MeshObject {
 	[Header("--- Wormhole Class ---")]
 	[SerializeField] private List<MeshObject> rings = new List<MeshObject>( );
-	[Header("--- Wormhole Constants ---")]
-	[SerializeField] private float OSCILLATION_SPEED = 0.01f;
-	[SerializeField] private float SCALE_LIMIT = 0.2f;
+	[Space]
+	[SerializeField] private float oscSpeed = 0.01f;
+	[SerializeField] private float scaleRange = 0.2f;
 
 	private float oscillationAngle;
 
@@ -20,7 +20,7 @@ public class Wormhole : MeshObject {
 	}
 
 	private void FixedUpdate ( ) {
-		oscillationAngle += OSCILLATION_SPEED;
+		oscillationAngle += oscSpeed;
 		/*
 		if (oscillationAngle >= Mathf.PI * 2) {
 			oscillationAngle -= Mathf.PI * 2;
@@ -28,7 +28,7 @@ public class Wormhole : MeshObject {
 		*/
 
 		foreach (MeshObject ring in rings) {
-			float scaleValue = SCALE_LIMIT * Mathf.Sin((1 / ring.Size) * oscillationAngle) + 1;
+			float scaleValue = scaleRange * Mathf.Sin((1 / ring.Size) * oscillationAngle) + 1;
 
 			ring.transform.localScale = new Vector3(scaleValue, scaleValue, 1);
 		}

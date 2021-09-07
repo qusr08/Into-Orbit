@@ -146,25 +146,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0057f1876b6ae2d49b5ea829d190cbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
+  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
   trailRenderer: {fileID: 4357440262241640254}
   rigidBody: {fileID: 1654005443914306766}
   meshFilter: {fileID: 1654005443914306771}
   meshRenderer: {fileID: 1654005443914306768}
   polyCollider: {fileID: 1654005443914306769}
   meshType: 3
+  size: 1
+  sizeToMassRatio: 1
+  meshPrecision: 20
   layerType: 0
   color:
     colorValues: ff000000ff000000ff000000
-  size: 1
-  sizeToMassRatio: 1
+  trailStartAlpha: 0.2
+  trailEndAlpha: 0
+  trailLength: 0.15
+  trailToObjectScale: 1
   showTrail: 1
   isLocked: 0
   disableColliders: 0
-  CIRCLE_MESH_PRECISION: 20
-  TRAIL_END_ALPHA: 75
-  TRAIL_LENGTH: 0.25
-  TRAIL_TO_OBJECT_SCALE: 1
   IsInitialized: 0
 --- !u!96 &4357440262241640254
 TrailRenderer:
@@ -207,7 +209,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.25
+  m_Time: 0.15
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -237,8 +239,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 1}
-      key1: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 1}
+      key0: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 0.2}
+      key1: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

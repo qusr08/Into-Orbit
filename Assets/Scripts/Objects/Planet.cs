@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Planet : GravityObject {
-	private float rotationSpeed;
-
-	protected new void Awake ( ) {
-		base.Awake( );
-
-		// Generate a random rotation speed
-		rotationSpeed = Utils.RandFloat(-10, 10);
-	}
+	[Header("--- Planet Class ---")]
+	[SerializeField] [Range(-10f, 10f)] private float rotationSpeed;
 
 	protected new void FixedUpdate ( ) {
 		base.FixedUpdate( );

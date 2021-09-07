@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ship : GravityObject {
-	[Header("--- Ship Constants ---")]
-	[SerializeField] private int SHIP_PARTICLE_COUNT = 8;
-	[SerializeField] private int LAUNCH_PARTICLE_COUNT = 10;
-	[SerializeField] private float MAX_LAUNCH_DISTANCE = 5;
+	[Header("--- Ship Class ---")]
+	[SerializeField] private int crashParticleCount = 8;
+	[SerializeField] private int launchParticleCount = 10;
+	[SerializeField] private float maxLaunchDistance = 5;
 
 	private bool isLaunching; // Whether or not the player is currently launching the ship
 	private List<Particle> launchingParticles; // All of the particles that make up the trail while launching
@@ -15,7 +15,7 @@ public class Ship : GravityObject {
 		// If the ship collides with a planet, it should be destroyed
 		if (collision2D.transform.tag.Equals("Planet")) {
 			// Create particle pieces of the ship as it gets destroyed to make for a cool effect
-			levelManager.SpawnParticles(transform, SHIP_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
+			levelManager.SpawnParticles(transform, crashParticleCount, Color, layerType: LayerType.Ship);
 
 			// Destroy this ship gameobject
 			Destroy(gameObject);
@@ -29,7 +29,7 @@ public class Ship : GravityObject {
 			isLaunching = true;
 
 			// Create particles for the trail
-			launchingParticles = levelManager.SpawnParticles(transform, LAUNCH_PARTICLE_COUNT, Utils.Hex2Color("EDEDED"),
+			launchingParticles = levelManager.SpawnParticles(transform, launchParticleCount, Utils.Hex2Color("EDEDED"),
 				size: 0.1f, meshType: MeshType.Circle, layerType: LayerType.ShipDetail, giveRandomForce: false, showTrail: false, disableColliders: true);
 			// Make sure to lock all of the particles because the ones for the trail should not move
 			foreach (Particle particle in launchingParticles) {
@@ -51,8 +51,8 @@ public class Ship : GravityObject {
 				// Make sure the distance that the mouse travels from the ship is not too far away
 				// This causes the ship to be launched at a very fast speed
 				float distance = Vector2.Distance(p1, p2);
-				if (distance > MAX_LAUNCH_DISTANCE) {
-					p1 *= MAX_LAUNCH_DISTANCE / distance;
+				if (distance > maxLaunchDistance) {
+					p1 *= maxLaunchDistance / distance;
 				}
 
 				// Set the position of the particle
@@ -104,7 +104,7 @@ public class Ship : GravityObject {
 
 		// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
 		IsLocked = false;
-		rigidBody.AddForce(direction * distance / MAX_LAUNCH_DISTANCE, ForceMode2D.Impulse);
+		rigidBody.AddForce(direction * distance / maxLaunchDistance, ForceMode2D.Impulse);
 
 		yield return null;
 	}

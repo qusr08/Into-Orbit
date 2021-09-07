@@ -25,7 +25,8 @@ public enum LayerType {
 
 public class MeshObject : MonoBehaviour {
 	[Header("--- Mesh Object Class ---")]
-	[SerializeField] private Material baseMaterial;
+	[SerializeField] private Material meshMaterial;
+	[SerializeField] private Material trailMaterial;
 	[Space]
 	[SerializeField] protected TrailRenderer trailRenderer;
 	[SerializeField] protected Rigidbody2D rigidBody;
@@ -34,20 +35,20 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] protected PolygonCollider2D polyCollider;
 	[Space]
 	[SerializeField] private MeshType meshType = MeshType.Circle;
-	[SerializeField] private LayerType layerType = LayerType.Front;
-	[SerializeField] private SerializableColor color;
-	// [SerializeField] [Range(0f, 1f)] private float colorOffset;
-	[Space]
 	[SerializeField] private float size = 1;
 	[SerializeField] private float sizeToMassRatio = 1;
+	[SerializeField] private int meshPrecision = 20;
+	[SerializeField] private LayerType layerType = LayerType.Front;
+	[SerializeField] private SerializableColor color;
+	[SerializeField] [Range(0f, 1f)] private float trailStartAlpha = 1f;
+	[SerializeField] [Range(0f, 1f)] private float trailEndAlpha = 0.2941177f;
+	[SerializeField] private float trailLength = 0.25f;
+	[SerializeField] [Range(0f, 1f)] private float trailToObjectScale = 1;
+	// [SerializeField] [Range(0f, 1f)] private float colorOffset;
+	[Space]
 	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
 	[SerializeField] private bool disableColliders = false;
-	[Header("--- Mesh Object Constants ---")]
-	[SerializeField] private int CIRCLE_MESH_PRECISION = 20;
-	[SerializeField] [Range(0f, 1f)] private float TRAIL_END_ALPHA = 75 / 255f;
-	[SerializeField] private float TRAIL_LENGTH = 0.25f;
-	[SerializeField] [Range(0f, 1f)] private float TRAIL_TO_OBJECT_SCALE = 1;
 
 	protected LevelManager levelManager;
 
@@ -97,7 +98,7 @@ public class MeshObject : MonoBehaviour {
 			Mass = size * SizeToMassRatio;
 
 			// Update trail size
-			trailRenderer.startWidth = TRAIL_TO_OBJECT_SCALE * size;
+			trailRenderer.startWidth = trailToObjectScale * size;
 
 			// Regenerate the mesh because the size has changed
 			GenerateMesh( );
@@ -207,12 +208,12 @@ public class MeshObject : MonoBehaviour {
 		rigidBody.angularDrag = 0;
 		rigidBody.drag = 0;
 
-		trailRenderer.time = TRAIL_LENGTH;
+		trailRenderer.time = trailLength;
 		trailRenderer.endWidth = 0;
-		trailRenderer.material = new Material(baseMaterial);
+		trailRenderer.material = new Material(trailMaterial);
 		Color trailColor = Utils.Hex2Color("EDEDED");
-		trailRenderer.startColor = trailColor;
-		trailRenderer.endColor = new Color(trailColor.r, trailColor.g, trailColor.b, TRAIL_END_ALPHA);
+		trailRenderer.startColor = new Color(trailColor.r, trailColor.g, trailColor.b, trailStartAlpha);
+		trailRenderer.endColor = new Color(trailColor.r, trailColor.g, trailColor.b, trailEndAlpha);
 
 		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
 		trailRenderer.transform.position = Utils.SetZ(transform.position, ((int) LayerType) + 1);
@@ -246,9 +247,9 @@ public class MeshObject : MonoBehaviour {
 			case MeshType.Circle:
 				float x1;
 				float y1;
-				for (int i = 0; i < CIRCLE_MESH_PRECISION; i++) {
-					x1 = (Size / 2) * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
-					y1 = (Size / 2) * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+				for (int i = 0; i < meshPrecision; i++) {
+					x1 = (Size / 2) * Mathf.Sin((2 * Mathf.PI * i) / meshPrecision);
+					y1 = (Size / 2) * Mathf.Cos((2 * Mathf.PI * i) / meshPrecision);
 
 					verticesList.Add(new Vector3(x1, y1, 0f));
 				}
@@ -257,9 +258,9 @@ public class MeshObject : MonoBehaviour {
 			case MeshType.RoughCircle:
 				float x2;
 				float y2;
-				for (int i = 0; i < CIRCLE_MESH_PRECISION; i++) {
-					x2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
-					y2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / CIRCLE_MESH_PRECISION);
+				for (int i = 0; i < meshPrecision; i++) {
+					x2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / meshPrecision);
+					y2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / meshPrecision);
 
 					verticesList.Add(new Vector3(x2, y2, 0f));
 				}
@@ -288,7 +289,7 @@ public class MeshObject : MonoBehaviour {
 		// Based on the type (shape) of the mesh, generate the triangles from the vertices
 		switch (MeshType) {
 			case MeshType.Circle:
-				for (int i = 0; i < (CIRCLE_MESH_PRECISION - 2); i++) {
+				for (int i = 0; i < (meshPrecision - 2); i++) {
 					trianglesList.Add(0);
 					trianglesList.Add(i + 1);
 					trianglesList.Add(i + 2);
@@ -296,7 +297,7 @@ public class MeshObject : MonoBehaviour {
 
 				break;
 			case MeshType.RoughCircle:
-				for (int i = 0; i < (CIRCLE_MESH_PRECISION - 2); i++) {
+				for (int i = 0; i < (meshPrecision - 2); i++) {
 					trianglesList.Add(0);
 					trianglesList.Add(i + 1);
 					trianglesList.Add(i + 2);
@@ -394,7 +395,7 @@ public class MeshObject : MonoBehaviour {
 
 	public void UpdateColor ( ) {
 		// Create a new temporary material from the base material
-		Material material = new Material(baseMaterial);
+		Material material = new Material(meshMaterial);
 		// Set the temporary material color
 		material.SetColor("_Color", Color);
 		// Set the mesh material to this temporary materal
