@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ship : GravityObject {
 	[Header("--- Ship Class ---")]
 	[SerializeField] private GameObject explosionPrefab;
+	[SerializeField] private GameObject launchPrefab;
 	[Space]
 	[SerializeField] private int crashParticleCount = 8;
 	[SerializeField] private int launchParticleCount = 10;
@@ -110,6 +111,9 @@ public class Ship : GravityObject {
 		// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
 		IsLocked = false;
 		rigidBody.AddForce(direction * distance / maxLaunchDistance, ForceMode2D.Impulse);
+
+		// Spawn explosion
+		Instantiate(launchPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, 67.5f + (Mathf.Rad2Deg * Mathf.Atan2(direction.y - Position.y, direction.x - Position.x)))));
 
 		yield return null;
 	}
