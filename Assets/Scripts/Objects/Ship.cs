@@ -87,6 +87,8 @@ public class Ship : GravityObject {
 			// Time can be ignored here because the ship will be launched with an impulse (instantanious) force
 			Vector2 v0 = force / Mass;
 
+			// Helpful : https://stackoverflow.com/questions/55997293/change-velocity-of-rigidbody-using-addforce
+
 			// Calculate the positions of each of the particles along the ships path
 			for (int i = 0; i < launchingParticles.Count; i++) {
 				for (int j = 0; j < LAUNCH_PARTICLE_ITERATION_INTERVAL; j++) {
