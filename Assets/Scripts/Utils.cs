@@ -18,10 +18,6 @@ public static class Utils {
 		return value;
 	}
 
-	public static Vector2 LinearInterpolation (float percentage, Vector3 p1, Vector3 p2) {
-		return p1 + (percentage * (p2 - p1));
-	}
-
 	public static bool CloseEnough (Vector3 vector1, Vector3 vector2) {
 		return Vector3.Distance(vector1, vector2) < 0.01f;
 	}
@@ -94,8 +90,29 @@ public static class Utils {
 
 	#region Vector Methods
 
+	public static Vector3 LinearInterpolation (float percentage, Vector3 p1, Vector3 p2) {
+		return p1 + (percentage * (p2 - p1));
+	}
+
 	public static Vector3 SetZ (Vector3 vector, float z) {
 		return new Vector3(vector.x, vector.y, z);
+	}
+
+	public static Vector3 LimitVector3 (Vector3 center, Vector3 point, float minDistance, float maxDistance) {
+		float distance = Vector3.Distance(center, point);
+		if (distance < minDistance) {
+			point = LinearInterpolation(minDistance / distance, center, point);
+		}
+
+		if (distance > maxDistance) {
+			point = LinearInterpolation(maxDistance / distance, center, point);
+		}
+
+		return point;
+	}
+
+	public static float GetRotation2D (Vector2 center, Vector2 point) {
+		return Mathf.Rad2Deg * Mathf.Atan2(point.y - center.y, point.x - center.x);
 	}
 
 	#endregion

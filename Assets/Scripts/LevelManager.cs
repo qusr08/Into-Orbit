@@ -17,17 +17,21 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject) {
+		return CalculateGravityForce(gravityObject.Position, gravityObject.Mass);
+	}
+
+	public Vector2 CalculateGravityForce (Vector2 position, float mass) {
 		Vector2 gravityForce = Vector2.zero;
 
 		// For each of the planets, calculate their gravitation influence on the parameter object
 		foreach (Planet planet in planets) {
 			// Calculate the distance between the current planet and the object
-			float distance = Vector2.Distance(planet.Position, gravityObject.Position);
+			float distance = Vector2.Distance(planet.Position, position);
 			// Calculate the direction the planet is relative to the object
-			Vector2 direction = (planet.Position - gravityObject.Position).normalized;
+			Vector2 direction = (planet.Position - position).normalized;
 
 			// Calculate the gravitational force that the planet is applying onto the object
-			float currForce = (G * gravityObject.Mass * planet.Mass) / Mathf.Pow(distance, 2);
+			float currForce = (G * mass * planet.Mass) / Mathf.Pow(distance, 2);
 			gravityForce += direction * currForce;
 		}
 
