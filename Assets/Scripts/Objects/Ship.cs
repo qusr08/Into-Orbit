@@ -14,6 +14,8 @@ public class Ship : GravityObject {
 	[Space]
 	[SerializeField] private Transform launchingIndicator;
 
+	private Vector2 lastMousePosition;
+
 	// Whether or not the player is currently launching the ship
 	private bool IsLaunching {
 		get {
@@ -60,52 +62,73 @@ public class Ship : GravityObject {
 		}
 	}
 
+	private void Start ( ) {
+		lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+	}
+
 	private void Update ( ) {
 		// While the ship is being launched, update the positions of the particles on the trail
 		if (IsLaunching) {
 			Vector2 p1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 p2 = Position;
-
-			// Set indicator to the midpoint between the mouse and the ship
-			Vector3 indicatorPosition = new Vector2(p1.x + p2.x, p1.y + p2.y) / 2;
-			launchingIndicator.localPosition = Utils.SetZ(Utils.LimitVector3(Position, indicatorPosition, 0, MAX_LAUNCH_DISTANCE / 2), 1);
-
-			// Calculate rotation angle of this transform relative to the indicator
-			launchingIndicator.rotation = Quaternion.Euler(new Vector3(0, 0, Utils.GetRotation2D(p2, p1)));
-
-			// Set the size of the indicator based on the distance of the mouse from the ship
-			float height = launchingIndicator.GetComponent<SpriteRenderer>( ).size.y;
-			float width = Utils.Limit(Vector2.Distance(p1, p2), 0, MAX_LAUNCH_DISTANCE);
-			launchingIndicator.GetComponent<SpriteRenderer>( ).size = new Vector2(width, height);
-
-			// Get the current force that would be applied to the ship if it was launched right now
 			Vector2 direction = (p2 - p1).normalized;
-			Vector2 force = direction * (width / MAX_LAUNCH_DISTANCE);
-			Vector2 currPosition = Position;
+			float distance = Utils.Limit(Vector2.Distance(p1, p2), 0, MAX_LAUNCH_DISTANCE);
 
-			// Calculate the initial velocity
-			// Time can be ignored here because the ship will be launched with an impulse (instantanious) force
-			Vector2 v0 = force / Mass;
+			// If the mouse position was moved, then recalculate the positions of the launch particles/indicator
+			if (p1 != lastMousePosition) {
+				// Set indicator to the midpoint between the mouse and the ship
+				Vector3 indicatorPosition = new Vector2(p1.x + p2.x, p1.y + p2.y) / 2;
+				launchingIndicator.localPosition = Utils.SetZ(Utils.LimitVector3(Position, indicatorPosition, 0, MAX_LAUNCH_DISTANCE / 2), 1);
 
-			// Helpful : https://stackoverflow.com/questions/55997293/change-velocity-of-rigidbody-using-addforce
+				// Calculate rotation angle of this transform relative to the indicator
+				launchingIndicator.rotation = Quaternion.Euler(new Vector3(0, 0, Utils.GetRotation2D(p2, p1)));
 
-			// Calculate the positions of each of the particles along the ships path
-			for (int i = 0; i < launchingParticles.Count; i++) {
-				for (int j = 0; j < LAUNCH_PARTICLE_ITERATION_INTERVAL; j++) {
-					// Calculate the gravity that the ship will experience at the current position
-					Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass);
-					// Calculate the new velocity of the ship at that position
-					Vector2 v = ((gravityForce * Time.fixedDeltaTime) / Mass) + v0;
+				// Set the size of the indicator based on the distance of the mouse from the ship
+				float height = launchingIndicator.GetComponent<SpriteRenderer>( ).size.y;
+				launchingIndicator.GetComponent<SpriteRenderer>( ).size = new Vector2(distance, height);
 
-					// Increment the current position that is being checked based on the velocity
-					currPosition += ((v + v0) / 2) * Time.fixedDeltaTime;
+				// Get the current force that would be applied to the ship if it was launched right now
+				Vector2 force = direction * (distance / MAX_LAUNCH_DISTANCE);
+				Vector2 currPosition = Position;
 
-					// Set the current velocity as the new starting velocity for the next iteration
-					v0 = v;
+				// Calculate the initial velocity
+				// Time can be ignored here because the ship will be launched with an impulse (instantanious) force
+				Vector2 v0 = force / Mass;
+
+				// Helpful : https://stackoverflow.com/questions/55997293/change-velocity-of-rigidbody-using-addforce
+
+				// Calculate the positions of each of the particles along the ships path
+				for (int i = 0; i < launchingParticles.Count; i++) {
+					launchingParticles[i].gameObject.SetActive(true);
+
+					for (int j = 0; j < LAUNCH_PARTICLE_ITERATION_INTERVAL; j++) {
+						// Calculate the gravity that the ship will experience at the current position
+						Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass);
+						// Calculate the new velocity of the ship at that position
+						Vector2 v = ((gravityForce * Time.fixedDeltaTime) / Mass) + v0;
+
+						// Increment the current position that is being checked based on the velocity
+						currPosition += ((v + v0) / 2) * Time.fixedDeltaTime;
+
+						// Set the current velocity as the new starting velocity for the next iteration
+						v0 = v;
+					}
+
+					// Once a certain amount of iterations have been done, set the particle to that position
+					// If the current position is on a planet, do not draw the particle because it spazzes out and doesn't work properly
+					RaycastHit2D hit = Physics2D.Raycast(Utils.SetZ(currPosition, -10), Vector3.forward);
+					if (hit && hit.transform.tag.Equals("Planet")) {
+						// Disable all particles later in the list
+						for (int j = i; j < launchingParticles.Count; j++) {
+							launchingParticles[j].gameObject.SetActive(false);
+						}
+
+						// Break out of the for loop
+						i = launchingParticles.Count;
+					} else {
+						launchingParticles[i].Position = currPosition;
+					}
 				}
-
-				// Once a certain amount of iterations have been done, set the particle to that position
-				launchingParticles[i].Position = currPosition;
 			}
 
 			// If the left mouse button is unpressed, disable launching
@@ -114,12 +137,15 @@ public class Ship : GravityObject {
 
 				// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
 				IsLocked = false;
-				rigidBody.AddForce(direction * (width / MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
+				rigidBody.AddForce(direction * (distance / MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
 
 				// Spawn launch explosion particles
 				float angleModifier = 90 + launchParticleSystem.transform.rotation.eulerAngles.z;
 				Instantiate(launchParticleSystem, transform.position, Quaternion.Euler(new Vector3(0, 0, angleModifier + Utils.GetRotation2D(Position, direction))));
 			}
+
+			// Update the last mouse position
+			lastMousePosition = p1;
 		}
 	}
 
