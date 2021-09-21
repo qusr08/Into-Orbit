@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wormhole : MeshObject {
+public class Wormhole : MonoBehaviour {
 	[Header("--- Wormhole Class ---")]
 	[SerializeField] private List<MeshObject> rings = new List<MeshObject>( );
 	[Space]
@@ -11,12 +11,9 @@ public class Wormhole : MeshObject {
 
 	private float oscillationAngle;
 
-	private new void OnValidate ( ) {
-		base.OnValidate( );
-
+	private void OnValidate ( ) {
 		rings.Clear( );
 		rings.AddRange(GetComponentsInChildren<MeshObject>( ));
-		rings.Remove(this);
 	}
 
 	private void FixedUpdate ( ) {

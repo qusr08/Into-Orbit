@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ship : GravityObject {
 	private const int CRASH_PARTICLE_COUNT = 8;
-	private const int LAUNCH_PARTICLE_COUNT = 6;
-	private const int LAUNCH_PARTICLE_ITERATION_INTERVAL = 4;
 	private const float MAX_LAUNCH_DISTANCE = 5;
 
 	[Header("--- Ship Class ---")]
@@ -13,6 +12,8 @@ public class Ship : GravityObject {
 	[SerializeField] private GameObject launchParticleSystem;
 	[Space]
 	[SerializeField] private Transform launchingIndicator;
+	[SerializeField] private int launchParticleCount = 10;
+	[SerializeField] private float launchParticleDensity = 5;
 
 	private Vector2 lastMousePosition;
 
@@ -27,13 +28,14 @@ public class Ship : GravityObject {
 
 			if (value) {
 				// Create particles for the trail
-				launchingParticles = levelManager.SpawnParticles(transform, LAUNCH_PARTICLE_COUNT, Utils.Hex2Color("EDEDED"),
+				launchingParticles = levelManager.SpawnParticles(transform, launchParticleCount, Utils.Hex2Color("EDEDED"),
 					size: 0.1f, meshType: MeshType.Circle, layerType: LayerType.ShipDetail, giveRandomForce: false, showTrail: false, disableColliders: true);
 				// Make sure to lock all of the particles because the ones for the trail should not move
 				foreach (Particle particle in launchingParticles) {
 					particle.IsLocked = true;
 				}
 			} else {
+				/*
 				// Destroy all of the launching particles
 				for (int i = launchingParticles.Count - 1; i >= 0; i--) {
 					Destroy(launchingParticles[i].gameObject);
@@ -42,6 +44,7 @@ public class Ship : GravityObject {
 
 				// Clear the list of particles since they have all been destroyed by now
 				launchingParticles.Clear( );
+				*/
 			}
 		}
 	}
@@ -87,35 +90,39 @@ public class Ship : GravityObject {
 				float height = launchingIndicator.GetComponent<SpriteRenderer>( ).size.y;
 				launchingIndicator.GetComponent<SpriteRenderer>( ).size = new Vector2(distance, height);
 
+				// ------------------------------------------------------------------------------------------
+
 				// Get the current force that would be applied to the ship if it was launched right now
-				Vector2 force = direction * (distance / MAX_LAUNCH_DISTANCE);
+				Vector2 currForce = direction * (distance / MAX_LAUNCH_DISTANCE);
 				Vector2 currPosition = Position;
 
-				// Calculate the initial velocity
+				// Calculate the initial velocity of the ship
 				// Time can be ignored here because the ship will be launched with an impulse (instantanious) force
-				Vector2 v0 = force / Mass;
-
-				// Helpful : https://stackoverflow.com/questions/55997293/change-velocity-of-rigidbody-using-addforce
+				Vector2 currVelocity = currForce / Mass;
 
 				// Calculate the positions of each of the particles along the ships path
 				for (int i = 0; i < launchingParticles.Count; i++) {
+					// Make sure the particle that is being positioned is active
 					launchingParticles[i].gameObject.SetActive(true);
 
-					for (int j = 0; j < LAUNCH_PARTICLE_ITERATION_INTERVAL; j++) {
+					// Run multiple iterations of this calculation, simulating each frame of the physics update
+					for (int j = 0; j < launchParticleDensity; j++) {
 						// Calculate the gravity that the ship will experience at the current position
 						Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass);
-						// Calculate the new velocity of the ship at that position
-						Vector2 v = ((gravityForce * Time.fixedDeltaTime) / Mass) + v0;
+						// Calculate the acceleration due to the gravity force
+						Vector2 gravityAcc = gravityForce / Mass;
 
-						// Increment the current position that is being checked based on the velocity
-						currPosition += ((v + v0) / 2) * Time.fixedDeltaTime;
+						// Increment the velocity by the acceleration
+						currVelocity += gravityAcc * Time.fixedDeltaTime;
+						// Increment the position by the velocity
+						currPosition += currVelocity * Time.fixedDeltaTime;
 
-						// Set the current velocity as the new starting velocity for the next iteration
-						v0 = v;
+						// My Forum Post: https://forum.unity.com/threads/need-help-predicting-the-path-of-an-object-in-a-2d-gravity-simulation.1170098/
 					}
 
-					// Once a certain amount of iterations have been done, set the particle to that position
-					// If the current position is on a planet, do not draw the particle because it spazzes out and doesn't work properly
+					// Once a certain amount of iterations have been done, set the particle to the current position
+					// If the current position is on a planet, do not draw the rest of the particles to show that the ship will crash into
+					//	the planet
 					RaycastHit2D hit = Physics2D.Raycast(Utils.SetZ(currPosition, -10), Vector3.forward);
 					if (hit && hit.transform.tag.Equals("Planet")) {
 						// Disable all particles later in the list
@@ -123,9 +130,10 @@ public class Ship : GravityObject {
 							launchingParticles[j].gameObject.SetActive(false);
 						}
 
-						// Break out of the for loop
+						// Break out of the for loop and stop calculating the position for the rest of the particles
 						i = launchingParticles.Count;
 					} else {
+						// If there was no planet collision, then just set the position of the current particle and move on to the next one
 						launchingParticles[i].Position = currPosition;
 					}
 				}

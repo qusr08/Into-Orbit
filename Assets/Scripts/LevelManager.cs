@@ -31,8 +31,8 @@ public class LevelManager : MonoBehaviour {
 			Vector2 direction = (planet.Position - position).normalized;
 
 			// Calculate the gravitational force that the planet is applying onto the object
-			float currForce = (G * mass * planet.Mass) / Mathf.Pow(distance, 2);
-			gravityForce += direction * currForce;
+			float force = (G * mass * planet.Mass) / Mathf.Pow(distance, 2);
+			gravityForce += direction * force;
 		}
 
 		return gravityForce;
