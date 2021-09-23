@@ -153,11 +153,12 @@ MonoBehaviour:
   showTrail: 1
   isLocked: 1
   disableColliders: 0
+  Wormhole: {fileID: 0}
   explosionParticleSystem: {fileID: 2881110983041004528, guid: 1ffa24d19b1faf4488d4935c193cf634, type: 3}
   launchParticleSystem: {fileID: 2881110983041004528, guid: c9c9e2874fd54d04aba7b2a3fc94b452, type: 3}
   launchingIndicator: {fileID: 9123832780799444798}
-  launchParticleCount: 40
-  launchParticleDensity: 5
+  launchDotCount: 15
+  launchDotDensity: 5
 --- !u!33 &8439090764092802915
 MeshFilter:
   m_ObjectHideFlags: 0

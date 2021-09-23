@@ -16,26 +16,38 @@ public class LevelManager : MonoBehaviour {
 		planets.AddRange(FindObjectsOfType<Planet>( ));
 	}
 
-	public Vector2 CalculateGravityForce (GravityObject gravityObject) {
-		return CalculateGravityForce(gravityObject.Position, gravityObject.Mass);
+	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<SpaceObject> onlyParents = null) {
+		return CalculateGravityForce(gravityObject.Position, gravityObject.Mass, onlyParents);
 	}
 
-	public Vector2 CalculateGravityForce (Vector2 position, float mass) {
+	public Vector2 CalculateGravityForce (Vector2 position, float mass, List<SpaceObject> onlyParents = null) {
 		Vector2 gravityForce = Vector2.zero;
 
-		// For each of the planets, calculate their gravitation influence on the parameter object
-		foreach (Planet planet in planets) {
-			// Calculate the distance between the current planet and the object
-			float distance = Vector2.Distance(planet.Position, position);
-			// Calculate the direction the planet is relative to the object
-			Vector2 direction = (planet.Position - position).normalized;
-
-			// Calculate the gravitational force that the planet is applying onto the object
-			float force = (G * mass * planet.Mass) / Mathf.Pow(distance, 2);
-			gravityForce += direction * force;
+		if (onlyParents != null) {
+			// For each of the objects in the list, calculate their gravitational infulence on the parameter object
+			foreach (SpaceObject spaceObject in onlyParents) {
+				gravityForce += CalculateGravityForce(position, mass, spaceObject);
+			}
+		} else {
+			// For each of the planets, calculate their gravitational influence on the parameter object
+			foreach (Planet planet in planets) {
+				gravityForce += CalculateGravityForce(position, mass, planet);
+			}
 		}
 
 		return gravityForce;
+	}
+
+	public Vector2 CalculateGravityForce (Vector2 position, float mass, SpaceObject spaceObject) {
+		// Calculate the distance between the current planet and the object
+		float distance = Vector2.Distance(spaceObject.Position, position);
+		// Calculate the direction the planet is relative to the object
+		Vector2 direction = (spaceObject.Position - position).normalized;
+
+		// Calculate the gravitational force that the planet is applying onto the object
+		float force = (G * mass * spaceObject.Mass) / Mathf.Pow(distance, 2);
+
+		return direction * force;
 	}
 
 	public List<Particle> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true, bool disableColliders = false) {

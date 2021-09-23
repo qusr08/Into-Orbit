@@ -69,6 +69,7 @@ MonoBehaviour:
   showTrail: 1
   isLocked: 0
   disableColliders: 0
+  Wormhole: {fileID: 0}
   IsInitialized: 0
 --- !u!33 &1654005443914306771
 MeshFilter:
