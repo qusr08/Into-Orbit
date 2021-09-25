@@ -6,14 +6,20 @@ public class Wormhole : MonoBehaviour {
 	[Header("--- Wormhole Class ---")]
 	[SerializeField] private List<MeshObject> rings = new List<MeshObject>( );
 	[SerializeField] private MeshObject outsideRing;
-	[SerializeField] private GravityObject ship;
+	[SerializeField] private Ship ship;
 	[Space]
 	[SerializeField] private float oscSpeed;
 	[SerializeField] private float scaleRange;
 
-	public float Size {
+	public float Radius {
 		get {
-			return outsideRing.Size;
+			return outsideRing.Size / 2;
+		}
+	}
+
+	public Vector2 Position {
+		get {
+			return transform.position;
 		}
 	}
 
@@ -26,7 +32,7 @@ public class Wormhole : MonoBehaviour {
 
 	private void Update ( ) {
 		if (ship != null && ship.Wormhole == null) {
-			if (Vector2.Distance(ship.Position, transform.position) <= outsideRing.Size / 2) {
+			if (Vector2.Distance(ship.Position, Position) <= Radius) {
 				ship.Wormhole = this;
 			}
 		}
