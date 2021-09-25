@@ -35,16 +35,14 @@ public class Ship : GravityObject {
 					particle.IsLocked = true;
 				}
 			} else {
-				/*
 				// Destroy all of the launching particles
-				for (int i = launchingParticles.Count - 1; i >= 0; i--) {
-					Destroy(launchingParticles[i].gameObject);
-					launchingParticles.RemoveAt(i);
+				for (int i = launchingDots.Count - 1; i >= 0; i--) {
+					Destroy(launchingDots[i].gameObject);
+					launchingDots.RemoveAt(i);
 				}
 
 				// Clear the list of particles since they have all been destroyed by now
-				launchingParticles.Clear( );
-				*/
+				launchingDots.Clear( );
 			}
 		}
 	}
@@ -70,6 +68,8 @@ public class Ship : GravityObject {
 	}
 
 	private void Update ( ) {
+		Debug.DrawRay(Position, rigidBody.velocity.normalized, Color.blue);
+
 		// While the ship is being launched, update the positions of the particles on the trail
 		if (IsLaunching) {
 			Vector2 p1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);

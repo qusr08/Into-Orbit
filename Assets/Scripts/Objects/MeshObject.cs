@@ -23,8 +23,8 @@ public enum LayerType {
 	Front = 0
 }
 
-public class SpaceObject : MonoBehaviour {
-	[Header("--- Space Object Class ---")]
+public class MeshObject : MonoBehaviour {
+	[Header("--- Mesh Object Class ---")]
 	[SerializeField] private Material meshMaterial;
 	[SerializeField] private Material trailMaterial;
 	[Space]

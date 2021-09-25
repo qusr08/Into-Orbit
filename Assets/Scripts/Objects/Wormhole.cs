@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Wormhole : MonoBehaviour {
 	[Header("--- Wormhole Class ---")]
-	[SerializeField] private List<SpaceObject> rings = new List<SpaceObject>( );
-	[SerializeField] private SpaceObject outsideRing;
+	[SerializeField] private List<MeshObject> rings = new List<MeshObject>( );
+	[SerializeField] private MeshObject outsideRing;
 	[SerializeField] private GravityObject ship;
 	[Space]
 	[SerializeField] private float oscSpeed;
 	[SerializeField] private float scaleRange;
 
+	public float Size {
+		get {
+			return outsideRing.Size;
+		}
+	}
+
 	private float oscillationAngle;
 
 	private void OnValidate ( ) {
 		rings.Clear( );
-		rings.AddRange(GetComponentsInChildren<SpaceObject>( ));
+		rings.AddRange(GetComponentsInChildren<MeshObject>( ));
 	}
 
 	private void Update ( ) {
 		if (ship != null && ship.Wormhole == null) {
-			if (Vector2.Distance(ship.Position, transform.position) <= outsideRing.Size) {
+			if (Vector2.Distance(ship.Position, transform.position) <= outsideRing.Size / 2) {
 				ship.Wormhole = this;
 			}
 		}
@@ -36,7 +42,7 @@ public class Wormhole : MonoBehaviour {
 
 		// Animate the rings of the wormhole to make them pulse
 		// Also, make sure they don't overlap
-		foreach (SpaceObject ring in rings) {
+		foreach (MeshObject ring in rings) {
 			float scaleValue = scaleRange * Mathf.Sin((1 / ring.Size) * oscillationAngle) + 1;
 
 			ring.transform.localScale = new Vector3(scaleValue, scaleValue, 1);

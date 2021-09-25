@@ -16,16 +16,16 @@ public class LevelManager : MonoBehaviour {
 		planets.AddRange(FindObjectsOfType<Planet>( ));
 	}
 
-	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<SpaceObject> onlyParents = null) {
+	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {
 		return CalculateGravityForce(gravityObject.Position, gravityObject.Mass, onlyParents);
 	}
 
-	public Vector2 CalculateGravityForce (Vector2 position, float mass, List<SpaceObject> onlyParents = null) {
+	public Vector2 CalculateGravityForce (Vector2 position, float mass, List<MeshObject> onlyParents = null) {
 		Vector2 gravityForce = Vector2.zero;
 
 		if (onlyParents != null) {
 			// For each of the objects in the list, calculate their gravitational infulence on the parameter object
-			foreach (SpaceObject spaceObject in onlyParents) {
+			foreach (MeshObject spaceObject in onlyParents) {
 				gravityForce += CalculateGravityForce(position, mass, spaceObject);
 			}
 		} else {
@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
 		return gravityForce;
 	}
 
-	public Vector2 CalculateGravityForce (Vector2 position, float mass, SpaceObject spaceObject) {
+	public Vector2 CalculateGravityForce (Vector2 position, float mass, MeshObject spaceObject) {
 		// Calculate the distance between the current planet and the object
 		float distance = Vector2.Distance(spaceObject.Position, position);
 		// Calculate the direction the planet is relative to the object
