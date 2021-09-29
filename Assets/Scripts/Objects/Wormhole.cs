@@ -9,7 +9,7 @@ public class Wormhole : MonoBehaviour {
 	[SerializeField] private Ship ship;
 	[Space]
 	[SerializeField] private float oscSpeed;
-	[SerializeField] private float scaleRange;
+	[SerializeField] private float scaleChange;
 
 	public float Radius {
 		get {
@@ -40,18 +40,15 @@ public class Wormhole : MonoBehaviour {
 
 	private void FixedUpdate ( ) {
 		oscillationAngle += oscSpeed;
-		/*
 		if (oscillationAngle >= Mathf.PI * 2) {
 			oscillationAngle -= Mathf.PI * 2;
 		}
-		*/
 
 		// Animate the rings of the wormhole to make them pulse
 		// Also, make sure they don't overlap
-		foreach (MeshObject ring in rings) {
-			float scaleValue = scaleRange * Mathf.Sin((1 / ring.Size) * oscillationAngle) + 1;
-
-			ring.transform.localScale = new Vector3(scaleValue, scaleValue, 1);
+		for (int i = 0; i < rings.Count; i++) {
+			float scaleValue = scaleChange * Mathf.Sin(oscillationAngle + i) - scaleChange + 1;
+			rings[i].transform.localScale = new Vector3(scaleValue, scaleValue, 1);
 		}
 	}
 }

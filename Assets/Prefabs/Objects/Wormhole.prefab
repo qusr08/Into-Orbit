@@ -1221,7 +1221,7 @@ MonoBehaviour:
   outsideRing: {fileID: 8165472760491356156}
   ship: {fileID: 0}
   oscSpeed: 0.01
-  scaleRange: 0.2
+  scaleChange: 0.1
 --- !u!1 &7194867593940989059
 GameObject:
   m_ObjectHideFlags: 0
