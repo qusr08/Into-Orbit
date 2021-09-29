@@ -18,6 +18,10 @@ public static class Utils {
 		return value;
 	}
 
+	public static float Map (float value, float rangeStart, float rangeEnd, float newRangeStart, float newRangeEnd) {
+		return newRangeStart + ((newRangeEnd - newRangeStart) / (rangeEnd - rangeStart)) * (value - rangeStart);
+	}
+
 	public static bool CloseEnough (Vector3 vector1, Vector3 vector2) {
 		return Vector3.Distance(vector1, vector2) < 0.01f;
 	}
@@ -94,11 +98,11 @@ public static class Utils {
 		return p1 + (percentage * (p2 - p1));
 	}
 
-	public static Vector3 SetZ (Vector3 vector, float z) {
+	public static Vector3 SetVectZ (Vector3 vector, float z) {
 		return new Vector3(vector.x, vector.y, z);
 	}
 
-	public static Vector3 LimitVector3 (Vector3 center, Vector3 point, float minDistance, float maxDistance) {
+	public static Vector3 LimitVect3 (Vector3 center, Vector3 point, float minDistance, float maxDistance) {
 		float distance = Vector3.Distance(center, point);
 		if (distance < minDistance) {
 			point = LinearInterpolation(minDistance / distance, center, point);
@@ -111,7 +115,7 @@ public static class Utils {
 		return point;
 	}
 
-	public static float GetRotation2D (Vector2 center, Vector2 point) {
+	public static float GetAngleBetween (Vector2 center, Vector2 point) {
 		return Mathf.Rad2Deg * Mathf.Atan2(point.y - center.y, point.x - center.x);
 	}
 
@@ -119,7 +123,7 @@ public static class Utils {
 }
 
 [System.Serializable]
-public class SerializableColor {
+public class SerializableColor3 {
 	// https://answers.unity.com/questions/772235/cannot-serialize-color.html
 
 	public int[ ] colorValues = new int[3] { 255, 255, 255 };
@@ -134,12 +138,36 @@ public class SerializableColor {
 	}
 
 	// Makes this class usable as Color, Color normalColor = mySerializableColor;
-	public static implicit operator Color (SerializableColor instance) {
+	public static implicit operator Color (SerializableColor3 instance) {
 		return instance.Color;
 	}
 
 	// Makes this class assignable by Color, SerializableColor myColor = Color.white;
-	public static implicit operator SerializableColor (Color color) {
-		return new SerializableColor { Color = color };
+	public static implicit operator SerializableColor3 (Color color) {
+		return new SerializableColor3 { Color = color };
+	}
+}
+
+[System.Serializable]
+public class SerializableColor4 {
+	public int[ ] colorValues = new int[4] { 255, 255, 255, 255};
+	public Color Color {
+		get {
+			return new Color(colorValues[0] / 255f, colorValues[1] / 255f, colorValues[2] / 255f, colorValues[3] / 255f);
+		}
+
+		set {
+			colorValues = new int[4] { (int) (value.r * 255), (int) (value.g * 255), (int) (value.b * 255), (int) (value.a * 255) };
+		}
+	}
+
+	// Makes this class usable as Color, Color normalColor = mySerializableColor;
+	public static implicit operator Color (SerializableColor4 instance) {
+		return instance.Color;
+	}
+
+	// Makes this class assignable by Color, SerializableColor myColor = Color.white;
+	public static implicit operator SerializableColor4 (Color color) {
+		return new SerializableColor4 { Color = color };
 	}
 }

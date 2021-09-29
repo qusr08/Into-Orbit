@@ -39,7 +39,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] private float sizeToMassRatio = 1;
 	[SerializeField] private int meshPrecision = 20;
 	[SerializeField] private LayerType layerType = LayerType.Front;
-	[SerializeField] private SerializableColor color;
+	[SerializeField] private SerializableColor3 color;
 	[SerializeField] [Range(0f, 1f)] private float trailStartAlpha = 1f;
 	[SerializeField] [Range(0f, 1f)] private float trailEndAlpha = 0.2941177f;
 	[SerializeField] private float trailLength = 0.25f;
@@ -216,7 +216,7 @@ public class MeshObject : MonoBehaviour {
 		trailRenderer.endColor = new Color(trailColor.r, trailColor.g, trailColor.b, trailEndAlpha);
 
 		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
-		trailRenderer.transform.position = Utils.SetZ(transform.position, ((int) LayerType) + 1);
+		trailRenderer.transform.position = Utils.SetVectZ(transform.position, ((int) LayerType) + 1);
 
 		// Update all class variables
 		MeshType = MeshType;

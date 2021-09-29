@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 public class Ship : GravityObject {
 	private const int CRASH_PARTICLE_COUNT = 8;
 	private const float MAX_LAUNCH_DISTANCE = 5;
+	private const float MIN_LAUNCH_DISTANCE = 0.2f;
 
 	[Header("--- Ship Class ---")]
+	[SerializeField] private CameraController cameraController;
+	[Space]
 	[SerializeField] private GameObject explosionParticleSystem;
 	[SerializeField] private GameObject launchParticleSystem;
 	[Space]
@@ -99,19 +102,27 @@ public class Ship : GravityObject {
 			if (p1 != lastMousePosition) {
 				PositionIndicator(p1, p2, distance);
 				CreateDots(direction, distance);
+
+				// Update the camera FOV based on the distance
+				cameraController.SetTargetFOV(Utils.Map(distance, 0, MAX_LAUNCH_DISTANCE, CameraController.MIN_CAMERA_FOV, CameraController.MAX_CAMERA_FOV));
 			}
 
 			// If the left mouse button is unpressed, disable launching
 			if (Input.GetMouseButtonUp(0)) {
 				IsLaunching = false;
 
-				// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
-				IsLocked = false;
-				rigidBody.AddForce(direction * (distance / MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
+				if (distance >= MIN_LAUNCH_DISTANCE) {
+					// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
+					IsLocked = false;
+					rigidBody.AddForce(direction * (distance / MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
 
-				// Spawn launch explosion particles
-				float angleModifier = 90 + launchParticleSystem.transform.rotation.eulerAngles.z;
-				Instantiate(launchParticleSystem, Position, Quaternion.Euler(new Vector3(0, 0, angleModifier + Utils.GetRotation2D(Position, direction))));
+					// Reset camera fov
+					cameraController.ResetFOV( );
+
+					// Spawn launch explosion particles
+					float angleModifier = 90 + launchParticleSystem.transform.rotation.eulerAngles.z;
+					Instantiate(launchParticleSystem, Position, Quaternion.Euler(new Vector3(0, 0, angleModifier + Utils.GetAngleBetween(Position, direction))));
+				}
 			}
 
 			// Update the last mouse position
@@ -139,10 +150,10 @@ public class Ship : GravityObject {
 	private void PositionIndicator (Vector2 p1, Vector2 p2, float distance) {
 		// Set indicator to the midpoint between the mouse and the ship
 		Vector3 indicatorPosition = new Vector2(p1.x + p2.x, p1.y + p2.y) / 2;
-		launchingIndicator.localPosition = Utils.SetZ(Utils.LimitVector3(Position, indicatorPosition, 0, MAX_LAUNCH_DISTANCE / 2), 1);
+		launchingIndicator.localPosition = Utils.SetVectZ(Utils.LimitVect3(Position, indicatorPosition, 0, MAX_LAUNCH_DISTANCE / 2), 1);
 
 		// Calculate rotation angle of this transform relative to the indicator
-		launchingIndicator.rotation = Quaternion.Euler(new Vector3(0, 0, Utils.GetRotation2D(p2, p1)));
+		launchingIndicator.rotation = Quaternion.Euler(new Vector3(0, 0, Utils.GetAngleBetween(p2, p1)));
 
 		// Set the size of the indicator based on the distance of the mouse from the ship
 		float height = launchingIndicator.GetComponent<SpriteRenderer>( ).size.y;
@@ -181,7 +192,7 @@ public class Ship : GravityObject {
 			// Once a certain amount of iterations have been done, set the particle to the current position
 			// If the current position is on a planet, do not draw the rest of the particles to show that the ship will crash into
 			//	the planet
-			RaycastHit2D hit = Physics2D.Raycast(Utils.SetZ(currPosition, -10), Vector3.forward);
+			RaycastHit2D hit = Physics2D.Raycast(Utils.SetVectZ(currPosition, -10), Vector3.forward);
 			if (hit && hit.transform.tag.Equals("Planet")) {
 				// Disable all particles later in the list
 				for (int j = i; j < launchingDots.Count; j++) {
@@ -202,7 +213,7 @@ public class Ship : GravityObject {
 		levelManager.SpawnParticles(transform, CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
 
 		// Spawn explosion
-		Instantiate(explosionParticleSystem, Utils.SetZ(transform.position, (int) LayerType.Front), Quaternion.identity);
+		Instantiate(explosionParticleSystem, Utils.SetVectZ(transform.position, (int) LayerType.Front), Quaternion.identity);
 
 		// Destroy this ship gameobject
 		Destroy(gameObject);
