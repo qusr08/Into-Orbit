@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : Singleton<LevelManager> {
 	[Header("--- Level Manager Class ---")]
-	[SerializeField] private GameObject particlePrefab;
+	[SerializeField] private GameObject meshPiecePrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 	[Header("--- Level Manager Constants ---")]
@@ -50,23 +50,23 @@ public class LevelManager : MonoBehaviour {
 		return direction * force;
 	}
 
-	public List<Particle> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true, bool disableColliders = false) {
-		List<Particle> particles = new List<Particle>( );
+	public List<MeshPiece> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true, bool disableColliders = false) {
+		List<MeshPiece> meshPieces = new List<MeshPiece>( );
 
-		// Create the particles with set values
+		// Create the meshPieces with set values
 		for (int i = 0; i < amount; i++) {
-			// Instatiate a new particle object and initialize its values
-			Particle particle = Instantiate(particlePrefab, parent.position, Quaternion.identity).GetComponent<Particle>( );
-			particle.Initialize(parent, color, size, meshType, layerType, showTrail, disableColliders);
+			// Instatiate a new meshPiece object and initialize its values
+			MeshPiece meshPiece = Instantiate(meshPiecePrefab, parent.position, Quaternion.identity).GetComponent<MeshPiece>( );
+			meshPiece.Initialize(parent, color, size, meshType, layerType, showTrail, disableColliders);
 
-			// Launch the particle in a random direction if told to do so
+			// Launch the meshPiece in a random direction if told to do so
 			if (giveRandomForce) {
-				particle.GiveRandomForce(parent.GetComponent<Rigidbody2D>( ));
+				meshPiece.GiveRandomForce(parent.GetComponent<Rigidbody2D>( ));
 			}
 
-			particles.Add(particle);
+			meshPieces.Add(meshPiece);
 		}
 
-		return particles;
+		return meshPieces;
 	}
 }

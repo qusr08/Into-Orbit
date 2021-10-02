@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle : GravityObject {
-	[Header("--- Particle Class ---")]
+public class MeshPiece : GravityObject {
+	[Header("--- Mesh Piece Class ---")]
 	[SerializeField] public bool IsInitialized;
 
 	private void Start ( ) {
-		// The particle class must be itialized beforehand to make sure the parameters are correct
+		// The meshPiece class must be itialized beforehand to make sure the parameters are correct
 		if (!IsInitialized) {
-			Debug.LogError("Cannot create particle without initialization.");
+			Debug.LogError("Cannot create mesh piece without initialization.");
 
 			Destroy(gameObject);
 			return;
@@ -17,7 +17,7 @@ public class Particle : GravityObject {
 	}
 
 	public void Initialize (Transform parent, Color color, float size, MeshType meshType, LayerType layerType, bool showTrail, bool disableColliders) {
-		// Set all values of the particle based on the arguments given
+		// Set all values of the meshPiece based on the arguments given
 		MeshType = meshType;
 		LayerType = layerType;
 		Size = size;
@@ -27,7 +27,7 @@ public class Particle : GravityObject {
 
 		UpdateVariables( );
 
-		// Since the values of this particle were set, the particle object is now intialized and can appear in the scene
+		// Since the values of this meshPiece were set, the meshPiece object is now intialized and can appear in the scene
 		IsInitialized = true;
 	}
 

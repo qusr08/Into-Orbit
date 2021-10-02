@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3420516620627675897}
   - component: {fileID: 5049341220615490903}
   - component: {fileID: 251208259552032960}
-  - component: {fileID: 1410954742269803596}
+  - component: {fileID: 8004669865802622670}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -84,7 +84,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3635393664123756149}
   m_Enabled: 1
---- !u!114 &1410954742269803596
+--- !u!114 &8004669865802622670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  STIFFNESS: 0.4
+  stiffness: 0.4
 --- !u!1 &6491601482367616693
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13513ad6bac609145a16008405410243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keepAlive: 1
   particlePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
   planets:
   - {fileID: 0}

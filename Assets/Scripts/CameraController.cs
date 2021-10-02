@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-	public static float MIN_CAMERA_FOV = 4.5f;
-	public static float CAMERA_DEFAULT_FOV = 5f;
-	public static float MAX_CAMERA_FOV = 5.5f;
-
 	[Header("--- Camera Controller Class ---")]
 	[SerializeField] public Transform Target;
 	[Header("--- Camera Controller Constants ---")]
-	[SerializeField] [Range(0f, 1f)] private float STIFFNESS;
+	[SerializeField] [Range(0f, 1f)] private float stiffness;
 
 	public float FOV {
 		get {
@@ -47,19 +43,19 @@ public class CameraController : MonoBehaviour {
 		}
 
 		// Move the camera smoothly to the location of the target (or the mouse if the right mouse button is held)
-		transform.position = Vector3.SmoothDamp(transform.position, moveToLocation, ref trackingVelocity, STIFFNESS);
+		transform.position = Vector3.SmoothDamp(transform.position, moveToLocation, ref trackingVelocity, stiffness);
 
 		// Smoothly move the current FOV to the target FOV
 		if (FOV != targetFOV) {
-			FOV = Mathf.SmoothDamp(FOV, targetFOV, ref fovVelocity, STIFFNESS);
+			FOV = Mathf.SmoothDamp(FOV, targetFOV, ref fovVelocity, stiffness);
 		}
 	}
 
 	public void SetTargetFOV (float targetFOV) {
-		this.targetFOV = Utils.Limit(targetFOV, MIN_CAMERA_FOV, MAX_CAMERA_FOV);
+		this.targetFOV = Utils.Limit(targetFOV, Constants.MIN_CAMERA_FOV, Constants.MAX_CAMERA_FOV);
 	}
 
 	public void ResetFOV () {
-		targetFOV = CAMERA_DEFAULT_FOV;
+		targetFOV = Constants.CAMERA_DEFAULT_FOV;
 	}
 }

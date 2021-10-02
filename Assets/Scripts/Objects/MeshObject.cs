@@ -2,27 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// The type of mesh (shape) that the object will be
-public enum MeshType {
-	Circle,
-	RoughCircle,
-	Square,
-	Triangle
-}
-
-public enum LayerType {
-	Back = 100,
-	EnvironmentGlowBack = 95,
-	EnvironmentGlowFront = 94,
-	WormholeOutside = 82,
-	WormholeMiddle = 81,
-	WormholeInside = 80,
-	Environment = 70,
-	ShipDetail = 40,
-	Ship = 30,
-	Front = 0
-}
-
 public class MeshObject : MonoBehaviour {
 	[Header("--- Mesh Object Class ---")]
 	[SerializeField] private Material meshMaterial;
