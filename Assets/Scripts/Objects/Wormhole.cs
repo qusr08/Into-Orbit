@@ -5,11 +5,12 @@ using UnityEngine;
 public class Wormhole : MonoBehaviour {
 	[Header("--- Wormhole Class ---")]
 	[SerializeField] private List<MeshObject> rings = new List<MeshObject>( );
-	[SerializeField] private MeshObject outsideRing;
 	[SerializeField] private Ship ship;
 	[Space]
 	[SerializeField] private float oscSpeed;
 	[SerializeField] private float scaleChange;
+
+	private MeshObject outsideRing;
 
 	public float Radius {
 		get {
@@ -28,6 +29,10 @@ public class Wormhole : MonoBehaviour {
 	private void OnValidate ( ) {
 		rings.Clear( );
 		rings.AddRange(GetComponentsInChildren<MeshObject>( ));
+
+		if (outsideRing == null) {
+			outsideRing = transform.Find("Outside").GetComponent<MeshObject>( );
+		}
 	}
 
 	private void Update ( ) {
