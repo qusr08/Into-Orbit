@@ -126,7 +126,8 @@ public class MeshObject : MonoBehaviour {
 		set {
 			disableColliders = value;
 
-			polyCollider.enabled = !DisableColliders;
+			polyCollider.enabled = true;
+			polyCollider.isTrigger = DisableColliders;
 		}
 	}
 	public float Mass {

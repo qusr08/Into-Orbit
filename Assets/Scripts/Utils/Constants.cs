@@ -31,4 +31,6 @@ public static class Constants {
 	public const int CRASH_PARTICLE_COUNT = 8;
 	public const float MAX_LAUNCH_DISTANCE = 5;
 	public const float MIN_LAUNCH_DISTANCE = 0.2f;
+
+	public const float TELEPORT_BUFFER_TIME = 0.5f;
 }
