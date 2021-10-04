@@ -5589,7 +5589,7 @@ MonoBehaviour:
   ship: {fileID: 0}
   scaleSpeed: 0.025
   rotationSpeed: 0.01
-  scaleChange: 0.15
+  scaleChange: 0.05
   xScale: 0.6
 --- !u!1 &8878234980908768894
 GameObject:

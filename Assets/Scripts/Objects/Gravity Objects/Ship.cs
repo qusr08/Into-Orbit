@@ -12,7 +12,7 @@ public class Ship : GravityObject {
 	[Space]
 	[SerializeField] private Transform launchingIndicator;
 	[SerializeField] private int launchDotCount = 20;
-	[SerializeField] private float launchDotDensity = 5;
+	[SerializeField] private int launchDotDensity = 5;
 
 	private Wormhole wormhole;
 	public Wormhole Wormhole {
@@ -169,6 +169,8 @@ public class Ship : GravityObject {
 			// Make sure the meshPiece that is being positioned is active
 			launchingDots[i].gameObject.SetActive(true);
 
+			bool hitPlanet = false;
+
 			// Run multiple iterations of this calculation, simulating each frame of the physics update
 			for (int j = 0; j < launchDotDensity; j++) {
 				// Calculate the gravity that the ship will experience at the current position
@@ -182,22 +184,27 @@ public class Ship : GravityObject {
 				currPosition += currVelocity * Time.fixedDeltaTime;
 
 				// My Forum Post: https://forum.unity.com/threads/need-help-predicting-the-path-of-an-object-in-a-2d-gravity-simulation.1170098/
+
+				// If the current position is on a planet, do not draw the rest of the meshPieces to show that the ship will crash into the planet
+				RaycastHit2D[ ] hits = Physics2D.RaycastAll(Utils.SetVectZ(currPosition, -10), Vector3.forward);
+				for (int k = 0; k < hits.Length; k++) {
+					if (hits[k].transform.tag.Equals("Planet")) {
+						// Disable all meshPieces later in the list
+						for (; i < launchingDots.Count; i++) {
+							launchingDots[i].gameObject.SetActive(false);
+						}
+
+						// Break out of the for loop and stop calculating the position for the rest of the meshPieces
+						hitPlanet = true;
+						j = launchDotDensity;
+						break;
+					}
+				}
 			}
 
 			// Once a certain amount of iterations have been done, set the meshPiece to the current position
-			// If the current position is on a planet, do not draw the rest of the meshPieces to show that the ship will crash into
-			//	the planet
-			RaycastHit2D hit = Physics2D.Raycast(Utils.SetVectZ(currPosition, -10), Vector3.forward);
-			if (hit && hit.transform.tag.Equals("Planet")) {
-				// Disable all meshPieces later in the list
-				for (int j = i; j < launchingDots.Count; j++) {
-					launchingDots[j].gameObject.SetActive(false);
-				}
-
-				// Break out of the for loop and stop calculating the position for the rest of the meshPieces
-				i = launchingDots.Count;
-			} else {
-				// If there was no planet collision, then just set the position of the current meshPiece and move on to the next one
+			// If there was no planet collision, then just set the position of the current meshPiece and move on to the next one
+			if (!hitPlanet) {
 				launchingDots[i].Position = currPosition;
 			}
 		}

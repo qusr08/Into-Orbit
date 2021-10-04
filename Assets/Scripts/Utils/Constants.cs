@@ -32,5 +32,5 @@ public static class Constants {
 	public const float MAX_LAUNCH_DISTANCE = 5;
 	public const float MIN_LAUNCH_DISTANCE = 0.2f;
 
-	public const float TELEPORT_BUFFER_TIME = 0.5f;
+	public const float TELEPORT_BUFFER_TIME = 1f;
 }
