@@ -33,4 +33,6 @@ public static class Constants {
 	public const float MIN_LAUNCH_DISTANCE = 0.2f;
 
 	public const float TELEPORT_BUFFER_TIME = 1f;
+	public const float SEGMENT_OVERLAP = 0.13f;
+	public const float MAX_SEGMENT_OFFSET = 0.4f;
 }
