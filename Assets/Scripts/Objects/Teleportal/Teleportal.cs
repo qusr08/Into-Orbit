@@ -72,6 +72,13 @@ public class Teleportal : MonoBehaviour {
 		portal2Rings.AddRange(portal2.GetComponentsInChildren<MeshObject>( ));
 
 		if (regenerateConnector) {
+			// Make sure the segments of the connector aren't too long
+			// This increases the segment density until they are less than the final length
+			while (Distance / segmentDensity > Constants.MAX_SEGMENT_STARTLENGTH) {
+				segmentDensity++;				
+			}
+
+			// Generate the connectors
 			GenerateConnectors(connectorBack, LayerType.EnvironmentGlowBack, new Color(27 / 255f, 27 / 255f, 27 / 255f));
 			GenerateConnectors(connectorFront, LayerType.EnvironmentGlowFront, new Color(33 / 255f, 33 / 255f, 33 / 255f));
 
@@ -79,6 +86,7 @@ public class Teleportal : MonoBehaviour {
 		}
 
 		if (forceClearLists) {
+			// Clear all children from the connector parents
 			ClearConnectorChildren(connectorBack);
 			ClearConnectorChildren(connectorFront);
 
@@ -91,6 +99,7 @@ public class Teleportal : MonoBehaviour {
 		portal1AngleOffset = Random.Range(0, Mathf.PI * 2);
 		portal2AngleOffset = Random.Range(0, Mathf.PI * 2);
 
+		// Get colliders of ship and outer rings
 		shipCollider = ship.GetComponent<Collider2D>( );
 		portal1OutsideRing = portal1.Find("Outside").GetComponent<Collider2D>( );
 		portal2OutsideRing = portal2.Find("Outside").GetComponent<Collider2D>( );
@@ -149,6 +158,8 @@ public class Teleportal : MonoBehaviour {
 
 		Vector2 lastPoint = Vector2.zero;
 		Vector2 lastCurrPoint = Vector2.zero;
+
+		// A list of all the segments
 		List<TeleportalSegment> segmentList = new List<TeleportalSegment>( );
 
 		for (int i = 0; i <= segmentDensity; i++) {
@@ -169,10 +180,14 @@ public class Teleportal : MonoBehaviour {
 				segmentList.Add(segment);
 			}
 
+			// Set the neighboring segments of the current segment
+			// The segments each need to know the position of the segments next to them so they always stay connected
 			if (i > 1) {
 				TeleportalSegment lastSegment = null;
 				TeleportalSegment nextSegment = null;
 
+				// Make sure there are segments next to the current segment
+				// The first and last segments won't have both neighbors
 				if (i - 3 >= 0) {
 					lastSegment = segmentList[i - 3];
 				}
@@ -180,7 +195,10 @@ public class Teleportal : MonoBehaviour {
 					nextSegment = segmentList[i - 1];
 				}
 
+				// Set this segments neighboring segments
 				segmentList[i - 2].SetSegments(this, lastSegment, nextSegment);
+
+				// If this is the last segment, there is no next segment, so set the segments manually
 				if (i == segmentDensity) {
 					segmentList[i - 1].SetSegments(this, segmentList[i - 2], null);
 				}

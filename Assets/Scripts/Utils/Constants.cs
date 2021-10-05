@@ -37,4 +37,5 @@ public static class Constants {
 	public const float MAX_SEGMENT_OFFSET = 0.3f;
 	public const float MIN_SEGMENT_MOVETIME = 4f;
 	public const float MAX_SEGMENT_MOVETIME = 10f;
+	public const float MAX_SEGMENT_STARTLENGTH = 1f;
 }

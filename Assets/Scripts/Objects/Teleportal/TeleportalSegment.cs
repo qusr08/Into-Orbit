@@ -17,6 +17,7 @@ public class TeleportalSegment : MonoBehaviour {
 	[SerializeField] private Vector2 fromPoint2;
 	[SerializeField] private Vector2 toPoint1;
 	[SerializeField] private Vector2 toPoint2;
+
 	private float moveTime1;
 	private float moveTime2;
 	private float moveTimeRemaining1;
@@ -69,25 +70,32 @@ public class TeleportalSegment : MonoBehaviour {
 	}
 
 	private void Update ( ) {
+		// Update the move time of both ends of this segment
 		moveTimeRemaining1 -= Time.deltaTime;
 		moveTimeRemaining2 -= Time.deltaTime;
 
+		// If both this segment and the last segment are done moving, generate a new move time and a new point to move to
 		if (lastSegment != null) {
 			if (lastSegment.moveTimeRemaining2 <= 0 && moveTimeRemaining1 <= 0) {
+				// Generate a new move time
 				float newMoveTime = Random.Range(Constants.MIN_SEGMENT_MOVETIME, Constants.MAX_SEGMENT_MOVETIME);
 				lastSegment.moveTimeRemaining2 = lastSegment.moveTime2 = moveTimeRemaining1 = moveTime1 = newMoveTime;
 
+				// Generate a new point
 				Vector2 newToPoint = teleportal.GetRandPerpPoint(centerPoint1, teleportal.Angle, 0, Constants.MAX_SEGMENT_OFFSET);
 				fromPoint1 = lastSegment.fromPoint2 = currPoint1;
 				toPoint1 = lastSegment.toPoint2 = newToPoint;
 			}
 		}
 
+		// If both this segment and the next segment are done moving, generate a new move time and a new point to move to
 		if (nextSegment != null) {
 			if (nextSegment.moveTimeRemaining1 <= 0 && moveTimeRemaining2 <= 0) {
+				// Generate a new move time
 				float newMoveTime = Random.Range(Constants.MIN_SEGMENT_MOVETIME, Constants.MAX_SEGMENT_MOVETIME);
 				nextSegment.moveTimeRemaining1 = nextSegment.moveTime1 = moveTimeRemaining2 = moveTime2 = newMoveTime;
 
+				// Generate a new point
 				Vector2 newToPoint = teleportal.GetRandPerpPoint(centerPoint2, teleportal.Angle, 0, Constants.MAX_SEGMENT_OFFSET);
 				fromPoint2 = nextSegment.fromPoint1 = currPoint2;
 				toPoint2 = nextSegment.toPoint1 = newToPoint;
@@ -96,6 +104,7 @@ public class TeleportalSegment : MonoBehaviour {
 	}
 
 	private void FixedUpdate ( ) {
+		// If the current point is not equal to the point it should be, move the current point gradually based on the move time
 		if (!Utils.CloseEnough(currPoint1, toPoint1) && moveTime1 != 0) {
 			currPoint1 = Vector2.Lerp(fromPoint1, toPoint1, 1 - (moveTimeRemaining1 / moveTime1));
 		}
@@ -103,6 +112,7 @@ public class TeleportalSegment : MonoBehaviour {
 			currPoint2 = Vector2.Lerp(fromPoint2, toPoint2, 1 - (moveTimeRemaining2 / moveTime2));
 		}
 
+		// Update the position, angle, and width of the segment
 		UpdateVariables( );
 	}
 

@@ -7,6 +7,8 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private GameObject meshPiecePrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
+	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
+	[SerializeField] private List<Teleportal> teleportals = new List<Teleportal>( );
 	[Header("--- Level Manager Constants ---")]
 	[SerializeField] private float G = 0.75f;
 
@@ -14,6 +16,12 @@ public class LevelManager : Singleton<LevelManager> {
 		// Find all planet objects in the scene and add it to this list
 		planets.Clear( );
 		planets.AddRange(FindObjectsOfType<Planet>( ));
+
+		wormholes.Clear( );
+		wormholes.AddRange(FindObjectsOfType<Wormhole>( ));
+
+		teleportals.Clear( );
+		teleportals.AddRange(FindObjectsOfType<Teleportal>( ));
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {
