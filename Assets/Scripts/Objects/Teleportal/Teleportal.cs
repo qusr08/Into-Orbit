@@ -21,7 +21,7 @@ public class Teleportal : MonoBehaviour {
 	[Space]
 	[SerializeField] private bool regenerateConnector;
 	[SerializeField] private bool forceClearLists;
-	[SerializeField] [Min(1)] private float segmentDensity;
+	[SerializeField] [Min(1)] private int segmentDensity;
 
 	private Collider2D portal1OutsideRing;
 	private Collider2D portal2OutsideRing;
@@ -33,8 +33,6 @@ public class Teleportal : MonoBehaviour {
 	private float rotationAngle;
 
 	private float teleportBufferTimer;
-
-	private LevelManager levelManager;
 
 	public Vector2 Portal1Position {
 		get {
@@ -73,29 +71,16 @@ public class Teleportal : MonoBehaviour {
 		portal1Rings.AddRange(portal1.GetComponentsInChildren<MeshObject>( ));
 		portal2Rings.AddRange(portal2.GetComponentsInChildren<MeshObject>( ));
 
-		if (portal1OutsideRing == null) {
-			portal1OutsideRing = portal1.Find("Outside").GetComponent<Collider2D>( );
-		}
-		if (portal2OutsideRing == null) {
-			portal2OutsideRing = portal2.Find("Outside").GetComponent<Collider2D>( );
-		}
-
-		if (ship != null) {
-			shipCollider = ship.GetComponent<Collider2D>( );
-		}
-
 		if (regenerateConnector) {
-			levelManager = FindObjectOfType<LevelManager>( );
-
 			GenerateConnectors(connectorBack, LayerType.EnvironmentGlowBack, new Color(27 / 255f, 27 / 255f, 27 / 255f));
-			//GenerateConnectors(connectorFront, LayerType.EnvironmentGlowFront, new Color(33 / 255f, 33 / 255f, 33 / 255f));
+			GenerateConnectors(connectorFront, LayerType.EnvironmentGlowFront, new Color(33 / 255f, 33 / 255f, 33 / 255f));
 
 			regenerateConnector = false;
 		}
 
 		if (forceClearLists) {
-			ClearSegmentList(connectorBack);
-			ClearSegmentList(connectorFront);
+			ClearConnectorChildren(connectorBack);
+			ClearConnectorChildren(connectorFront);
 
 			forceClearLists = false;
 		}
@@ -105,10 +90,14 @@ public class Teleportal : MonoBehaviour {
 		// Generate a random offset between the portals so they look different in game
 		portal1AngleOffset = Random.Range(0, Mathf.PI * 2);
 		portal2AngleOffset = Random.Range(0, Mathf.PI * 2);
+
+		shipCollider = ship.GetComponent<Collider2D>( );
+		portal1OutsideRing = portal1.Find("Outside").GetComponent<Collider2D>( );
+		portal2OutsideRing = portal2.Find("Outside").GetComponent<Collider2D>( );
 	}
 
 	private void Update ( ) {
-		if (ship != null && portal1OutsideRing != null && portal2OutsideRing != null) {
+		if (ship != null) {
 			// As long as the ship has not just teleported, wait for it to touch one of the portals
 			// This is needed so the ship doesn't spaz teleport between the portals
 			if (teleportBufferTimer <= 0) {
@@ -156,33 +145,45 @@ public class Teleportal : MonoBehaviour {
 
 	private void GenerateConnectors (Transform connectorParent, LayerType layerType, Color color) {
 		// Remove and destroy all current segments because they are going to be regenerated
-		ClearSegmentList(connectorParent);
+		ClearConnectorChildren(connectorParent);
 
 		Vector2 lastPoint = Vector2.zero;
 		Vector2 lastCurrPoint = Vector2.zero;
+		List<TeleportalSegment> segmentList = new List<TeleportalSegment>( );
 
 		for (int i = 0; i <= segmentDensity; i++) {
 			// Calcuate the current position of the segment connection
 			// As in, where 2 segments connect ends
-			Vector2 point = Utils.LinearInterpolation(i / segmentDensity, Portal1Position, Portal2Position);
+			Vector2 point = Utils.LinearInterpolation((float) i / segmentDensity, Portal1Position, Portal2Position);
 			Vector2 currPoint = GetRandPerpPoint(point, Angle, 0, Constants.MAX_SEGMENT_OFFSET);
-
-			MeshPiece dot = levelManager.SpawnParticles(connectorParent, 1, Color.white, giveRandomForce: false, showTrail: false, disableColliders: true, meshType: MeshType.Circle)[0];
-			dot.transform.position = currPoint;
-			MeshPiece dot2 = levelManager.SpawnParticles(connectorParent, 1, Color.red, giveRandomForce: false, showTrail: false, disableColliders: true, meshType: MeshType.Circle)[0];
-			dot2.transform.position = point;
 
 			if (i > 0) {
 				// Create a new instance of the segment
 				TeleportalSegment segment = Instantiate(connectorSegmentPrefab, connectorParent).GetComponent<TeleportalSegment>( );
 
 				// Set all segment variables
-				//segment.CurrPoint1 = lastCurrPoint;
-				//segment.CurrPoint2 = currPoint;
-				segment.Point1 = lastPoint;
-				segment.Point2 = point;
+				segment.SetPoints(lastPoint, point, lastCurrPoint, currPoint);
 				segment.LayerType = layerType;
 				segment.Color = color;
+
+				segmentList.Add(segment);
+			}
+
+			if (i > 1) {
+				TeleportalSegment lastSegment = null;
+				TeleportalSegment nextSegment = null;
+
+				if (i - 3 >= 0) {
+					lastSegment = segmentList[i - 3];
+				}
+				if (i - 1 < segmentDensity) {
+					nextSegment = segmentList[i - 1];
+				}
+
+				segmentList[i - 2].SetSegments(this, lastSegment, nextSegment);
+				if (i == segmentDensity) {
+					segmentList[i - 1].SetSegments(this, segmentList[i - 2], null);
+				}
 			}
 
 			lastPoint = point;
@@ -190,7 +191,7 @@ public class Teleportal : MonoBehaviour {
 		}
 	}
 
-	private Vector2 GetRandPerpPoint (Vector2 center, float angle, float minMag, float maxMag) {
+	public Vector2 GetRandPerpPoint (Vector2 center, float angle, float minMag, float maxMag) {
 		// Based on the angle that the portals are from each other, find 2 points on either side of an imaginary line connecting the portals
 		//	and then get a random value between it. This is so the segments form a jagged line instead of a straight one.
 		Vector2 minPoint = center + new Vector2(Mathf.Cos(angle + (Mathf.PI / 2)), Mathf.Sin(angle + (Mathf.PI / 2)));
@@ -204,11 +205,11 @@ public class Teleportal : MonoBehaviour {
 		return Utils.LinearInterpolation(Random.Range(0f, 1f), minPoint, maxPoint);
 	}
 
-	private void ClearSegmentList (Transform connector) {
-		TeleportalSegment[ ] segmentList = connector.GetComponentsInChildren<TeleportalSegment>( );
+	private void ClearConnectorChildren (Transform connector) {
+		TeleportalSegment[ ] childList = connector.GetComponentsInChildren<TeleportalSegment>( );
 
-		for (int i = segmentList.Length - 1; i >= 0; i--) {
-			DestroyImmediate(segmentList[i].gameObject);
+		for (int i = childList.Length - 1; i >= 0; i--) {
+			DestroyImmediate(childList[i].gameObject);
 		}
 	}
 }

@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class TeleportalSegment : MonoBehaviour {
 	[SerializeField] private SpriteRenderer spriteRenderer;
-
-	private Vector2 point1;
-	private Vector2 point2;
-	public Vector2 currPoint1;
-	public Vector2 currPoint2;
-	private Vector2 toPoint1;
-	private Vector2 toPoint2;
+	[Space]
+	[SerializeField] private TeleportalSegment lastSegment;
+	[SerializeField] private TeleportalSegment nextSegment;
+	[SerializeField] private Teleportal teleportal;
+	[Space]
+	[SerializeField] private Vector2 centerPoint1;
+	[SerializeField] private Vector2 centerPoint2;
+	[SerializeField] private Vector2 currPoint1;
+	[SerializeField] private Vector2 currPoint2;
+	[SerializeField] private Vector2 fromPoint1;
+	[SerializeField] private Vector2 fromPoint2;
+	[SerializeField] private Vector2 toPoint1;
+	[SerializeField] private Vector2 toPoint2;
+	private float moveTime1;
+	private float moveTime2;
+	private float moveTimeRemaining1;
+	private float moveTimeRemaining2;
 
 	public float Width {
 		get {
@@ -45,37 +55,7 @@ public class TeleportalSegment : MonoBehaviour {
 		}
 
 		set {
-			transform.position = value;
-		}
-	}
-	public Vector2 Point1 {
-		set {
-			point1 = value;
-			Position = (point1 + point2) / 2f;
-
-			UpdateVariables( );
-		}
-	}
-	public Vector2 Point2 {
-		set {
-			point2 = value;
-			Position = (point1 + point2) / 2f;
-
-			UpdateVariables( );
-		}
-	}
-	public Vector2 CurrPoint1 {
-		set {
-			currPoint1 = toPoint1 = value;
-
-			UpdateVariables( );
-		}
-	}
-	public Vector2 CurrPoint2 {
-		set {
-			currPoint2 = toPoint2 = value;
-
-			UpdateVariables( );
+			transform.position = new Vector3(value.x, value.y, (int) LayerType);
 		}
 	}
 	public LayerType LayerType {
@@ -88,20 +68,62 @@ public class TeleportalSegment : MonoBehaviour {
 		}
 	}
 
-	private void FixedUpdate ( ) {
-		if (!Utils.CloseEnough(currPoint1, toPoint1)) {
-			CurrPoint1 = Vector2.Lerp(currPoint1, toPoint1, Time.fixedDeltaTime);
+	private void Update ( ) {
+		moveTimeRemaining1 -= Time.deltaTime;
+		moveTimeRemaining2 -= Time.deltaTime;
+
+		if (lastSegment != null) {
+			if (lastSegment.moveTimeRemaining2 <= 0 && moveTimeRemaining1 <= 0) {
+				float newMoveTime = Random.Range(Constants.MIN_SEGMENT_MOVETIME, Constants.MAX_SEGMENT_MOVETIME);
+				lastSegment.moveTimeRemaining2 = lastSegment.moveTime2 = moveTimeRemaining1 = moveTime1 = newMoveTime;
+
+				Vector2 newToPoint = teleportal.GetRandPerpPoint(centerPoint1, teleportal.Angle, 0, Constants.MAX_SEGMENT_OFFSET);
+				fromPoint1 = lastSegment.fromPoint2 = currPoint1;
+				toPoint1 = lastSegment.toPoint2 = newToPoint;
+			}
 		}
 
-		if (!Utils.CloseEnough(currPoint2, toPoint2)) {
-			CurrPoint2 = Vector2.Lerp(currPoint2, toPoint2, Time.fixedDeltaTime);
+		if (nextSegment != null) {
+			if (nextSegment.moveTimeRemaining1 <= 0 && moveTimeRemaining2 <= 0) {
+				float newMoveTime = Random.Range(Constants.MIN_SEGMENT_MOVETIME, Constants.MAX_SEGMENT_MOVETIME);
+				nextSegment.moveTimeRemaining1 = nextSegment.moveTime1 = moveTimeRemaining2 = moveTime2 = newMoveTime;
+
+				Vector2 newToPoint = teleportal.GetRandPerpPoint(centerPoint2, teleportal.Angle, 0, Constants.MAX_SEGMENT_OFFSET);
+				fromPoint2 = nextSegment.fromPoint1 = currPoint2;
+				toPoint2 = nextSegment.toPoint1 = newToPoint;
+			}
+		}
+	}
+
+	private void FixedUpdate ( ) {
+		if (!Utils.CloseEnough(currPoint1, toPoint1) && moveTime1 != 0) {
+			currPoint1 = Vector2.Lerp(fromPoint1, toPoint1, 1 - (moveTimeRemaining1 / moveTime1));
+		}
+		if (!Utils.CloseEnough(currPoint2, toPoint2) && moveTime2 != 0) {
+			currPoint2 = Vector2.Lerp(fromPoint2, toPoint2, 1 - (moveTimeRemaining2 / moveTime2));
 		}
 
 		UpdateVariables( );
 	}
 
 	private void UpdateVariables ( ) {
-		Angle = Utils.GetAngleBetween(point1, point2);
-		Width = Vector2.Distance(point1, point2) + Constants.SEGMENT_OVERLAP;
+		Position = (currPoint1 + currPoint2) / 2f;
+		Angle = Utils.GetAngleBetween(currPoint1, currPoint2);
+		Width = Vector2.Distance(currPoint1, currPoint2) + Constants.SEGMENT_OVERLAP;
+	}
+
+	public void SetSegments (Teleportal teleportal, TeleportalSegment lastSegment, TeleportalSegment nextSegment) {
+		this.teleportal = teleportal;
+		this.lastSegment = lastSegment;
+		this.nextSegment = nextSegment;
+	}
+
+	public void SetPoints (Vector2 centerPoint1, Vector2 centerPoint2, Vector2 currPoint1, Vector2 currPoint2) {
+		this.centerPoint1 = centerPoint1;
+		this.centerPoint2 = centerPoint2;
+		this.currPoint1 = toPoint1 = fromPoint1 = currPoint1;
+		this.currPoint2 = toPoint2 = fromPoint2 = currPoint2;
+
+		UpdateVariables( );
 	}
 }
