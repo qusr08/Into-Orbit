@@ -5,7 +5,7 @@ using UnityEngine;
 public class Asteroid : GravityObject {
 	[Header("--- Asteroid Class ---")]
 	[SerializeField] private LineRenderer lineRenderer;
-	[SerializeField] private Planet parent;
+	[SerializeField] private List<MeshObject> parents = new List<MeshObject>( );
 	[Space]
 	[SerializeField] private bool recalculateTrajectory = false;
 	[SerializeField] private bool showTrajectory;
@@ -35,7 +35,7 @@ public class Asteroid : GravityObject {
 
 	protected new void FixedUpdate ( ) {
 		// Calculate the gravity that the ship will experience at the current position
-		rigidBody.AddForce(levelManager.CalculateGravityForce(this, new List<MeshObject> { parent }), ForceMode2D.Force);
+		rigidBody.AddForce(levelManager.CalculateGravityForce(this, parents), ForceMode2D.Force);
 	}
 
 	private void CreateTrajectory ( ) {
@@ -55,7 +55,7 @@ public class Asteroid : GravityObject {
 
 			for (int j = 0; j < trajectoryDensity; j++) {
 				// Calculate the gravity that the ship will experience at the current position
-				Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass, parent);
+				Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass, parents);
 				// Calculate the acceleration due to the gravity force
 				Vector2 gravityAcc = gravityForce / Mass;
 
