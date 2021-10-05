@@ -331,6 +331,7 @@ MonoBehaviour:
   meshFilter: {fileID: 3761491783369276194}
   meshRenderer: {fileID: 3761491783369276195}
   polyCollider: {fileID: 3761491783369276220}
+  levelManager: {fileID: 0}
   meshType: 0
   size: 1.25
   sizeToMassRatio: 1
@@ -518,6 +519,7 @@ MonoBehaviour:
   meshFilter: {fileID: 3761491784329895614}
   meshRenderer: {fileID: 3761491784329895615}
   polyCollider: {fileID: 3761491784329895608}
+  levelManager: {fileID: 0}
   meshType: 0
   size: 0.75
   sizeToMassRatio: 1
@@ -739,6 +741,7 @@ MonoBehaviour:
   meshFilter: {fileID: 3761491785352075977}
   meshRenderer: {fileID: 3761491785352075978}
   polyCollider: {fileID: 3761491785352075979}
+  levelManager: {fileID: 0}
   meshType: 0
   size: 0.25
   sizeToMassRatio: 1
@@ -926,6 +929,7 @@ MonoBehaviour:
   meshFilter: {fileID: 3761491785411448964}
   meshRenderer: {fileID: 3761491785411448965}
   polyCollider: {fileID: 3761491785411448966}
+  levelManager: {fileID: 0}
   meshType: 0
   size: 3.5
   sizeToMassRatio: 1

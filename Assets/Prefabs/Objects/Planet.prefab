@@ -55,6 +55,7 @@ MonoBehaviour:
   meshFilter: {fileID: 223014123553274991}
   meshRenderer: {fileID: 223014123553274990}
   polyCollider: {fileID: 223014123553274985}
+  levelManager: {fileID: 0}
   meshType: 0
   size: 2
   sizeToMassRatio: 25
