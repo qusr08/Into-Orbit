@@ -59,6 +59,7 @@ MonoBehaviour:
   size: 0.7
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 82
   color:
     colorValues: da00000000000000a4000000
@@ -245,6 +246,7 @@ MonoBehaviour:
   size: 2.5
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 94
   color:
     colorValues: 210000002100000021000000
@@ -815,7 +817,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6806500642147943973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.5, y: 3.42, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6172908937908256243}
@@ -845,6 +847,7 @@ MonoBehaviour:
   size: 0.1
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 80
   color:
     colorValues: 970000000000000071000000
@@ -1031,6 +1034,7 @@ MonoBehaviour:
   size: 0.35
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 81
   color:
     colorValues: b20000000000000088000000
@@ -1275,6 +1279,7 @@ MonoBehaviour:
   size: 5
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 95
   color:
     colorValues: 190000001900000019000000

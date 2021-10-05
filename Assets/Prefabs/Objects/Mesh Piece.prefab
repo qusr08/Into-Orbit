@@ -197,6 +197,7 @@ MonoBehaviour:
   size: 1
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 0
   color:
     colorValues: ff000000ff000000ff000000

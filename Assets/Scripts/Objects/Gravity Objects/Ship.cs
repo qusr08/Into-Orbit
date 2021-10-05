@@ -68,7 +68,7 @@ public class Ship : GravityObject {
 
 	protected void OnCollisionEnter2D (Collision2D collision2D) {
 		// If the ship collides with a planet, it should be destroyed
-		if (collision2D.transform.tag.Equals("Planet")) {
+		if (collision2D.transform.tag.Equals("Obstacle")) {
 			Death( );
 		}
 	}
@@ -188,7 +188,7 @@ public class Ship : GravityObject {
 				// If the current position is on a planet, do not draw the rest of the meshPieces to show that the ship will crash into the planet
 				RaycastHit2D[ ] hits = Physics2D.RaycastAll(Utils.SetVectZ(currPosition, -10), Vector3.forward);
 				for (int k = 0; k < hits.Length; k++) {
-					if (hits[k].transform.tag.Equals("Planet")) {
+					if (hits[k].transform.tag.Equals("Obstacle")) {
 						// Disable all meshPieces later in the list
 						for (; i < launchingDots.Count; i++) {
 							launchingDots[i].gameObject.SetActive(false);

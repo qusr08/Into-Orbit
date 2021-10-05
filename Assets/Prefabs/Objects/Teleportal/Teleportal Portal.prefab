@@ -335,6 +335,7 @@ MonoBehaviour:
   size: 1.25
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 82
   color:
     colorValues: 00000000a4000000da000000
@@ -521,6 +522,7 @@ MonoBehaviour:
   size: 0.75
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 81
   color:
     colorValues: 0000000088000000b2000000
@@ -741,6 +743,7 @@ MonoBehaviour:
   size: 0.25
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 80
   color:
     colorValues: 000000007300000097000000
@@ -927,6 +930,7 @@ MonoBehaviour:
   size: 3.5
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 94
   color:
     colorValues: 190000001900000019000000

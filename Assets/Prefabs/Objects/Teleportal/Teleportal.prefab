@@ -124,8 +124,8 @@ MonoBehaviour:
   - {fileID: 6275295985413674421}
   ship: {fileID: 0}
   scaleSpeed: 0.025
-  rotationSpeed: 0.01
-  scaleChange: 0.05
+  rotationSpeed: 0.0075
+  scaleChange: 0.075
   xScale: 0.7
   regenerateConnector: 0
   forceClearLists: 0

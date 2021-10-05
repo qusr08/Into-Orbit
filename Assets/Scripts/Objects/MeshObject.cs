@@ -17,13 +17,13 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] private float size = 1;
 	[SerializeField] private float sizeToMassRatio = 1;
 	[SerializeField] private int meshPrecision = 20;
+	[SerializeField] private float meshRoughness = 0.1f;
 	[SerializeField] private LayerType layerType = LayerType.Front;
 	[SerializeField] private SerializableColor3 color;
 	[SerializeField] private SerializableColor4 trailStartColor;
 	[SerializeField] private SerializableColor4 trailEndColor;
 	[SerializeField] private float trailLength = 0.25f;
 	[SerializeField] [Range(0f, 1f)] private float trailToObjectScale = 1;
-	// [SerializeField] [Range(0f, 1f)] private float colorOffset;
 	[Space]
 	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
@@ -245,8 +245,8 @@ public class MeshObject : MonoBehaviour {
 				float x2;
 				float y2;
 				for (int i = 0; i < meshPrecision; i++) {
-					x2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Sin((2 * Mathf.PI * i) / meshPrecision);
-					y2 = ((Size / 2) + Utils.RandFloat(-0.05f, 0.05f)) * Mathf.Cos((2 * Mathf.PI * i) / meshPrecision);
+					x2 = ((Size / 2) + Utils.RandFloat(-meshRoughness, meshRoughness)) * Mathf.Sin((2 * Mathf.PI * i) / meshPrecision);
+					y2 = ((Size / 2) + Utils.RandFloat(-meshRoughness, meshRoughness)) * Mathf.Cos((2 * Mathf.PI * i) / meshPrecision);
 
 					verticesList.Add(new Vector3(x2, y2, 0f));
 				}

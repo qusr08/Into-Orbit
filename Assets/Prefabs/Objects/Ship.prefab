@@ -281,6 +281,7 @@ MonoBehaviour:
   size: 0.1
   sizeToMassRatio: 1
   meshPrecision: 20
+  meshRoughness: 0.1
   layerType: 30
   color:
     colorValues: da0000000000000037000000
