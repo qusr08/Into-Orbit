@@ -6,7 +6,7 @@ public class MeshPiece : GravityObject {
 	[Header("--- Mesh Piece Class ---")]
 	[SerializeField] public bool IsInitialized;
 
-	private void Start ( ) {
+	protected void Start ( ) {
 		// The meshPiece class must be itialized beforehand to make sure the parameters are correct
 		if (!IsInitialized) {
 			Debug.LogError("Cannot create mesh piece without initialization.");

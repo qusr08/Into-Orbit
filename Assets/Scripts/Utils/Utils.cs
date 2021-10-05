@@ -102,6 +102,14 @@ public static class Utils {
 		return new Vector3(vector.x, vector.y, z);
 	}
 
+	public static Vector3[ ] SetVectZ (Vector3[ ] vectors, float z) {
+		for (int i = 0; i < vectors.Length; i++) {
+			vectors[i] = SetVectZ(vectors[i], z);
+		}
+
+		return vectors;
+	}
+
 	public static Vector3 LimitVect3 (Vector3 center, Vector3 point, float minDistance, float maxDistance) {
 		float distance = Vector3.Distance(center, point);
 		if (distance < minDistance) {
@@ -150,7 +158,7 @@ public class SerializableColor3 {
 
 [System.Serializable]
 public class SerializableColor4 {
-	public int[ ] colorValues = new int[4] { 255, 255, 255, 255};
+	public int[ ] colorValues = new int[4] { 255, 255, 255, 255 };
 	public Color Color {
 		get {
 			return new Color(colorValues[0] / 255f, colorValues[1] / 255f, colorValues[2] / 255f, colorValues[3] / 255f);

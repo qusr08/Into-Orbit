@@ -73,7 +73,7 @@ public class Ship : GravityObject {
 		}
 	}
 
-	private void OnMouseOver ( ) {
+	protected void OnMouseOver ( ) {
 		// If the mouse is hovered over the ship and the left mouse button is pressed and it is not currently launching,
 		// begin to launch the ship
 		if (Input.GetMouseButtonDown(0) && !IsLaunching) {
@@ -81,11 +81,11 @@ public class Ship : GravityObject {
 		}
 	}
 
-	private void Start ( ) {
+	protected void Start ( ) {
 		lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	}
 
-	private void Update ( ) {
+	protected void Update ( ) {
 		// While the ship is being launched, update the positions of the meshPieces on the trail
 		if (IsLaunching) {
 			Vector2 p1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -125,7 +125,7 @@ public class Ship : GravityObject {
 		}
 	}
 
-	private new void FixedUpdate ( ) {
+	protected new void FixedUpdate ( ) {
 		if (Wormhole != null) {
 			// Make the ship smoothly transition to the center of the wormhole
 			Position = Vector2.SmoothDamp(Position, Wormhole.Position, ref refVelocity, 0.5f);

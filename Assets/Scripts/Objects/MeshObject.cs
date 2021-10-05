@@ -188,6 +188,7 @@ public class MeshObject : MonoBehaviour {
 		rigidBody.angularDrag = 0;
 		rigidBody.drag = 0;
 
+		trailRenderer.alignment = LineAlignment.TransformZ;
 		trailRenderer.time = trailLength;
 		trailRenderer.endWidth = 0;
 		trailRenderer.material = new Material(trailMaterial);
