@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeshObject : MonoBehaviour {
 	[Header("--- Mesh Object Class ---")]
 	[SerializeField] private Material meshMaterial;
-	[SerializeField] private Material trailMaterial;
+	[SerializeField] private GameObject trailPrefab;
 	[Space]
 	[SerializeField] protected TrailRenderer trailRenderer;
 	[SerializeField] protected Rigidbody2D rigidBody;
@@ -19,8 +19,8 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] private int meshPrecision = 20;
 	[SerializeField] private LayerType layerType = LayerType.Front;
 	[SerializeField] private SerializableColor3 color;
-	[SerializeField] [Range(0f, 1f)] private float trailStartAlpha = 1f;
-	[SerializeField] [Range(0f, 1f)] private float trailEndAlpha = 0.2941177f;
+	[SerializeField] private SerializableColor4 trailStartColor;
+	[SerializeField] private SerializableColor4 trailEndColor;
 	[SerializeField] private float trailLength = 0.25f;
 	[SerializeField] [Range(0f, 1f)] private float trailToObjectScale = 1;
 	// [SerializeField] [Range(0f, 1f)] private float colorOffset;
@@ -170,7 +170,14 @@ public class MeshObject : MonoBehaviour {
 			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
 		if (trailRenderer == null) {
-			trailRenderer = (GetComponent<TrailRenderer>( ) == null) ? gameObject.AddComponent<TrailRenderer>( ) : GetComponent<TrailRenderer>( );
+			foreach (Transform child in transform) {
+				if (child.name == "Trail") {
+					DestroyImmediate(child);
+				}
+			}
+
+			Instantiate(trailPrefab, transform);
+			trailRenderer = GetComponentInChildren<TrailRenderer>( );
 		}
 
 		UpdateVariables( );
@@ -191,13 +198,11 @@ public class MeshObject : MonoBehaviour {
 		trailRenderer.alignment = LineAlignment.TransformZ;
 		trailRenderer.time = trailLength;
 		trailRenderer.endWidth = 0;
-		trailRenderer.material = new Material(trailMaterial);
-		Color trailColor = Utils.Hex2Color("EDEDED");
-		trailRenderer.startColor = new Color(trailColor.r, trailColor.g, trailColor.b, trailStartAlpha);
-		trailRenderer.endColor = new Color(trailColor.r, trailColor.g, trailColor.b, trailEndAlpha);
+		trailRenderer.startColor = new Color(trailStartColor.R, trailStartColor.G, trailStartColor.B, trailStartColor.A);
+		trailRenderer.endColor = new Color(trailEndColor.R, trailEndColor.G, trailEndColor.B, trailEndColor.A);
 
 		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
-		trailRenderer.transform.position = Utils.SetVectZ(transform.position, ((int) LayerType) + 1);
+		trailRenderer.transform.position = Utils.SetVectZ(transform.position, (int) LayerType + 0.5f);
 
 		// Update all class variables
 		MeshType = MeshType;

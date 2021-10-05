@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 223014123553274990}
   - component: {fileID: 223014123553274985}
   - component: {fileID: 223014123553274988}
-  - component: {fileID: 8174508949168210144}
   m_Layer: 8
   m_Name: Planet
   m_TagString: Planet
@@ -30,9 +29,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223014123553274986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -3, z: 71}
+  m_LocalPosition: {x: -3, y: -3, z: 70}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5122969706126921804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
-  trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 8174508949168210144}
+  trailPrefab: {fileID: 3142663571955837792, guid: 05bc731b0f1f1e640b28d0db4c2ad554, type: 3}
+  trailRenderer: {fileID: 7786687147822148691}
   rigidBody: {fileID: 223014123553274988}
   meshFilter: {fileID: 223014123553274991}
   meshRenderer: {fileID: 223014123553274990}
@@ -62,8 +62,10 @@ MonoBehaviour:
   layerType: 70
   color:
     colorValues: 440000004400000044000000
-  trailStartAlpha: 1
-  trailEndAlpha: 0.2941177
+  trailStartColor:
+    colorValues: ff000000ff000000ff000000ff000000
+  trailEndColor:
+    colorValues: ff000000ff000000ff000000ff000000
   trailLength: 0.25
   trailToObjectScale: 1
   showTrail: 0
@@ -184,14 +186,45 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!96 &8174508949168210144
+--- !u!1 &9079615700849666604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5122969706126921804}
+  - component: {fileID: 7786687147822148691}
+  m_Layer: 7
+  m_Name: Trail(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5122969706126921804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9079615700849666604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 223014123553274987}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!96 &7786687147822148691
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223014123553274986}
+  m_GameObject: {fileID: 9079615700849666604}
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -255,8 +288,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 1}
-      key1: {r: 0.92941177, g: 0.92941177, b: 0.92941177, a: 0.29411766}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

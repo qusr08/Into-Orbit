@@ -145,6 +145,24 @@ public class SerializableColor3 {
 		}
 	}
 
+	public float R {
+		get {
+			return Color.r;
+		}
+	}
+
+	public float G {
+		get {
+			return Color.g;
+		}
+	}
+
+	public float B {
+		get {
+			return Color.b;
+		}
+	}
+
 	// Makes this class usable as Color, Color normalColor = mySerializableColor;
 	public static implicit operator Color (SerializableColor3 instance) {
 		return instance.Color;
@@ -166,6 +184,30 @@ public class SerializableColor4 {
 
 		set {
 			colorValues = new int[4] { (int) (value.r * 255), (int) (value.g * 255), (int) (value.b * 255), (int) (value.a * 255) };
+		}
+	}
+
+	public float R {
+		get {
+			return Color.r;
+		}
+	}
+
+	public float G {
+		get {
+			return Color.g;
+		}
+	}
+
+	public float B {
+		get {
+			return Color.b;
+		}
+	}
+
+	public float A {
+		get {
+			return Color.a;
 		}
 	}
 
