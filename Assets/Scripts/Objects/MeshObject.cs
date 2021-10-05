@@ -12,6 +12,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] protected MeshFilter meshFilter;
 	[SerializeField] protected MeshRenderer meshRenderer;
 	[SerializeField] protected PolygonCollider2D polyCollider;
+	[SerializeField] protected LevelManager levelManager;
 	[Space]
 	[SerializeField] private MeshType meshType = MeshType.Circle;
 	[SerializeField] private float size = 1;
@@ -28,8 +29,6 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
 	[SerializeField] private bool disableColliders = false;
-
-	protected LevelManager levelManager;
 
 	public MeshType MeshType {
 		get {
@@ -169,6 +168,9 @@ public class MeshObject : MonoBehaviour {
 		if (polyCollider == null) {
 			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
+		if (levelManager == null) {
+			levelManager = FindObjectOfType<LevelManager>( );
+		}
 		if (trailRenderer == null) {
 			foreach (Transform child in transform) {
 				if (child.name == "Trail") {
@@ -181,11 +183,6 @@ public class MeshObject : MonoBehaviour {
 		}
 
 		UpdateVariables( );
-	}
-
-	protected void Awake ( ) {
-		// Find the level manager (so gravitational forces can be calculated)
-		levelManager = FindObjectOfType<LevelManager>( );
 	}
 
 	protected void UpdateVariables ( ) {

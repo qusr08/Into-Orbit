@@ -6,6 +6,10 @@ public class MeshPiece : GravityObject {
 	[Header("--- Mesh Piece Class ---")]
 	[SerializeField] public bool IsInitialized;
 
+	protected void Awake ( ) {
+		levelManager = FindObjectOfType<LevelManager>( );
+	}
+
 	protected void Start ( ) {
 		// The meshPiece class must be itialized beforehand to make sure the parameters are correct
 		if (!IsInitialized) {

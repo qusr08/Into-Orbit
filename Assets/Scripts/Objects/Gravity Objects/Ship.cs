@@ -90,33 +90,33 @@ public class Ship : GravityObject {
 		if (IsLaunching) {
 			Vector2 p1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			Vector2 p2 = Position;
-			Vector2 direction = (p2 - p1).normalized;
-			float distance = Utils.Limit(Vector2.Distance(p1, p2), 0, Constants.MAX_LAUNCH_DISTANCE);
+			Vector2 launchDirection = (p2 - p1).normalized;
+			float launchMagnitude = Utils.Limit(Vector2.Distance(p1, p2), 0, Constants.MAX_LAUNCH_DISTANCE);
 
 			// If the mouse position was moved, then recalculate the positions of the launch meshPieces/indicator
 			if (p1 != lastMousePosition) {
-				PositionIndicator(p1, p2, distance);
-				CreateDots(direction, distance);
+				PositionIndicator(p1, p2, launchMagnitude);
+				CreateDots(launchDirection, launchMagnitude);
 
 				// Update the camera FOV based on the distance
-				cameraController.SetTargetFOV(Utils.Map(distance, 0, Constants.MAX_LAUNCH_DISTANCE, Constants.MIN_CAMERA_FOV, Constants.MAX_CAMERA_FOV));
+				cameraController.SetTargetFOV(Utils.Map(launchMagnitude, 0, Constants.MAX_LAUNCH_DISTANCE, Constants.MIN_CAMERA_FOV, Constants.MAX_CAMERA_FOV));
 			}
 
 			// If the left mouse button is unpressed, disable launching
 			if (Input.GetMouseButtonUp(0)) {
 				IsLaunching = false;
 
-				if (distance >= Constants.MIN_LAUNCH_DISTANCE) {
+				if (launchMagnitude >= Constants.MIN_LAUNCH_DISTANCE) {
 					// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
 					IsLocked = false;
-					rigidBody.AddForce(direction * (distance / Constants.MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
+					rigidBody.AddForce(launchDirection * (launchMagnitude / Constants.MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
 
 					// Reset camera FOV
 					cameraController.ResetFOV( );
 
 					// Spawn launch explosion meshPieces
 					float angleModifier = 90 + launchParticleSystem.transform.rotation.eulerAngles.z;
-					Instantiate(launchParticleSystem, Position, Quaternion.Euler(new Vector3(0, 0, angleModifier + Utils.GetAngleBetween(Position, direction))));
+					Instantiate(launchParticleSystem, Position, Quaternion.Euler(new Vector3(0, 0, angleModifier + Utils.GetAngleBetween(Position, launchDirection))));
 				}
 			}
 
@@ -155,9 +155,9 @@ public class Ship : GravityObject {
 		launchingIndicator.GetComponent<SpriteRenderer>( ).size = new Vector2(distance, height);
 	}
 
-	private void CreateDots (Vector2 direction, float distance) {
+	private void CreateDots (Vector2 direction, float magnitude) {
 		// Get the current force that would be applied to the ship if it was launched right now
-		Vector2 currForce = direction * (distance / Constants.MAX_LAUNCH_DISTANCE);
+		Vector2 currForce = direction * (magnitude / Constants.MAX_LAUNCH_DISTANCE);
 		Vector2 currPosition = Position;
 
 		// Calculate the initial velocity of the ship
