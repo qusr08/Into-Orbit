@@ -8,6 +8,7 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private GameObject meshGravityPiecePrefab;
 	[SerializeField] private GameObject meshStationaryPiecePrefab;
 	[Space]
+	[SerializeField] private Ship ship;
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
 	[SerializeField] private List<Teleportal> teleportals = new List<Teleportal>( );
@@ -16,7 +17,8 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private float G = 0.75f;
 
 	private void OnValidate ( ) {
-		// Find all planet objects in the scene and add it to this list
+		ship = FindObjectOfType<Ship>( );
+
 		planets.Clear( );
 		planets.AddRange(FindObjectsOfType<Planet>( ));
 
