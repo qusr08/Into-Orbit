@@ -36,7 +36,7 @@ public class LevelManager : Singleton<LevelManager> {
 	public Vector2 CalculateGravityForce (Vector2 position, float mass, List<MeshObject> onlyParents = null) {
 		Vector2 gravityForce = Vector2.zero;
 
-		if (onlyParents != null) {
+		if (onlyParents != null && onlyParents.Count > 0) {
 			// For each of the objects in the list, calculate their gravitational infulence on the parameter object
 			foreach (MeshObject spaceObject in onlyParents) {
 				gravityForce += CalculateGravityForce(position, mass, spaceObject);

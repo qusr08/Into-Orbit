@@ -38,4 +38,6 @@ public static class Constants {
 	public const float MIN_SEGMENT_MOVETIME = 4f;
 	public const float MAX_SEGMENT_MOVETIME = 10f;
 	public const float MAX_SEGMENT_STARTLENGTH = 1f;
+
+	public const int MAX_TRAJECTORY_ITERATIONS = 2000;
 }

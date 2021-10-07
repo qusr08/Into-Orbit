@@ -69,6 +69,7 @@ MonoBehaviour:
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
+  baseTrailColorOffMesh: 0
   trailStartColor:
     colorValues: ff000000ff000000ff000000ff000000
   trailEndColor:
@@ -364,6 +365,7 @@ MonoBehaviour:
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
+  baseTrailColorOffMesh: 0
   trailStartColor:
     colorValues: ff000000ff000000ff000000ff000000
   trailEndColor:
@@ -693,6 +695,7 @@ MonoBehaviour:
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
+  baseTrailColorOffMesh: 0
   trailStartColor:
     colorValues: ff000000ff000000ff000000ff000000
   trailEndColor:
@@ -988,6 +991,7 @@ MonoBehaviour:
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
+  baseTrailColorOffMesh: 0
   trailStartColor:
     colorValues: ff000000ff000000ff000000ff000000
   trailEndColor:

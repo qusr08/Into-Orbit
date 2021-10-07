@@ -7,11 +7,9 @@ public class MeshPiece : GravityObject {
 	[Separator("Mesh Piece")]
 	[SerializeField] public bool IsInitialized;
 
-	protected void Awake ( ) {
-		levelManager = FindObjectOfType<LevelManager>( );
-	}
+	protected new void Start ( ) {
+		base.Start( );
 
-	protected void Start ( ) {
 		// The meshPiece class must be itialized beforehand to make sure the parameters are correct
 		if (!IsInitialized) {
 			Debug.LogError("Cannot create mesh piece without initialization.");

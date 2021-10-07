@@ -69,12 +69,14 @@ MonoBehaviour:
   sizeToMassRatio: 25
   meshPrecision: 20
   meshRoughness: 0.1
+  baseTrailColorOffMesh: 0
   trailStartColor:
     colorValues: ff000000ff000000ff000000ff000000
   trailEndColor:
     colorValues: ff000000ff000000ff000000ff000000
   trailLength: 0
   trailToObjectScale: 1
+  parents: []
 --- !u!33 &223014123553274991
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -80,7 +80,9 @@ public class Ship : GravityObject {
 		}
 	}
 
-	protected void Start ( ) {
+	protected new void Start ( ) {
+		base.Start( );
+
 		lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	}
 

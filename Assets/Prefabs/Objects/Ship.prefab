@@ -153,12 +153,14 @@ MonoBehaviour:
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
+  baseTrailColorOffMesh: 0
   trailStartColor:
-    colorValues: 440000004400000044000000ff000000
+    colorValues: 190000001900000019000000ff000000
   trailEndColor:
-    colorValues: 440000004400000044000000ff000000
+    colorValues: 190000001900000019000000ff000000
   trailLength: 10
   trailToObjectScale: 1
+  parents: []
   explosionParticleSystem: {fileID: 2881110983041004528, guid: 1ffa24d19b1faf4488d4935c193cf634, type: 3}
   launchParticleSystem: {fileID: 2881110983041004528, guid: c9c9e2874fd54d04aba7b2a3fc94b452, type: 3}
   launchingIndicator: {fileID: 9123832780799444798}
@@ -359,8 +361,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
-      key1: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
+      key0: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
+      key1: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

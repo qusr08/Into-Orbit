@@ -27,8 +27,9 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] private LayerType layerType = LayerType.Front;
 	[SerializeField] private float size = 1;
 	[SerializeField] private float sizeToMassRatio = 1;
-	[SerializeField] [ConditionalField("meshType", false, new object[ ] { MeshType.Circle, MeshType.RoughCircle })] private int meshPrecision = 20;
+	[SerializeField] [ConditionalField("meshType", false, MeshType.Circle, MeshType.RoughCircle)] private int meshPrecision = 20;
 	[SerializeField] [ConditionalField("meshType", false, MeshType.RoughCircle)] private float meshRoughness = 0.1f;
+	[SerializeField] [ConditionalField("showTrail")] private bool baseTrailColorOffMesh = false;
 	[SerializeField] [ConditionalField("showTrail")] private SerializableColor4 trailStartColor;
 	[SerializeField] [ConditionalField("showTrail")] private SerializableColor4 trailEndColor;
 	[SerializeField] [ConditionalField("showTrail")] private int trailLength = 5;
@@ -190,6 +191,10 @@ public class MeshObject : MonoBehaviour {
 		}
 
 		UpdateVariables( );
+	}
+
+	protected void Awake ( ) {
+		levelManager = FindObjectOfType<LevelManager>( );
 	}
 
 	protected void FixedUpdate ( ) {
@@ -367,8 +372,12 @@ public class MeshObject : MonoBehaviour {
 		trailRenderer.alignment = LineAlignment.TransformZ;
 		trailRenderer.endWidth = 0;
 		trailRenderer.material = new Material(trailMaterial);
-		trailRenderer.startColor = trailStartColor.Color;
-		trailRenderer.endColor = trailEndColor.Color;
+		if (baseTrailColorOffMesh) {
+			trailRenderer.startColor = trailRenderer.endColor = new Color(color.R - 0.5f, color.G - 0.5f, color.B - 0.5f);
+		} else {
+			trailRenderer.startColor = trailStartColor.Color;
+			trailRenderer.endColor = trailEndColor.Color;
+		}
 
 		// Update all class variables
 		MeshType = MeshType;

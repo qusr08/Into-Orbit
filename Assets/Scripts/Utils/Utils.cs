@@ -22,8 +22,8 @@ public static class Utils {
 		return newRangeStart + ((newRangeEnd - newRangeStart) / (rangeEnd - rangeStart)) * (value - rangeStart);
 	}
 
-	public static bool CloseEnough (Vector3 vector1, Vector3 vector2) {
-		return Vector3.Distance(vector1, vector2) < 0.01f;
+	public static bool CloseEnough (Vector3 vector1, Vector3 vector2, float checkValue = 0.01f) {
+		return Vector3.Distance(vector1, vector2) < checkValue;
 	}
 
 	public static Color Hex2Color (string hexString) {
