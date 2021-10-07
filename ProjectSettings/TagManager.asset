@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ship
-  - Obstacle
+  - Space Object
+  - Space Entity
+  - Debug
   layers:
   - Default
   - TransparentFX

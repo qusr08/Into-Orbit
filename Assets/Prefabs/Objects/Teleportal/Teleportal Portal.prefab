@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 3761491784584045818}
   m_Layer: 0
   m_Name: Teleportal Portal
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

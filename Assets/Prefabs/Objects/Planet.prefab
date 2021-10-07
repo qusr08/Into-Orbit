@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 321351661029250219}
   m_Layer: 8
   m_Name: Planet
-  m_TagString: Obstacle
+  m_TagString: Space Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

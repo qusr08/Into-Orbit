@@ -91,6 +91,18 @@ public class Asteroid : GravityObject {
 	}
 
 	protected void OnCollisionEnter2D (Collision2D collision) {
+		if (collision.transform.tag.Equals("Space Object")) {
+			Death( );
+		}
+	}
+
+	private void Death ( ) {
+		// Create meshPiece pieces of the ship as it gets destroyed to make for a cool effect
+		//levelManager.SpawnGravityPieces(transform, 4, Color, size: 0.15f, layerType: LayerType.Environment, meshType:MeshType.Circle);
+
 		hasCollided = true;
+
+		// Destroy this ship gameobject
+		//Destroy(gameObject);
 	}
 }

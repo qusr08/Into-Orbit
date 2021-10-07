@@ -373,7 +373,7 @@ public class MeshObject : MonoBehaviour {
 		trailRenderer.endWidth = 0;
 		trailRenderer.material = new Material(trailMaterial);
 		if (baseTrailColorOffMesh) {
-			trailRenderer.startColor = trailRenderer.endColor = new Color(color.R - 0.5f, color.G - 0.5f, color.B - 0.5f);
+			trailRenderer.startColor = trailRenderer.endColor = new Color(color.R / 2f, color.G / 2f, color.B / 2f);
 		} else {
 			trailRenderer.startColor = trailStartColor.Color;
 			trailRenderer.endColor = trailEndColor.Color;
@@ -404,7 +404,7 @@ public class MeshObject : MonoBehaviour {
 	}
 
 	private void UpdateTrail ( ) {
-		lastTrailPositions.Insert(0, Utils.SetVectZ(Position + (rigidBody.velocity * Time.fixedDeltaTime), (int) LayerType + 1));
+		lastTrailPositions.Insert(0, Utils.SetVectZ(Position + (rigidBody.velocity * Time.fixedDeltaTime), (int) LayerType.Trail));
 		if (lastTrailPositions.Count > trailLength) {
 			lastTrailPositions.RemoveAt(trailLength);
 		}

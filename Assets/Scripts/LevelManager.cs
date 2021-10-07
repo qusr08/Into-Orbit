@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager> {
 	[Separator("Level Manager")]
-	[SerializeField] private GameObject meshPiecePrefab;
+	[SerializeField] private GameObject meshGravityPiecePrefab;
+	[SerializeField] private GameObject meshStationaryPiecePrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
@@ -63,19 +64,34 @@ public class LevelManager : Singleton<LevelManager> {
 		return direction * force;
 	}
 
-	public List<MeshPiece> SpawnParticles (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true, bool disableColliders = false) {
+	public List<MeshPiece> SpawnGravityPieces (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true) {
 		List<MeshPiece> meshPieces = new List<MeshPiece>( );
 
 		// Create the meshPieces with set values
 		for (int i = 0; i < amount; i++) {
 			// Instatiate a new meshPiece object and initialize its values
-			MeshPiece meshPiece = Instantiate(meshPiecePrefab, parent.position, Quaternion.identity).GetComponent<MeshPiece>( );
-			meshPiece.Initialize(parent, color, size, meshType, layerType, showTrail, disableColliders);
+			MeshPiece meshPiece = Instantiate(meshGravityPiecePrefab, parent.position, Quaternion.identity).GetComponent<MeshPiece>( );
+			meshPiece.Initialize(parent, color, size, meshType, layerType, showTrail, false);
 
 			// Launch the meshPiece in a random direction if told to do so
 			if (giveRandomForce) {
 				meshPiece.GiveRandomForce(parent.GetComponent<Rigidbody2D>( ));
 			}
+
+			meshPieces.Add(meshPiece);
+		}
+
+		return meshPieces;
+	}
+
+	public List<MeshPiece> SpawnStationaryPieces (Transform parent, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Circle, LayerType layerType = LayerType.Front) {
+		List<MeshPiece> meshPieces = new List<MeshPiece>( );
+
+		// Create the meshPieces with set values
+		for (int i = 0; i < amount; i++) {
+			// Instatiate a new meshPiece object and initialize its values
+			MeshPiece meshPiece = Instantiate(meshStationaryPiecePrefab, parent.position, Quaternion.identity).GetComponent<MeshPiece>( );
+			meshPiece.Initialize(parent, color, size, meshType, layerType, false, true);
 
 			meshPieces.Add(meshPiece);
 		}

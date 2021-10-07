@@ -143,8 +143,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keepAlive: 1
-  meshPiecePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
+  meshGravityPiecePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
+  meshStationaryPiecePrefab: {fileID: 1654005443914306764, guid: abd7f5a724a149948a91efd2dfd383d6, type: 3}
   planets:
+  - {fileID: 0}
+  - {fileID: 0}
+  wormholes:
+  - {fileID: 0}
+  teleportals: []
+  asteroids:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

@@ -45,8 +45,7 @@ public class Ship : GravityObject {
 
 			if (value) {
 				// Create meshPieces for the trail
-				launchingDots = levelManager.SpawnParticles(transform, launchDotCount, Utils.Hex2Color("EDEDED"),
-					size: 0.1f, meshType: MeshType.Circle, layerType: LayerType.ShipDetail, giveRandomForce: false, showTrail: false, disableColliders: true);
+				launchingDots = levelManager.SpawnStationaryPieces(transform, launchDotCount, Utils.Hex2Color("EDEDED"), size: 0.1f, layerType: LayerType.ShipDetail);
 				// Make sure to lock all of the meshPieces because the ones for the trail should not move
 				foreach (MeshPiece meshPiece in launchingDots) {
 					meshPiece.IsLocked = true;
@@ -65,9 +64,9 @@ public class Ship : GravityObject {
 	}
 	private List<MeshPiece> launchingDots; // All of the meshPieces that make up the trail while launching
 
-	protected void OnCollisionEnter2D (Collision2D collision2D) {
+	protected void OnCollisionEnter2D (Collision2D collision) {
 		// If the ship collides with a planet, it should be destroyed
-		if (collision2D.transform.tag.Equals("Obstacle")) {
+		if (collision.transform.tag.Equals("Space Object")) {
 			Death( );
 		}
 	}
@@ -189,16 +188,18 @@ public class Ship : GravityObject {
 				// If the current position is on a planet, do not draw the rest of the meshPieces to show that the ship will crash into the planet
 				RaycastHit2D[ ] hits = Physics2D.RaycastAll(Utils.SetVectZ(currPosition, -10), Vector3.forward);
 				for (int k = 0; k < hits.Length; k++) {
-					if (hits[k].transform.tag.Equals("Obstacle")) {
-						// Disable all meshPieces later in the list
-						for (; i < launchingDots.Count; i++) {
-							launchingDots[i].gameObject.SetActive(false);
-						}
+					if (hits[k].transform != transform) {
+						if (hits[k].transform.tag.Equals("Space Object")) {
+							// Disable all meshPieces later in the list
+							for (; i < launchingDots.Count; i++) {
+								launchingDots[i].gameObject.SetActive(false);
+							}
 
-						// Break out of the for loop and stop calculating the position for the rest of the meshPieces
-						hitPlanet = true;
-						j = launchDotDensity;
-						break;
+							// Break out of the for loop and stop calculating the position for the rest of the meshPieces
+							hitPlanet = true;
+							j = launchDotDensity;
+							break;
+						}
 					}
 				}
 			}
@@ -213,7 +214,7 @@ public class Ship : GravityObject {
 
 	private void Death ( ) {
 		// Create meshPiece pieces of the ship as it gets destroyed to make for a cool effect
-		levelManager.SpawnParticles(transform, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
+		levelManager.SpawnGravityPieces(transform, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
 
 		// Spawn explosion
 		Instantiate(explosionParticleSystem, Utils.SetVectZ(transform.position, (int) LayerType.Front), Quaternion.identity);

@@ -14,6 +14,7 @@ public enum LayerType {
 	Back = 100,
 	EnvironmentGlowBack = 95,
 	EnvironmentGlowFront = 94,
+	Trail = 90,
 	EnvironmentDetailOutside = 82,
 	EnvironmentDetailMiddle = 81,
 	EnvironmentDetailInside = 80,

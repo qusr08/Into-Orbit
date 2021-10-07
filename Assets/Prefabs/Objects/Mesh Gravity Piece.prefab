@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 1654005443914306766}
   - component: {fileID: 9141779280674903116}
   m_Layer: 7
-  m_Name: Mesh Piece
-  m_TagString: Untagged
+  m_Name: Mesh Gravity Piece
+  m_TagString: Space Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

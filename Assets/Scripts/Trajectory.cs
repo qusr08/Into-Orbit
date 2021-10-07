@@ -73,7 +73,7 @@ public class Trajectory : MonoBehaviour {
 			RaycastHit2D[ ] hits = Physics2D.CircleCastAll(Utils.SetVectZ(currPosition, -10), gravityObject.Size, Vector3.forward);
 			for (int k = 0; k < hits.Length; k++) {
 				if (hits[k].transform != gravityObject.transform) {
-					if (hits[k].transform.tag.Equals("Obstacle")) {
+					if (hits[k].transform.tag.Equals("Space Object")) {
 						Debug.LogWarning($"Trajectory hits an object!");
 
 						return;
