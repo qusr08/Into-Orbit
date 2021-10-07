@@ -34,7 +34,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] [ConditionalField("showTrail")] private int trailLength = 5;
 	[SerializeField] [ConditionalField("showTrail")] [Range(0f, 1f)] private float trailToObjectScale = 1;
 
-	private Vector2 lastTrailPosition;
+	private List<Vector3> lastTrailPositions = new List<Vector3>( );
 
 	public MeshType MeshType {
 		get {
@@ -192,33 +192,8 @@ public class MeshObject : MonoBehaviour {
 		UpdateVariables( );
 	}
 
-	protected void UpdateVariables ( ) {
-		// Reset and update component variables
-		rigidBody.bodyType = RigidbodyType2D.Dynamic;
-		rigidBody.gravityScale = 0;
-		rigidBody.angularDrag = 0;
-		rigidBody.drag = 0;
-
-		trailRenderer.alignment = LineAlignment.TransformZ;
-		trailRenderer.endWidth = 0;
-		trailRenderer.startColor = trailStartColor.Color;
-		trailRenderer.endColor = trailEndColor.Color;
-
-		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
-		trailRenderer.transform.position = Utils.SetVectZ(transform.position, (int) LayerType + 0.5f);
-
-		// Update all class variables
-		MeshType = MeshType;
-		LayerType = LayerType;
-		Color = Color;
-		Size = Size;
-		SizeToMassRatio = SizeToMassRatio;
-		ShowTrail = ShowTrail;
-		IsLocked = IsLocked;
-		DisableColliders = DisableColliders;
-
-		// Regenerate the mesh;
-		GenerateMesh( );
+	protected void FixedUpdate ( ) {
+		UpdateTrail( );
 	}
 
 	protected void GenerateMesh ( ) {
@@ -382,6 +357,33 @@ public class MeshObject : MonoBehaviour {
 		polyCollider.SetPath(0, path);
 	}
 
+	protected void UpdateVariables ( ) {
+		// Reset and update component variables
+		rigidBody.bodyType = RigidbodyType2D.Dynamic;
+		rigidBody.gravityScale = 0;
+		rigidBody.angularDrag = 0;
+		rigidBody.drag = 0;
+
+		trailRenderer.alignment = LineAlignment.TransformZ;
+		trailRenderer.endWidth = 0;
+		trailRenderer.material = new Material(trailMaterial);
+		trailRenderer.startColor = trailStartColor.Color;
+		trailRenderer.endColor = trailEndColor.Color;
+
+		// Update all class variables
+		MeshType = MeshType;
+		LayerType = LayerType;
+		Color = Color;
+		Size = Size;
+		SizeToMassRatio = SizeToMassRatio;
+		ShowTrail = ShowTrail;
+		IsLocked = IsLocked;
+		DisableColliders = DisableColliders;
+
+		// Regenerate the mesh;
+		GenerateMesh( );
+	}
+
 	public void UpdateColor ( ) {
 		// Create a new temporary material from the base material
 		Material material = new Material(meshMaterial);
@@ -390,5 +392,15 @@ public class MeshObject : MonoBehaviour {
 		// Set the mesh material to this temporary materal
 		// This is needed so objects can all have the same material but all be different colors
 		meshRenderer.material = material;
+	}
+
+	private void UpdateTrail ( ) {
+		lastTrailPositions.Insert(0, Utils.SetVectZ(Position + (rigidBody.velocity * Time.fixedDeltaTime), (int) LayerType + 1));
+		if (lastTrailPositions.Count > trailLength) {
+			lastTrailPositions.RemoveAt(trailLength);
+		}
+
+		trailRenderer.positionCount = lastTrailPositions.Count;
+		trailRenderer.SetPositions(lastTrailPositions.ToArray( ));
 	}
 }

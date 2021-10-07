@@ -137,6 +137,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8878234980782040942}
     m_Modifications:
+    - target: {fileID: 1476915702339236398, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667829122019022237, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3234599163783335156, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3271502555394972013, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -309,6 +321,10 @@ PrefabInstance:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5438956220669631274, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5522553781244982047, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -383,6 +399,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8878234980782040942}
     m_Modifications:
+    - target: {fileID: 1476915702339236398, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667829122019022237, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3234599163783335156, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3271502555394972013, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -545,6 +573,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3761491785411448970, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438956220669631274, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5522553781244982047, guid: 9376a307fd9167a41a72403c584782bc, type: 3}

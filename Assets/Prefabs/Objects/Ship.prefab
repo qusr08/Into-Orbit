@@ -157,7 +157,7 @@ MonoBehaviour:
     colorValues: 440000004400000044000000ff000000
   trailEndColor:
     colorValues: 440000004400000044000000ff000000
-  trailLength: 0
+  trailLength: 10
   trailToObjectScale: 1
   explosionParticleSystem: {fileID: 2881110983041004528, guid: 1ffa24d19b1faf4488d4935c193cf634, type: 3}
   launchParticleSystem: {fileID: 2881110983041004528, guid: c9c9e2874fd54d04aba7b2a3fc94b452, type: 3}
@@ -321,7 +321,15 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

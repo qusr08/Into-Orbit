@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GravityObject : MeshObject {
-	protected void FixedUpdate ( ) {
+	protected new void FixedUpdate ( ) {
+		// Update the trail after the position has changed
+		base.FixedUpdate( );
+
 		// As long as the object is not locked, calculate the force that should be applied to it
 		if (!IsLocked) {
 			// Calculate the gravity that the ship will experience at the current position
