@@ -1,12 +1,11 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Ship : GravityObject {
-	[Header("--- Ship Class ---")]
-	[SerializeField] private CameraController cameraController;
-	[Space]
+	[Separator("Ship")]
 	[SerializeField] private GameObject explosionParticleSystem;
 	[SerializeField] private GameObject launchParticleSystem;
 	[Space]
@@ -145,7 +144,7 @@ public class Ship : GravityObject {
 	private void PositionIndicator (Vector2 p1, Vector2 p2, float distance) {
 		// Set indicator to the midpoint between the mouse and the ship
 		Vector3 indicatorPosition = new Vector2(p1.x + p2.x, p1.y + p2.y) / 2;
-		launchingIndicator.localPosition = Utils.SetVectZ(Utils.LimitVect3(Position, indicatorPosition, 0, Constants.MAX_LAUNCH_DISTANCE / 2), 1);
+		launchingIndicator.position = Utils.SetVectZ(Utils.LimitVect3(Position, indicatorPosition, 0, Constants.MAX_LAUNCH_DISTANCE / 2), (int) LayerType + 1);
 
 		// Calculate rotation angle of this transform relative to the indicator
 		launchingIndicator.rotation = Quaternion.Euler(new Vector3(0, 0, Utils.GetAngleBetween(p2, p1)));

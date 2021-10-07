@@ -1,10 +1,11 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class Teleportal : MonoBehaviour {
-	[Header("--- Teleportal Class ---")]
+	[Separator("Teleportal")]
 	[SerializeField] private Transform portal1;
 	[SerializeField] private Transform portal2;
 	[SerializeField] private Transform connectorBack;

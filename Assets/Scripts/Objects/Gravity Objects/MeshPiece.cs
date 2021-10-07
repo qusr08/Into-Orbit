@@ -1,9 +1,10 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshPiece : GravityObject {
-	[Header("--- Mesh Piece Class ---")]
+	[Separator("Mesh Piece")]
 	[SerializeField] public bool IsInitialized;
 
 	protected void Awake ( ) {

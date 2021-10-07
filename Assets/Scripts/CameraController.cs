@@ -1,11 +1,12 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-	[Header("--- Camera Controller Class ---")]
+	[Separator("Camera Controller")]
 	[SerializeField] public Transform Target;
-	[Header("--- Camera Controller Constants ---")]
+	[Separator("Constants")]
 	[SerializeField] [Range(0f, 1f)] private float stiffness;
 
 	public float FOV {

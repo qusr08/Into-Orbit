@@ -1,15 +1,17 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager> {
-	[Header("--- Level Manager Class ---")]
+	[Separator("Level Manager")]
 	[SerializeField] private GameObject meshPiecePrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
 	[SerializeField] private List<Teleportal> teleportals = new List<Teleportal>( );
-	[Header("--- Level Manager Constants ---")]
+	[SerializeField] private List<Asteroid> asteroids = new List<Asteroid>( );
+	[Separator("Constants")]
 	[SerializeField] private float G = 0.75f;
 
 	private void OnValidate ( ) {
@@ -22,6 +24,9 @@ public class LevelManager : Singleton<LevelManager> {
 
 		teleportals.Clear( );
 		teleportals.AddRange(FindObjectsOfType<Teleportal>( ));
+
+		asteroids.Clear( );
+		asteroids.AddRange(FindObjectsOfType<Asteroid>( ));
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {

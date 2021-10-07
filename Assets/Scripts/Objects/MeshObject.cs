@@ -1,34 +1,40 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MeshObject : MonoBehaviour {
-	[Header("--- Mesh Object Class ---")]
-	[SerializeField] private Material meshMaterial;
-	[SerializeField] private GameObject trailPrefab;
+	[Separator("Mesh Object")]
+	[SerializeField] private bool recalculateMesh;
 	[Space]
-	[SerializeField] protected TrailRenderer trailRenderer;
+	[SerializeField] private Material meshMaterial;
+	[SerializeField] private Material trailMaterial;
+	[Space]
+	[SerializeField] protected LineRenderer trailRenderer;
 	[SerializeField] protected Rigidbody2D rigidBody;
 	[SerializeField] protected MeshFilter meshFilter;
 	[SerializeField] protected MeshRenderer meshRenderer;
 	[SerializeField] protected PolygonCollider2D polyCollider;
 	[SerializeField] protected LevelManager levelManager;
-	[Space]
-	[SerializeField] private MeshType meshType = MeshType.Circle;
-	[SerializeField] private float size = 1;
-	[SerializeField] private float sizeToMassRatio = 1;
-	[SerializeField] private int meshPrecision = 20;
-	[SerializeField] private float meshRoughness = 0.1f;
-	[SerializeField] private LayerType layerType = LayerType.Front;
-	[SerializeField] private SerializableColor3 color;
-	[SerializeField] private SerializableColor4 trailStartColor;
-	[SerializeField] private SerializableColor4 trailEndColor;
-	[SerializeField] private float trailLength = 0.25f;
-	[SerializeField] [Range(0f, 1f)] private float trailToObjectScale = 1;
+	[SerializeField] protected CameraController cameraController;
 	[Space]
 	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
 	[SerializeField] private bool disableColliders = false;
+	[Space]
+	[SerializeField] private SerializableColor3 color;
+	[SerializeField] private MeshType meshType = MeshType.Circle;
+	[SerializeField] private LayerType layerType = LayerType.Front;
+	[SerializeField] private float size = 1;
+	[SerializeField] private float sizeToMassRatio = 1;
+	[SerializeField] [ConditionalField("meshType", false, new object[ ] { MeshType.Circle, MeshType.RoughCircle })] private int meshPrecision = 20;
+	[SerializeField] [ConditionalField("meshType", false, MeshType.RoughCircle)] private float meshRoughness = 0.1f;
+	[SerializeField] [ConditionalField("showTrail")] private SerializableColor4 trailStartColor;
+	[SerializeField] [ConditionalField("showTrail")] private SerializableColor4 trailEndColor;
+	[SerializeField] [ConditionalField("showTrail")] private int trailLength = 5;
+	[SerializeField] [ConditionalField("showTrail")] [Range(0f, 1f)] private float trailToObjectScale = 1;
+
+	private Vector2 lastTrailPosition;
 
 	public MeshType MeshType {
 		get {
@@ -156,6 +162,13 @@ public class MeshObject : MonoBehaviour {
 			return;
 
 		// Make sure all components of the object are not null
+		if (levelManager == null) {
+			levelManager = FindObjectOfType<LevelManager>( );
+		}
+		if (cameraController == null) {
+			cameraController = FindObjectOfType<CameraController>( );
+		}
+
 		if (rigidBody == null) {
 			rigidBody = (GetComponent<Rigidbody2D>( ) == null) ? gameObject.AddComponent<Rigidbody2D>( ) : GetComponent<Rigidbody2D>( );
 		}
@@ -168,18 +181,12 @@ public class MeshObject : MonoBehaviour {
 		if (polyCollider == null) {
 			polyCollider = (GetComponent<PolygonCollider2D>( ) == null) ? gameObject.AddComponent<PolygonCollider2D>( ) : GetComponent<PolygonCollider2D>( );
 		}
-		if (levelManager == null) {
-			levelManager = FindObjectOfType<LevelManager>( );
-		}
 		if (trailRenderer == null) {
-			foreach (Transform child in transform) {
-				if (child.name == "Trail") {
-					DestroyImmediate(child);
-				}
-			}
+			trailRenderer = (GetComponent<LineRenderer>( ) == null) ? gameObject.AddComponent<LineRenderer>( ) : GetComponent<LineRenderer>( );
+		}
 
-			Instantiate(trailPrefab, transform);
-			trailRenderer = GetComponentInChildren<TrailRenderer>( );
+		if (recalculateMesh) {
+			recalculateMesh = false;
 		}
 
 		UpdateVariables( );
@@ -193,10 +200,9 @@ public class MeshObject : MonoBehaviour {
 		rigidBody.drag = 0;
 
 		trailRenderer.alignment = LineAlignment.TransformZ;
-		trailRenderer.time = trailLength;
 		trailRenderer.endWidth = 0;
-		trailRenderer.startColor = new Color(trailStartColor.R, trailStartColor.G, trailStartColor.B, trailStartColor.A);
-		trailRenderer.endColor = new Color(trailEndColor.R, trailEndColor.G, trailEndColor.B, trailEndColor.A);
+		trailRenderer.startColor = trailStartColor.Color;
+		trailRenderer.endColor = trailEndColor.Color;
 
 		// Make sure the trail is (basically) on the same layer as the ship. The +1 is to make sure it is behind the ship
 		trailRenderer.transform.position = Utils.SetVectZ(transform.position, (int) LayerType + 0.5f);

@@ -1,9 +1,10 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Asteroid : GravityObject {
-	[Header("--- Asteroid Class ---")]
+	[Separator("Asteroid")]
 	[SerializeField] private LineRenderer lineRenderer;
 	[SerializeField] private List<MeshObject> parents = new List<MeshObject>( );
 	[Space]
@@ -11,7 +12,7 @@ public class Asteroid : GravityObject {
 	[SerializeField] private bool showTrajectory;
 	[SerializeField] private Vector2 initialForce;
 	[SerializeField] private int trajectoryIterations = 50;
-	[SerializeField] private int trajectoryDensity = 5;
+	[SerializeField] [Range(0f, 1f)] private float trajectoryReposition;
 
 	protected new void OnValidate ( ) {
 		base.OnValidate( );
@@ -53,28 +54,31 @@ public class Asteroid : GravityObject {
 			lineRenderer.positionCount++;
 			lineRenderer.SetPosition(lineRenderer.positionCount - 1, currPosition);
 
-			for (int j = 0; j < trajectoryDensity; j++) {
-				// Calculate the gravity that the ship will experience at the current position
-				Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass, parents);
-				// Calculate the acceleration due to the gravity force
-				Vector2 gravityAcc = gravityForce / Mass;
+			// Calculate the gravity that the ship will experience at the current position
+			Vector2 gravityForce = levelManager.CalculateGravityForce(currPosition, Mass, parents);
+			// Calculate the acceleration due to the gravity force
+			Vector2 gravityAcc = gravityForce / Mass;
 
-				// Increment the velocity by the acceleration
-				currVelocity += gravityAcc * Time.fixedDeltaTime;
-				// Increment the position by the velocity
-				currPosition += currVelocity * Time.fixedDeltaTime;
+			// Increment the velocity by the acceleration
+			currVelocity += gravityAcc * Time.fixedDeltaTime;
+			// Increment the position by the velocity
+			currPosition += currVelocity * Time.fixedDeltaTime;
 
-				// My Forum Post: https://forum.unity.com/threads/need-help-predicting-the-path-of-an-object-in-a-2d-gravity-simulation.1170098/
+			// My Forum Post: https://forum.unity.com/threads/need-help-predicting-the-path-of-an-object-in-a-2d-gravity-simulation.1170098/
 
-				// If the current position is on a planet, do not draw the rest of the trajectory
-				RaycastHit2D[ ] hits = Physics2D.RaycastAll(Utils.SetVectZ(currPosition, -10), Vector3.forward);
-				for (int k = 0; k < hits.Length; k++) {
-					if (hits[k].transform.tag.Equals("Obstacle") && hits[k].transform != transform) {
-						// Break out of the for loop and stop calculating the rest of the trajectory
-						i = trajectoryIterations;
-						j = trajectoryDensity;
-						break;
-					}
+			if (Utils.CloseEnough(currPosition, Position)) {
+				Debug.Log($"Trajectory is an orbit! {currPosition.x} = {Position.x}");
+
+				break;
+			}
+
+			// If the current position is on a planet, do not draw the rest of the trajectory
+			RaycastHit2D[ ] hits = Physics2D.RaycastAll(Utils.SetVectZ(currPosition, -10), Vector3.forward);
+			for (int k = 0; k < hits.Length; k++) {
+				if (hits[k].transform.tag.Equals("Obstacle") && hits[k].transform != transform) {
+					// Break out of the for loop and stop calculating the rest of the trajectory
+					i = trajectoryIterations;
+					break;
 				}
 			}
 		}

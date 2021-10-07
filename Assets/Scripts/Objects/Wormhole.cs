@@ -1,9 +1,10 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Wormhole : MonoBehaviour {
-	[Header("--- Wormhole Class ---")]
+	[Separator("Wormhole")]
 	[SerializeField] private List<MeshObject> rings = new List<MeshObject>( );
 	[SerializeField] private Ship ship;
 	[Space]

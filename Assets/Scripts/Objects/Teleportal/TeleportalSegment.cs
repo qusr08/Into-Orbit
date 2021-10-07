@@ -1,8 +1,10 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TeleportalSegment : MonoBehaviour {
+	[Separator("Teleportal Segment")]
 	[SerializeField] private SpriteRenderer spriteRenderer;
 	[Space]
 	[SerializeField] private TeleportalSegment lastSegment;
