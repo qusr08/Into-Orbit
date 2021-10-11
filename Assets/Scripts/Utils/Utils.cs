@@ -107,7 +107,7 @@ public static class Utils {
 			vectors[i] = SetVectZ(vectors[i], z);
 		}
 
-		return vectors;
+		return vectors; 
 	}
 
 	public static Vector3 LimitVect3 (Vector3 center, Vector3 point, float minDistance, float maxDistance) {
@@ -125,6 +125,18 @@ public static class Utils {
 
 	public static float GetAngleBetween (Vector2 center, Vector2 point) {
 		return Mathf.Rad2Deg * Mathf.Atan2(point.y - center.y, point.x - center.x);
+
+		// https://math.stackexchange.com/questions/878785/how-to-find-an-angle-in-range0-360-between-2-vectors
+		// float dot = (center.x * point.x) + (center.y * point.y);
+		// float det = (center.x * point.y) - (center.y * point.x);
+		// return Mathf.Rad2Deg * Mathf.Atan2(det, dot);
+
+		// https://answers.unity.com/questions/1164731/need-help-getting-angles-to-work-in-360-degrees.html
+		//float angle = Vector2.SignedAngle(center, point); //Returns the angle between -180 and 180.
+		//if (angle < 0) {
+		//	angle = 360 - angle * -1;
+		//}
+		//return angle;
 	}
 
 	#endregion

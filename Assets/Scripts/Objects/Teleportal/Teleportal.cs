@@ -37,13 +37,13 @@ public class Teleportal : MonoBehaviour {
 
 	public Vector2 Portal1Position {
 		get {
-			return portal1.position;
+			return portal1.localPosition;
 		}
 	}
 
 	public Vector2 Portal2Position {
 		get {
-			return portal2.position;
+			return portal2.localPosition;
 		}
 	}
 
@@ -55,6 +55,7 @@ public class Teleportal : MonoBehaviour {
 
 	public float Angle {
 		get {
+			// Debug.Log(Utils.GetAngleBetween(Portal2Position, Portal1Position));
 			return Utils.GetAngleBetween(Portal2Position, Portal1Position);
 		}
 	}
@@ -95,7 +96,7 @@ public class Teleportal : MonoBehaviour {
 		}
 	}
 
-	private void Start ( ) {
+	protected void Start ( ) {
 		// Generate a random offset between the portals so they look different in game
 		portal1AngleOffset = Random.Range(0, Mathf.PI * 2);
 		portal2AngleOffset = Random.Range(0, Mathf.PI * 2);
@@ -106,7 +107,7 @@ public class Teleportal : MonoBehaviour {
 		portal2OutsideRing = portal2.Find("Outside").GetComponent<Collider2D>( );
 	}
 
-	private void Update ( ) {
+	protected void Update ( ) {
 		if (ship != null) {
 			// As long as the ship has not just teleported, wait for it to touch one of the portals
 			// This is needed so the ship doesn't spaz teleport between the portals
@@ -127,7 +128,7 @@ public class Teleportal : MonoBehaviour {
 		}
 	}
 
-	private void FixedUpdate ( ) {
+	protected void FixedUpdate ( ) {
 		// Update the scale and rotation values
 		scalingAngle += scaleSpeed;
 		if (scalingAngle >= Mathf.PI * 2) {
@@ -213,8 +214,8 @@ public class Teleportal : MonoBehaviour {
 	public Vector2 GetRandPerpPoint (Vector2 center, float angle, float minMag, float maxMag) {
 		// Based on the angle that the portals are from each other, find 2 points on either side of an imaginary line connecting the portals
 		//	and then get a random value between it. This is so the segments form a jagged line instead of a straight one.
-		Vector2 minPoint = center + new Vector2(Mathf.Cos(angle + (Mathf.PI / 2)), Mathf.Sin(angle + (Mathf.PI / 2)));
-		Vector2 maxPoint = center + new Vector2(Mathf.Cos(angle - (Mathf.PI / 2)), Mathf.Sin(angle - (Mathf.PI / 2)));
+		Vector2 minPoint = center + new Vector2(Mathf.Cos(Mathf.Deg2Rad * (angle + 90)), Mathf.Sin(Mathf.Deg2Rad * (angle + 90)));
+		Vector2 maxPoint = center + new Vector2(Mathf.Cos(Mathf.Deg2Rad * (angle - 90)), Mathf.Sin(Mathf.Deg2Rad * (angle - 90)));
 
 		// Make sure the point is not further away from the straight line than the maximum offset
 		minPoint = Utils.LimitVect3(center, minPoint, minMag, maxMag);

@@ -26,7 +26,7 @@ public class Ship : GravityObject {
 
 			if (value) {
 				// Create meshPieces for the trail
-				launchingDots = levelManager.SpawnStationaryPieces(transform, launchDotCount, Utils.Hex2Color("EDEDED"), size: 0.1f, layerType: LayerType.ShipDetail);
+				launchingDots = levelManager.SpawnStationaryPieces(Position, launchDotCount, Utils.Hex2Color("EDEDED"), size: 0.1f, layerType: LayerType.ShipDetail);
 				// Make sure to lock all of the meshPieces because the ones for the trail should not move
 				foreach (MeshPiece meshPiece in launchingDots) {
 					meshPiece.IsLocked = true;
@@ -171,7 +171,7 @@ public class Ship : GravityObject {
 
 	protected override void Death ( ) {
 		// Create meshPiece pieces of the ship as it gets destroyed to make for a cool effect
-		levelManager.SpawnGravityPieces(transform, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
+		levelManager.SpawnGravityPieces(Position, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
 
 		// Spawn explosion
 		Instantiate(explosionParticleSystem, Utils.SetVectZ(transform.position, (int) LayerType.Front), Quaternion.identity);

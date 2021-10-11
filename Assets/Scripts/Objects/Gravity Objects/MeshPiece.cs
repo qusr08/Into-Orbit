@@ -19,7 +19,7 @@ public class MeshPiece : GravityObject {
 		}
 	}
 
-	public void Initialize (Transform parent, Color color, float size, MeshType meshType, LayerType layerType, bool showTrail, bool disableColliders) {
+	public void Initialize (Color color, float size, MeshType meshType, LayerType layerType, bool showTrail, bool disableColliders) {
 		// Set all values of the meshPiece based on the arguments given
 		MeshType = meshType;
 		LayerType = layerType;
@@ -34,7 +34,7 @@ public class MeshPiece : GravityObject {
 		IsInitialized = true;
 	}
 
-	public void GiveRandomForce (Rigidbody2D parentRigidBody = null) {
+	public void GiveRandomForce ( ) {
 		rigidBody.AddForce(Utils.RandNormVect2( ) * (0.25f * SizeToMassRatio), ForceMode2D.Impulse);
 	}
 
