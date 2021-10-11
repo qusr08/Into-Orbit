@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6570404103195968506}
   m_Layer: 0
   m_Name: Outside
-  m_TagString: Untagged
+  m_TagString: Wormhole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,7 +60,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
-  disableColliders: 1
+  disableSolidColliders: 1
+  enableCollisions: 1
   color:
     colorValues: da00000000000000a4000000
   meshType: 0
@@ -313,7 +314,7 @@ GameObject:
   - component: {fileID: -2588611529195520434}
   m_Layer: 0
   m_Name: Environment Glow Front
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,7 +357,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
-  disableColliders: 1
+  disableSolidColliders: 1
+  enableCollisions: 0
   color:
     colorValues: 210000002100000021000000
   meshType: 0
@@ -449,7 +451,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2270037869780585852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -609,7 +611,7 @@ GameObject:
   - component: {fileID: 2414438014405048464}
   m_Layer: 0
   m_Name: Inside
-  m_TagString: Untagged
+  m_TagString: Wormhole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -652,7 +654,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
-  disableColliders: 1
+  disableSolidColliders: 1
+  enableCollisions: 1
   color:
     colorValues: 970000000000000071000000
   meshType: 0
@@ -905,7 +908,7 @@ GameObject:
   - component: {fileID: 4188284601452670347}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Wormhole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -948,7 +951,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
-  disableColliders: 1
+  disableSolidColliders: 1
+  enableCollisions: 1
   color:
     colorValues: b20000000000000088000000
   meshType: 0
@@ -1259,7 +1263,7 @@ GameObject:
   - component: {fileID: 966343978707002270}
   m_Layer: 0
   m_Name: Environment Glow Back
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1302,7 +1306,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
-  disableColliders: 1
+  disableSolidColliders: 1
+  enableCollisions: 0
   color:
     colorValues: 190000001900000019000000
   meshType: 0
@@ -1395,7 +1400,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7194867593940989059}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

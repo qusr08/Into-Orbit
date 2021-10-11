@@ -17,7 +17,6 @@ public class Asteroid : GravityObject {
 	[SerializeField] [Range(0f, 1f)] [ConditionalField(nameof(trajectory))] private float trajectoryReposition;
 
 	private int trajectoryFrameCounter = 0;
-	private bool hasCollided;
 
 	private Vector2 initialPosition {
 		get {
@@ -90,19 +89,6 @@ public class Asteroid : GravityObject {
 		base.FixedUpdate( );
 	}
 
-	protected void OnCollisionEnter2D (Collision2D collision) {
-		if (collision.transform.tag.Equals("Space Object")) {
-			Death( );
-		}
-	}
-
-	private void Death ( ) {
-		// Create meshPiece pieces of the ship as it gets destroyed to make for a cool effect
-		//levelManager.SpawnGravityPieces(transform, 4, Color, size: 0.15f, layerType: LayerType.Environment, meshType:MeshType.Circle);
-
-		hasCollided = true;
-
-		// Destroy this ship gameobject
-		//Destroy(gameObject);
+	protected override void Death ( ) {
 	}
 }

@@ -25,7 +25,7 @@ public class MeshPiece : GravityObject {
 		LayerType = layerType;
 		Size = size;
 		ShowTrail = showTrail;
-		DisableColliders = disableColliders;
+		DisableSolidColliders = disableColliders;
 		Color = color;
 
 		UpdateVariables( );
@@ -36,5 +36,8 @@ public class MeshPiece : GravityObject {
 
 	public void GiveRandomForce (Rigidbody2D parentRigidBody = null) {
 		rigidBody.AddForce(Utils.RandNormVect2( ) * (0.25f * SizeToMassRatio), ForceMode2D.Impulse);
+	}
+
+	protected override void Death ( ) {
 	}
 }

@@ -13,25 +13,6 @@ public class Ship : GravityObject {
 	[SerializeField] private int launchDotCount = 20;
 	[SerializeField] private int launchDotDensity = 5;
 
-	private Wormhole wormhole;
-	public Wormhole Wormhole {
-		get {
-			return wormhole;
-		}
-
-		set {
-			wormhole = value;
-			if (wormhole == null) {
-				return;
-			}
-
-			// Set the rigidBody velocity to 0 because setting the position over time would just be better here
-			refVelocity = rigidBody.velocity;
-			rigidBody.velocity = Vector2.zero;
-		}
-	}
-
-	private Vector2 refVelocity;
 	private Vector2 lastMousePosition;
 
 	// Whether or not the player is currently launching the ship
@@ -63,13 +44,6 @@ public class Ship : GravityObject {
 		}
 	}
 	private List<MeshPiece> launchingDots; // All of the meshPieces that make up the trail while launching
-
-	protected void OnCollisionEnter2D (Collision2D collision) {
-		// If the ship collides with a planet, it should be destroyed
-		if (collision.transform.tag.Equals("Space Object")) {
-			Death( );
-		}
-	}
 
 	protected void OnMouseOver ( ) {
 		// If the mouse is hovered over the ship and the left mouse button is pressed and it is not currently launching,
@@ -122,23 +96,6 @@ public class Ship : GravityObject {
 
 			// Update the last mouse position
 			lastMousePosition = p1;
-		}
-	}
-
-	protected new void FixedUpdate ( ) {
-		if (Wormhole != null) {
-			// Make the ship smoothly transition to the center of the wormhole
-			Position = Vector2.SmoothDamp(Position, Wormhole.Position, ref refVelocity, 0.5f);
-
-			// If the ship has reached the center and is stopped, then the player has won the level
-			if (Utils.CloseEnough(Position, Wormhole.Position)) {
-				Position = Wormhole.Position;
-
-				Wormhole = null;
-				IsLocked = true;
-			}
-		} else {
-			base.FixedUpdate( );
 		}
 	}
 
@@ -212,7 +169,7 @@ public class Ship : GravityObject {
 		}
 	}
 
-	private void Death ( ) {
+	protected override void Death ( ) {
 		// Create meshPiece pieces of the ship as it gets destroyed to make for a cool effect
 		levelManager.SpawnGravityPieces(transform, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
 

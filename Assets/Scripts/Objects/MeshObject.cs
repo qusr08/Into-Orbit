@@ -20,7 +20,8 @@ public class MeshObject : MonoBehaviour {
 	[Space]
 	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
-	[SerializeField] private bool disableColliders = false;
+	[SerializeField] private bool disableSolidColliders = false;
+	[SerializeField] private bool enableCollisions = true;
 	[Space]
 	[SerializeField] private SerializableColor3 color;
 	[SerializeField] private MeshType meshType = MeshType.Circle;
@@ -124,16 +125,27 @@ public class MeshObject : MonoBehaviour {
 			rigidBody.constraints = (isLocked) ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.None;
 		}
 	}
-	public bool DisableColliders {
+	public bool DisableSolidColliders {
 		get {
-			return disableColliders;
+			return disableSolidColliders;
 		}
 
 		set {
-			disableColliders = value;
+			disableSolidColliders = value;
 
 			polyCollider.enabled = true;
-			polyCollider.isTrigger = DisableColliders;
+			polyCollider.isTrigger = DisableSolidColliders;
+		}
+	}
+	public bool EnableCollisions {
+		get {
+			return enableCollisions;
+		}
+
+		set {
+			enableCollisions = value;
+
+			polyCollider.enabled = value;
 		}
 	}
 	public float Mass {
@@ -384,10 +396,12 @@ public class MeshObject : MonoBehaviour {
 		LayerType = LayerType;
 		Color = Color;
 		Size = Size;
+		Mass = Mass;
 		SizeToMassRatio = SizeToMassRatio;
 		ShowTrail = ShowTrail;
 		IsLocked = IsLocked;
-		DisableColliders = DisableColliders;
+		DisableSolidColliders = DisableSolidColliders;
+		EnableCollisions = EnableCollisions;
 
 		// Regenerate the mesh;
 		GenerateMesh( );

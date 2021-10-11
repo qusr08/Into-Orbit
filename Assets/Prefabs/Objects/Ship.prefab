@@ -144,7 +144,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 1
   isLocked: 1
-  disableColliders: 0
+  disableSolidColliders: 0
+  enableCollisions: 1
   color:
     colorValues: da0000000000000037000000
   meshType: 2

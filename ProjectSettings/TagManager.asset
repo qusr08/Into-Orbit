@@ -7,6 +7,10 @@ TagManager:
   - Space Object
   - Space Entity
   - Debug
+  - Wormhole
+  - Teleportal
+  - Button
+  - Boost Recharge
   layers:
   - Default
   - TransparentFX
@@ -14,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Ship
-  - Particle Objects
-  - Planet
+  - 
+  - 
+  - 
   - 
   - 
   - 

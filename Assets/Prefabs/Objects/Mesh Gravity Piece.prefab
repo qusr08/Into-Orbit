@@ -60,7 +60,8 @@ MonoBehaviour:
   cameraController: {fileID: 0}
   showTrail: 1
   isLocked: 0
-  disableColliders: 0
+  disableSolidColliders: 0
+  enableCollisions: 1
   color:
     colorValues: ff000000ff000000ff000000
   meshType: 3

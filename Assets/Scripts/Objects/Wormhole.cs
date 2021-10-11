@@ -27,7 +27,7 @@ public class Wormhole : MonoBehaviour {
 
 	private float oscillationAngle;
 
-	private void OnValidate ( ) {
+	protected void OnValidate ( ) {
 		rings.Clear( );
 		rings.AddRange(GetComponentsInChildren<MeshObject>( ));
 
@@ -36,15 +36,7 @@ public class Wormhole : MonoBehaviour {
 		}
 	}
 
-	private void Update ( ) {
-		if (ship != null && ship.Wormhole == null) {
-			if (Vector2.Distance(ship.Position, Position) <= Radius) {
-				ship.Wormhole = this;
-			}
-		}
-	}
-
-	private void FixedUpdate ( ) {
+	protected void FixedUpdate ( ) {
 		oscillationAngle += oscSpeed;
 		if (oscillationAngle >= Mathf.PI * 2) {
 			oscillationAngle -= Mathf.PI * 2;
