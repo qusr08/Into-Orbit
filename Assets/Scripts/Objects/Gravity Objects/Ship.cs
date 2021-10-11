@@ -26,9 +26,9 @@ public class Ship : GravityObject {
 
 			if (value) {
 				// Create meshPieces for the trail
-				launchingDots = levelManager.SpawnStationaryPieces(Position, launchDotCount, Utils.Hex2Color("EDEDED"), size: 0.1f, layerType: LayerType.ShipDetail);
+				launchingDots = levelManager.SpawnStationaryParticles(Position, launchDotCount, Utils.Hex2Color("EDEDED"), size: 0.1f, layerType: LayerType.ShipDetail);
 				// Make sure to lock all of the meshPieces because the ones for the trail should not move
-				foreach (MeshPiece meshPiece in launchingDots) {
+				foreach (MeshParticle meshPiece in launchingDots) {
 					meshPiece.IsLocked = true;
 				}
 			} else {
@@ -43,7 +43,7 @@ public class Ship : GravityObject {
 			}
 		}
 	}
-	private List<MeshPiece> launchingDots; // All of the meshPieces that make up the trail while launching
+	private List<MeshParticle> launchingDots; // All of the meshPieces that make up the trail while launching
 
 	protected void OnMouseOver ( ) {
 		// If the mouse is hovered over the ship and the left mouse button is pressed and it is not currently launching,
@@ -171,7 +171,7 @@ public class Ship : GravityObject {
 
 	protected override void Death ( ) {
 		// Create meshPiece pieces of the ship as it gets destroyed to make for a cool effect
-		levelManager.SpawnGravityPieces(Position, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
+		levelManager.SpawnGravityParticles(Position, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
 
 		// Spawn explosion
 		Instantiate(explosionParticleSystem, Utils.SetVectZ(transform.position, (int) LayerType.Front), Quaternion.identity);

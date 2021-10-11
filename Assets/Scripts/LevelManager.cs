@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager> {
 	[Separator("Level Manager")]
-	[SerializeField] private GameObject meshGravityPiecePrefab;
-	[SerializeField] private GameObject meshStationaryPiecePrefab;
+	[SerializeField] private GameObject meshGravityParticlePrefab;
+	[SerializeField] private GameObject meshStationaryParticlePrefab;
+	[Space]
+	[SerializeField] private GameObject explosionParticleSystemPrefab;
+	[SerializeField] private GameObject collisionParticleSystemPrefab;
+	[SerializeField] private GameObject teleportParticleSystemPrefab;
+	[SerializeField] private GameObject launchParticleSystemPrefab;
 	[Space]
 	[SerializeField] private Ship ship;
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
@@ -16,7 +21,7 @@ public class LevelManager : Singleton<LevelManager> {
 	[Separator("Constants")]
 	[SerializeField] private float G = 0.75f;
 
-	private void OnValidate ( ) {
+	protected void OnValidate ( ) {
 		ship = FindObjectOfType<Ship>( );
 
 		planets.Clear( );
@@ -66,38 +71,38 @@ public class LevelManager : Singleton<LevelManager> {
 		return direction * force;
 	}
 
-	public List<MeshPiece> SpawnGravityPieces (Vector2 position, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true) {
-		List<MeshPiece> meshPieces = new List<MeshPiece>( );
+	public List<MeshParticle> SpawnGravityParticles (Vector2 position, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true) {
+		List<MeshParticle> meshParticles = new List<MeshParticle>( );
 
 		// Create the meshPieces with set values
 		for (int i = 0; i < amount; i++) {
 			// Instatiate a new meshPiece object and initialize its values
-			MeshPiece meshPiece = Instantiate(meshGravityPiecePrefab, position, Quaternion.identity).GetComponent<MeshPiece>( );
-			meshPiece.Initialize(color, size, meshType, layerType, showTrail, false);
+			MeshParticle meshParticle = Instantiate(meshGravityParticlePrefab, position, Quaternion.identity).GetComponent<MeshParticle>( );
+			meshParticle.Initialize(color, size, meshType, layerType, showTrail, false);
 
 			// Launch the meshPiece in a random direction if told to do so
 			if (giveRandomForce) {
-				meshPiece.GiveRandomForce();
+				meshParticle.GiveRandomForce();
 			}
 
-			meshPieces.Add(meshPiece);
+			meshParticles.Add(meshParticle);
 		}
 
-		return meshPieces;
+		return meshParticles;
 	}
 
-	public List<MeshPiece> SpawnStationaryPieces (Vector2 position, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Circle, LayerType layerType = LayerType.Front) {
-		List<MeshPiece> meshPieces = new List<MeshPiece>( );
+	public List<MeshParticle> SpawnStationaryParticles (Vector2 position, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Circle, LayerType layerType = LayerType.Front) {
+		List<MeshParticle> meshParticles = new List<MeshParticle>( );
 
 		// Create the meshPieces with set values
 		for (int i = 0; i < amount; i++) {
 			// Instatiate a new meshPiece object and initialize its values
-			MeshPiece meshPiece = Instantiate(meshStationaryPiecePrefab, position, Quaternion.identity).GetComponent<MeshPiece>( );
-			meshPiece.Initialize(color, size, meshType, layerType, false, true);
+			MeshParticle meshParticle = Instantiate(meshStationaryParticlePrefab, position, Quaternion.identity).GetComponent<MeshParticle>( );
+			meshParticle.Initialize(color, size, meshType, layerType, false, true);
 
-			meshPieces.Add(meshPiece);
+			meshParticles.Add(meshParticle);
 		}
 
-		return meshPieces;
+		return meshParticles;
 	}
 }

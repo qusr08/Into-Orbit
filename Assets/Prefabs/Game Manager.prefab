@@ -729,15 +729,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keepAlive: 1
-  meshGravityPiecePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
-  meshStationaryPiecePrefab: {fileID: 1654005443914306764, guid: abd7f5a724a149948a91efd2dfd383d6, type: 3}
+  meshGravityParticlePrefab: {fileID: 1654005443914306764, guid: a3d2c766f005dc147b24233dc548db48, type: 3}
+  meshStationaryParticlePrefab: {fileID: 1654005443914306764, guid: abd7f5a724a149948a91efd2dfd383d6, type: 3}
+  explosionParticleSystemPrefab: {fileID: 2881110983041004528, guid: 1ffa24d19b1faf4488d4935c193cf634, type: 3}
+  collisionParticleSystemPrefab: {fileID: 0}
+  teleportParticleSystemPrefab: {fileID: 0}
+  launchParticleSystemPrefab: {fileID: 2881110983041004528, guid: c9c9e2874fd54d04aba7b2a3fc94b452, type: 3}
   ship: {fileID: 0}
   planets:
   - {fileID: 0}
   - {fileID: 0}
   wormholes:
   - {fileID: 0}
-  teleportals: []
+  teleportals:
+  - {fileID: 0}
   asteroids:
   - {fileID: 0}
   - {fileID: 0}

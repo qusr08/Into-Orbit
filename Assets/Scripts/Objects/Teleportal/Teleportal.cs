@@ -82,7 +82,7 @@ public class Teleportal : MonoBehaviour {
 
 			// Generate the connectors
 			GenerateConnectors(connectorBack, LayerType.EnvironmentGlowBack, new Color(27 / 255f, 27 / 255f, 27 / 255f));
-			GenerateConnectors(connectorFront, LayerType.EnvironmentGlowFront, new Color(33 / 255f, 33 / 255f, 33 / 255f));
+			GenerateConnectors(connectorFront, LayerType.EnvironmentGlowFront, new Color(35 / 255f, 35 / 255f, 35 / 255f));
 
 			regenerateConnector = false;
 		}

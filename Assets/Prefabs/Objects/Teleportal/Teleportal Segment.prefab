@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eee14db7b90fd1740a3c449df8d4ce3f, type: 3}
-  m_Color: {r: 0.105882354, g: 0.105882354, b: 0.105882354, a: 1}
+  m_Color: {r: 0.12941177, g: 0.12941177, b: 0.12941177, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -96,6 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2562818120228763529}
-  LayerType: 0
-  CurrPoint1: {x: 0, y: 0}
-  CurrPoint2: {x: 0, y: 0}
+  lastSegment: {fileID: 0}
+  nextSegment: {fileID: 0}
+  teleportal: {fileID: 0}
+  centerPoint1: {x: 0, y: 0}
+  centerPoint2: {x: 0, y: 0}
+  currPoint1: {x: 0, y: 0}
+  currPoint2: {x: 0, y: 0}
+  fromPoint1: {x: 0, y: 0}
+  fromPoint2: {x: 0, y: 0}
+  toPoint1: {x: 0, y: 0}
+  toPoint2: {x: 0, y: 0}
