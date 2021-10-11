@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cd50fceedf2eece4aa4d4e929069632f
+guid: fed0d612f762f9b4eae7c8dffc2b2c54
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - 7Pixel
+  - Designer Block
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
