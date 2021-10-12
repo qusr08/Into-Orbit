@@ -25,11 +25,19 @@ public class CameraController : MonoBehaviour {
 	private float fovVelocity;
 	private float targetFOV;
 
-	private void Start ( ) {
+	protected void OnValidate ( ) {
+		if (Target == null) {
+			Target = FindObjectOfType<Ship>( ).transform;
+		} else {
+			transform.position = Utils.SetVectZ(Target.position, transform.position.z);
+		}
+	}
+
+	protected void Start ( ) {
 		ResetFOV( );	
 	}
 
-	private void FixedUpdate ( ) {
+	protected void FixedUpdate ( ) {
 		// If the camera is currently tracking a target, get its current position
 		// The reason for this is that if the target is destoryed, I want the camera to continue to its last location
 		//	before it was destroyed.

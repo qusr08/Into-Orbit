@@ -405,7 +405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3635393664123756149}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6491601482367616714}
@@ -735,25 +735,12 @@ MonoBehaviour:
   collisionParticleSystemPrefab: {fileID: 2881110983041004528, guid: 4ea39c016b9c2bd45b1b454563154f30, type: 3}
   teleportParticleSystemPrefab: {fileID: 2943183558485401433, guid: 9d8c7ab3eff2a634584f306f3536caf2, type: 3}
   launchParticleSystemPrefab: {fileID: 2881110983041004528, guid: c9c9e2874fd54d04aba7b2a3fc94b452, type: 3}
-  ship: {fileID: 0}
   planets:
-  - {fileID: 0}
   - {fileID: 0}
   wormholes:
   - {fileID: 0}
-  teleportals:
-  - {fileID: 0}
-  asteroids:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  teleportals: []
+  asteroids: []
   G: 0.6
 --- !u!114 &5496106708327014791
 MonoBehaviour:

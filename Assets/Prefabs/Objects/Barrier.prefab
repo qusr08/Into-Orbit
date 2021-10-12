@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3662390849234143746
+--- !u!1 &7370478515979326521
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,97 +8,90 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3662390849234143752}
-  - component: {fileID: 4685677607647161898}
-  - component: {fileID: 3662390849234143750}
-  - component: {fileID: 3662390849234143751}
-  - component: {fileID: 3662390849234143748}
-  - component: {fileID: 3662390849234143749}
-  - component: {fileID: 7853034250196611518}
+  - component: {fileID: 7370478515979326522}
+  - component: {fileID: 7370478515979326512}
+  - component: {fileID: 7370478515979326527}
+  - component: {fileID: 7370478515979326526}
+  - component: {fileID: 7370478515979326525}
+  - component: {fileID: 7370478515979326524}
+  - component: {fileID: 7370478515979326523}
   m_Layer: 0
-  m_Name: Asteroid
+  m_Name: Barrier
   m_TagString: Space Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3662390849234143752
+--- !u!4 &7370478515979326522
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
+  m_GameObject: {fileID: 7370478515979326521}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 70}
+  m_LocalPosition: {x: 0, y: 0, z: 80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4685677607647161898
+--- !u!114 &7370478515979326512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
+  m_GameObject: {fileID: 7370478515979326521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8856672f1400e3c46bf63ab167464216, type: 3}
+  m_Script: {fileID: 11500000, guid: cd969590eb07b3e4c9d2eca9daabe298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   recalculateMesh: 0
   meshMaterial: {fileID: 2100000, guid: 37ff11ab0216c57488bd1aaae020ce10, type: 2}
   trailMaterial: {fileID: 2100000, guid: 875f92829279fde479a573576cbf317a, type: 2}
-  trailRenderer: {fileID: 7853034250196611518}
-  rigidBody: {fileID: 3662390849234143750}
-  meshFilter: {fileID: 3662390849234143751}
-  meshRenderer: {fileID: 3662390849234143748}
-  polyCollider: {fileID: 3662390849234143749}
+  trailRenderer: {fileID: 7370478515979326523}
+  rigidBody: {fileID: 7370478515979326527}
+  meshFilter: {fileID: 7370478515979326526}
+  meshRenderer: {fileID: 7370478515979326525}
+  polyCollider: {fileID: 7370478515979326524}
   levelManager: {fileID: 0}
   cameraController: {fileID: 0}
-  showTrail: 1
-  isLocked: 0
+  showTrail: 0
+  isLocked: 1
   disableSolidColliders: 0
   enableCollisions: 1
   color:
-    colorValues: 440000004400000044000000
-  meshType: 1
-  layerType: 70
+    colorValues: 970000000000000028000000
+  meshType: 2
+  layerType: 80
   size: 0.5
-  sizeToMassRatio: 10
+  sizeToMassRatio: 1
   meshPrecision: 20
-  meshRoughness: 0.02
+  meshRoughness: 0.1
   baseTrailColorOffMesh: 0
   trailStartColor:
-    colorValues: 190000001900000019000000ff000000
+    colorValues: ff000000ff000000ff000000ff000000
   trailEndColor:
-    colorValues: 190000001900000019000000ff000000
-  trailLength: 20
+    colorValues: ff000000ff000000ff000000ff000000
+  trailLength: 5
   trailToObjectScale: 1
-  parents: []
-  trajectoryPrefab: {fileID: 5182457796216293944, guid: 7b63e188a961aac478a0889e031d97a8, type: 3}
-  createTrajectoryObject: 0
-  trajectory: {fileID: 0}
-  trajectoryData: {fileID: 0}
-  clearTrajectoryData: 0
-  updateFromTrajectory: 0
-  initialVelocity: {x: 0, y: 0}
-  trajectoryReposition: 0
---- !u!50 &3662390849234143750
+  planet1: {fileID: 0}
+  planet2: {fileID: 0}
+--- !u!50 &7370478515979326527
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
+  m_GameObject: {fileID: 7370478515979326521}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -106,22 +99,22 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!33 &3662390849234143751
+  m_Constraints: 7
+--- !u!33 &7370478515979326526
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
+  m_GameObject: {fileID: 7370478515979326521}
   m_Mesh: {fileID: 0}
---- !u!23 &3662390849234143748
+--- !u!23 &7370478515979326525
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
+  m_GameObject: {fileID: 7370478515979326521}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -156,13 +149,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!60 &3662390849234143749
+--- !u!60 &7370478515979326524
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
+  m_GameObject: {fileID: 7370478515979326521}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -181,34 +174,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.262458}
-      - {x: 0.07151735, y: 0.2500519}
-      - {x: 0.1539558, y: 0.18783441}
-      - {x: 0.18940063, y: 0.15291761}
-      - {x: 0.2238801, y: 0.07633571}
-      - {x: 0.25148624, y: -0.0000000117908865}
-      - {x: 0.2246749, y: -0.07859128}
-      - {x: 0.20910238, y: -0.14596446}
-      - {x: 0.15055364, y: -0.18935803}
-      - {x: 0.08092012, y: -0.24156457}
-      - {x: -0.000000022403917, y: -0.26808852}
-      - {x: -0.073137686, y: -0.24996011}
-      - {x: -0.14974388, y: -0.21286394}
-      - {x: -0.18709522, y: -0.15431476}
-      - {x: -0.23165452, y: -0.08279493}
-      - {x: -0.25187457, y: 0.0000000029037164}
-      - {x: -0.23686871, y: 0.07855156}
-      - {x: -0.1978035, y: 0.14504434}
-      - {x: -0.1555901, y: 0.197659}
-      - {x: -0.072695166, y: 0.23149852}
---- !u!120 &7853034250196611518
+    - - {x: -0.25, y: -0.25}
+      - {x: -0.25, y: 0.25}
+      - {x: 0.25, y: 0.25}
+      - {x: 0.25, y: -0.25}
+--- !u!120 &7370478515979326523
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3662390849234143746}
-  m_Enabled: 1
+  m_GameObject: {fileID: 7370478515979326521}
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -241,16 +218,18 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions: []
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.05
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 10
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -271,8 +250,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
-      key1: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

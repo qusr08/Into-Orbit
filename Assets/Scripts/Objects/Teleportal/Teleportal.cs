@@ -11,24 +11,10 @@ public class Teleportal : MonoBehaviour {
 	[SerializeField] private Transform connectorBack;
 	[SerializeField] private Transform connectorFront;
 	[SerializeField] private GameObject connectorSegmentPrefab;
-	[SerializeField] private List<MeshObject> portal1Rings = new List<MeshObject>( );
-	[SerializeField] private List<MeshObject> portal2Rings = new List<MeshObject>( );
-	[Space]
-	[SerializeField] private float scaleSpeed;
-	[SerializeField] private float rotationSpeed;
-	[SerializeField] private float scaleChange;
-	[SerializeField] [Range(0, 1)] private float xScale;
 	[Space]
 	[SerializeField] private bool regenerateConnector;
 	[SerializeField] private bool forceClearLists;
 	[SerializeField] [Min(1)] private int segmentDensity;
-
-	private float portal1AngleOffset;
-	private float portal2AngleOffset;
-	private float scalingAngle;
-	private float rotationAngle;
-
-	private float teleportBufferTimer;
 
 	public Vector2 Portal1Position {
 		get {
@@ -63,11 +49,6 @@ public class Teleportal : MonoBehaviour {
 			return;
 		}
 
-		portal1Rings.Clear( );
-		portal2Rings.Clear( );
-		portal1Rings.AddRange(portal1.GetComponentsInChildren<MeshObject>( ));
-		portal2Rings.AddRange(portal2.GetComponentsInChildren<MeshObject>( ));
-
 		if (regenerateConnector) {
 			// Make sure the segments of the connector aren't too long
 			// This increases the segment density until they are less than the final length
@@ -88,38 +69,6 @@ public class Teleportal : MonoBehaviour {
 			ClearConnectorChildren(connectorFront);
 
 			forceClearLists = false;
-		}
-	}
-
-	protected void Start ( ) {
-		// Generate a random offset between the portals so they look different in game
-		portal1AngleOffset = Random.Range(0, Mathf.PI * 2);
-		portal2AngleOffset = Random.Range(0, Mathf.PI * 2);
-	}
-
-	protected void FixedUpdate ( ) {
-		// Update the scale and rotation values
-		scalingAngle += scaleSpeed;
-		if (scalingAngle >= Mathf.PI * 2) {
-			scalingAngle -= Mathf.PI * 2;
-		}
-		rotationAngle += rotationSpeed;
-		if (rotationAngle >= Mathf.PI * 2) {
-			rotationAngle -= Mathf.PI * 2;
-		}
-
-		// Animate the rings of the teleportal to make them pulse and rotate
-		for (int i = 0; i < portal1Rings.Count; i++) {
-			float scaleValue = scaleChange * Mathf.Sin(scalingAngle + i + portal1AngleOffset) - scaleChange + 1;
-			portal1Rings[i].transform.localScale = new Vector3(scaleValue * xScale, scaleValue, 1);
-			float rotationValue = rotationAngle + (i / 20) + portal1AngleOffset;
-			portal1Rings[i].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * rotationValue);
-		}
-		for (int i = 0; i < portal2Rings.Count; i++) {
-			float scaleValue = scaleChange * Mathf.Sin(scalingAngle + i + portal2AngleOffset) - scaleChange + 1;
-			portal2Rings[i].transform.localScale = new Vector3(scaleValue * xScale, scaleValue, 1);
-			float rotationValue = rotationAngle + (i / 20) + portal2AngleOffset;
-			portal2Rings[i].transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * rotationValue);
 		}
 	}
 

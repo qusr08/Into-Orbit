@@ -13,7 +13,6 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private GameObject teleportParticleSystemPrefab;
 	[SerializeField] private GameObject launchParticleSystemPrefab;
 	[Space]
-	[SerializeField] private Ship ship;
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
 	[SerializeField] private List<Teleportal> teleportals = new List<Teleportal>( );
@@ -22,8 +21,6 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private float G = 0.75f;
 
 	protected void OnValidate ( ) {
-		ship = FindObjectOfType<Ship>( );
-
 		planets.Clear( );
 		planets.AddRange(FindObjectsOfType<Planet>( ));
 
