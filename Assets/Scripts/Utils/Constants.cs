@@ -36,7 +36,7 @@ public enum ParticleSystemType {
 public static class Constants {
 	public const float MIN_CAMERA_FOV = 4.5f;
 	public const float CAMERA_DEFAULT_FOV = 5f;
-	public const float MAX_CAMERA_FOV = 5.5f;
+	public const float MAX_CAMERA_FOV = 6.5f;
 
 	public const int CRASH_PARTICLE_COUNT = 8;
 	public const float MAX_LAUNCH_DISTANCE = 5;
