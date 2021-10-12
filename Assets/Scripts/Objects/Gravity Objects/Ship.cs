@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Ship : GravityObject {
 	[Separator("Ship")]
-	[SerializeField] private GameObject explosionParticleSystem;
-	[SerializeField] private GameObject launchParticleSystem;
-	[Space]
 	[SerializeField] private Transform launchingIndicator;
 	[SerializeField] private int launchDotCount = 20;
 	[SerializeField] private int launchDotDensity = 5;
@@ -59,7 +56,9 @@ public class Ship : GravityObject {
 		lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	}
 
-	protected void Update ( ) {
+	protected new void Update ( ) {
+		base.Update( );
+
 		// While the ship is being launched, update the positions of the meshPieces on the trail
 		if (IsLaunching) {
 			Vector2 p1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -89,8 +88,7 @@ public class Ship : GravityObject {
 					cameraController.ResetFOV( );
 
 					// Spawn launch explosion meshPieces
-					float angleModifier = 90 + launchParticleSystem.transform.rotation.eulerAngles.z;
-					Instantiate(launchParticleSystem, Position, Quaternion.Euler(new Vector3(0, 0, angleModifier + Utils.GetAngleBetween(Position, launchDirection))));
+					levelManager.SpawnParticleSystem(ParticleSystemType.Launch, Position, angle: 90 + Utils.GetAngleBetween(Position, launchDirection));
 				}
 			}
 
@@ -174,7 +172,7 @@ public class Ship : GravityObject {
 		levelManager.SpawnGravityParticles(Position, Constants.CRASH_PARTICLE_COUNT, Color, layerType: LayerType.Ship);
 
 		// Spawn explosion
-		Instantiate(explosionParticleSystem, Utils.SetVectZ(transform.position, (int) LayerType.Front), Quaternion.identity);
+		levelManager.SpawnParticleSystem(ParticleSystemType.Explosion, Position);
 
 		// Destroy this ship gameobject
 		Destroy(gameObject);

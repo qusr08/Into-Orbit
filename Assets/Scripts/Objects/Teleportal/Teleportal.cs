@@ -13,7 +13,6 @@ public class Teleportal : MonoBehaviour {
 	[SerializeField] private GameObject connectorSegmentPrefab;
 	[SerializeField] private List<MeshObject> portal1Rings = new List<MeshObject>( );
 	[SerializeField] private List<MeshObject> portal2Rings = new List<MeshObject>( );
-	[SerializeField] private Ship ship;
 	[Space]
 	[SerializeField] private float scaleSpeed;
 	[SerializeField] private float rotationSpeed;
@@ -23,10 +22,6 @@ public class Teleportal : MonoBehaviour {
 	[SerializeField] private bool regenerateConnector;
 	[SerializeField] private bool forceClearLists;
 	[SerializeField] [Min(1)] private int segmentDensity;
-
-	private Collider2D portal1OutsideRing;
-	private Collider2D portal2OutsideRing;
-	private Collider2D shipCollider;
 
 	private float portal1AngleOffset;
 	private float portal2AngleOffset;
@@ -77,7 +72,7 @@ public class Teleportal : MonoBehaviour {
 			// Make sure the segments of the connector aren't too long
 			// This increases the segment density until they are less than the final length
 			while (Distance / segmentDensity > Constants.MAX_SEGMENT_STARTLENGTH) {
-				segmentDensity++;				
+				segmentDensity++;
 			}
 
 			// Generate the connectors
@@ -100,32 +95,6 @@ public class Teleportal : MonoBehaviour {
 		// Generate a random offset between the portals so they look different in game
 		portal1AngleOffset = Random.Range(0, Mathf.PI * 2);
 		portal2AngleOffset = Random.Range(0, Mathf.PI * 2);
-
-		// Get colliders of ship and outer rings
-		shipCollider = ship.GetComponent<Collider2D>( );
-		portal1OutsideRing = portal1.Find("Outside").GetComponent<Collider2D>( );
-		portal2OutsideRing = portal2.Find("Outside").GetComponent<Collider2D>( );
-	}
-
-	protected void Update ( ) {
-		if (ship != null) {
-			// As long as the ship has not just teleported, wait for it to touch one of the portals
-			// This is needed so the ship doesn't spaz teleport between the portals
-			if (teleportBufferTimer <= 0) {
-				// If the ship is touching either one of the colliders of the portals, then teleport it to the opposite one
-				if (shipCollider.IsTouching(portal1OutsideRing)) {
-					Vector2 positionOffset = ship.Position - (Vector2) portal1.position;
-					ship.Position = (Vector2) portal2.position + positionOffset;
-					teleportBufferTimer = Constants.TELEPORT_BUFFER_TIME;
-				} else if (shipCollider.IsTouching(portal2OutsideRing)) {
-					Vector2 positionOffset = ship.Position - (Vector2) portal2.position;
-					ship.Position = (Vector2) portal1.position + positionOffset;
-					teleportBufferTimer = Constants.TELEPORT_BUFFER_TIME;
-				}
-			} else {
-				teleportBufferTimer -= Time.deltaTime;
-			}
-		}
 	}
 
 	protected void FixedUpdate ( ) {
@@ -231,5 +200,10 @@ public class Teleportal : MonoBehaviour {
 		for (int i = childList.Length - 1; i >= 0; i--) {
 			DestroyImmediate(childList[i].gameObject);
 		}
+	}
+
+	public Vector2 GetTeleportPosition (Vector2 objectPosition, Transform portal) {
+		Vector2 positionOffset = objectPosition - (Vector2) portal.position;
+		return (portal == portal1 ? Portal2Position : Portal1Position) + positionOffset;
 	}
 }

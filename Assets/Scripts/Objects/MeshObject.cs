@@ -166,6 +166,15 @@ public class MeshObject : MonoBehaviour {
 			transform.position = new Vector3(value.x, value.y, transform.position.z);
 		}
 	}
+	public Vector2 Scale {
+		get {
+			return transform.localScale;
+		}
+
+		set {
+			transform.localScale = new Vector2(Utils.Limit(value.x, 0, 100), Utils.Limit(value.y, 0, 100));
+		}
+	}
 
 	protected void OnValidate ( ) => UnityEditor.EditorApplication.delayCall += _OnValidate;
 	private void _OnValidate ( ) {

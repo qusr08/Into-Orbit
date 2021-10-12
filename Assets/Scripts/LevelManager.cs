@@ -82,7 +82,7 @@ public class LevelManager : Singleton<LevelManager> {
 
 			// Launch the meshPiece in a random direction if told to do so
 			if (giveRandomForce) {
-				meshParticle.GiveRandomForce();
+				meshParticle.GiveRandomForce( );
 			}
 
 			meshParticles.Add(meshParticle);
@@ -104,5 +104,33 @@ public class LevelManager : Singleton<LevelManager> {
 		}
 
 		return meshParticles;
+	}
+
+	public GameObject SpawnParticleSystem (ParticleSystemType systemType, Vector2 position, float angle = 0) {
+		GameObject system = null;
+
+		switch (systemType) {
+			case ParticleSystemType.Collision:
+				system = Instantiate(collisionParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
+				break;
+			case ParticleSystemType.Launch:
+				system = Instantiate(launchParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
+				break;
+			case ParticleSystemType.Explosion:
+				system = Instantiate(explosionParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
+				break;
+			case ParticleSystemType.Teleport:
+				system = Instantiate(teleportParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
+				break;
+		}
+
+		return system;
+	}
+
+	public GameObject SpawnParticleSystem (ParticleSystemType systemType, Transform parent, float angle = 0) {
+		GameObject system = SpawnParticleSystem(systemType, parent.position, angle: angle);
+		system.transform.SetParent(parent);
+
+		return system;
 	}
 }

@@ -21,7 +21,15 @@ public enum LayerType {
 	Environment = 70,
 	ShipDetail = 40,
 	Ship = 30,
+	Particles = 15,
 	Front = 0
+}
+
+public enum ParticleSystemType {
+	Collision,
+	Launch,
+	Explosion,
+	Teleport
 }
 
 public static class Constants {
@@ -34,6 +42,7 @@ public static class Constants {
 	public const float MIN_LAUNCH_DISTANCE = 0.2f;
 
 	public const float TELEPORT_BUFFER_TIME = 1f;
+	public const float TELEPORT_SPEED = 10f;
 	public const float SEGMENT_OVERLAP = 0.13f;
 	public const float MAX_SEGMENT_OFFSET = 0.3f;
 	public const float MIN_SEGMENT_MOVETIME = 4f;

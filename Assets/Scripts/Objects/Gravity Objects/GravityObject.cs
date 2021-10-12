@@ -34,12 +34,51 @@ public abstract class GravityObject : MeshObject {
 		}
 	}
 
+	private float teleportBufferTimer;
+	private Vector2 teleportInitialVelocity;
+	private Vector2 travelToPortalPoint;
+	private ParticleSystemObject teleportParticleSystem;
+	private Teleportal teleportal;
+	public Teleportal Teleportal {
+		get {
+			return teleportal;
+		}
+
+		set {
+			teleportal = value;
+			if (teleportal == null) {
+				updateGravity = true;
+				EnableCollisions = true;
+				rigidBody.velocity = teleportInitialVelocity;
+				meshRenderer.enabled = true;
+				teleportBufferTimer = Constants.TELEPORT_BUFFER_TIME;
+
+				teleportParticleSystem.SetLifespan(5f);
+				teleportParticleSystem.IsEmitting = false;
+
+				return;
+			}
+
+			updateGravity = false;
+			hasCollided = true;
+			EnableCollisions = false;
+			teleportInitialVelocity = rigidBody.velocity;
+			rigidBody.velocity = Vector2.zero;
+			meshRenderer.enabled = false;
+
+			teleportParticleSystem = levelManager.SpawnParticleSystem(ParticleSystemType.Teleport, transform).GetComponent<ParticleSystemObject>( );
+		}
+	}
+
 	protected void OnCollisionEnter2D (Collision2D collision) {
 		string collisionTag = collision.transform.tag;
 
 		// If the object collides with another object, it should be destroyed
 		if (collisionTag.Equals("Space Object")) {
 			hasCollided = true;
+
+			// levelManager.SpawnParticleSystem(ParticleSystemType.Collision, Position);
+
 			Death( );
 		}
 	}
@@ -51,13 +90,23 @@ public abstract class GravityObject : MeshObject {
 			if (Wormhole == null) {
 				Wormhole = collision.transform.parent.GetComponent<Wormhole>( );
 			}
-		} else if (collisionTag.Equals("Teleportal")) {
-
+		} else if (teleportBufferTimer <= 0 && collisionTag.Equals("Teleportal")) {
+			if (Teleportal == null) {
+				Transform portal = collision.transform.parent;
+				Teleportal = portal.parent.GetComponent<Teleportal>( );
+				travelToPortalPoint = Teleportal.GetTeleportPosition(Position, portal);
+			}
 		}
 	}
 
 	protected void Start ( ) {
 		parents = new List<MeshObject>( );
+	}
+
+	protected void Update ( ) {
+		if (teleportBufferTimer > 0) {
+			teleportBufferTimer -= Time.deltaTime;
+		}
 	}
 
 	protected new void FixedUpdate ( ) {
@@ -73,14 +122,24 @@ public abstract class GravityObject : MeshObject {
 		if (Wormhole != null) {
 			// Make the ship smoothly transition to the center of the wormhole
 			Position = Vector2.SmoothDamp(Position, Wormhole.Position, ref refWormholePositionVelocity, 0.5f);
-			transform.localScale = Vector2.SmoothDamp(transform.localScale, Vector2.zero, ref refWormholeScaleVelocity, 0.5f);
+			Scale = Vector2.SmoothDamp(Scale, Vector2.zero, ref refWormholeScaleVelocity, 0.5f);
 
 			// If the ship has reached the center and is stopped, then the player has won the level
-			if (Utils.CloseEnough(Position, Wormhole.Position) && Utils.CloseEnough(transform.localScale, Vector2.zero)) {
+			if (Utils.CloseEnough(Position, Wormhole.Position) && Utils.CloseEnough(Scale, Vector2.zero)) {
 				Position = Wormhole.Position;
-				transform.localScale = Vector2.zero;
+				Scale = Vector2.zero;
 
 				IsLocked = true;
+			}
+		}
+
+		if (Teleportal != null) {
+			Position = Vector2.MoveTowards(Position, travelToPortalPoint, Time.fixedDeltaTime * Constants.TELEPORT_SPEED);
+
+			if (Utils.CloseEnough(Position, travelToPortalPoint)) {
+				Position = travelToPortalPoint;
+
+				Teleportal = null;
 			}
 		}
 	}

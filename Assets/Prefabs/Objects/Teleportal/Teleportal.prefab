@@ -124,7 +124,6 @@ MonoBehaviour:
   - {fileID: 6275295984167501343}
   - {fileID: 6275295985413674421}
   - {fileID: 6953896932173856820}
-  ship: {fileID: 0}
   scaleSpeed: 0.025
   rotationSpeed: 0.0075
   scaleChange: 0.075
@@ -158,6 +157,10 @@ PrefabInstance:
     - target: {fileID: 1667829122019022237, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122184966595546772, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234599163783335156, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -467,6 +470,10 @@ PrefabInstance:
     - target: {fileID: 1667829122019022237, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3122184966595546772, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234599163783335156, guid: 9376a307fd9167a41a72403c584782bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
