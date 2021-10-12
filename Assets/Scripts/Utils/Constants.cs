@@ -7,7 +7,8 @@ public enum MeshType {
 	Circle,
 	RoughCircle,
 	Square,
-	Triangle
+	RightTriangle,
+	EquilateralTriangle
 }
 
 public enum LayerType {

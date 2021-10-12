@@ -94,10 +94,15 @@ public class Ship : GravityObject {
 
 			// Update the last mouse position
 			lastMousePosition = p1;
+		} else {
+			transform.rotation = Quaternion.Euler(0, 0, Utils.GetAngleBetween(Position, Position + rigidBody.velocity) - 90);
 		}
 	}
 
 	private void PositionIndicator (Vector2 p1, Vector2 p2, float distance) {
+		// Update the direction the ship is facing
+		transform.rotation = Quaternion.Euler(0, 0, Utils.GetAngleBetween(p1, p2) - 90);
+
 		// Set indicator to the midpoint between the mouse and the ship
 		Vector3 indicatorPosition = new Vector2(p1.x + p2.x, p1.y + p2.y) / 2;
 		launchingIndicator.position = Utils.SetVectZ(Utils.LimitVect3(Position, indicatorPosition, 0, Constants.MAX_LAUNCH_DISTANCE / 2), (int) LayerType + 1);

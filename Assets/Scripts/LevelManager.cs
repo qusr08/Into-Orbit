@@ -71,7 +71,7 @@ public class LevelManager : Singleton<LevelManager> {
 		return direction * force;
 	}
 
-	public List<MeshParticle> SpawnGravityParticles (Vector2 position, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.Triangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true) {
+	public List<MeshParticle> SpawnGravityParticles (Vector2 position, int amount, Color color, float size = 0.05f, MeshType meshType = MeshType.RightTriangle, LayerType layerType = LayerType.Front, bool giveRandomForce = true, bool showTrail = true) {
 		List<MeshParticle> meshParticles = new List<MeshParticle>( );
 
 		// Create the meshPieces with set values

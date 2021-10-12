@@ -148,7 +148,7 @@ MonoBehaviour:
   enableCollisions: 1
   color:
     colorValues: da0000000000000037000000
-  meshType: 2
+  meshType: 4
   layerType: 30
   size: 0.1
   sizeToMassRatio: 1
@@ -239,10 +239,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.05, y: -0.05}
-      - {x: -0.05, y: 0.05}
-      - {x: 0.05, y: 0.05}
-      - {x: 0.05, y: -0.05}
+    - - {x: 0, y: 0.1}
+      - {x: 0.0866, y: -0.05}
+      - {x: -0.0866, y: -0.05}
 --- !u!58 &6443677246469986241
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -263,10 +263,16 @@ public class MeshObject : MonoBehaviour {
 				verticesList.Add(new Vector3(Size / 2, -Size / 2, 0));
 
 				break;
-			case MeshType.Triangle:
+			case MeshType.RightTriangle:
 				verticesList.Add(new Vector3(-Size / 2, -Size / 2, 0));
 				verticesList.Add(new Vector3(-Size / 2, Size / 2, 0));
 				verticesList.Add(new Vector3(Size / 2, -Size / 2, 0));
+
+				break;
+			case MeshType.EquilateralTriangle:
+				verticesList.Add(new Vector3(0, Size, 0));
+				verticesList.Add(new Vector3(Size * 0.866f, -Size / 2, 0));
+				verticesList.Add(new Vector3(-Size * 0.866f, -Size / 2, 0));
 
 				break;
 		}
@@ -304,7 +310,13 @@ public class MeshObject : MonoBehaviour {
 				trianglesList.Add(3);
 
 				break;
-			case MeshType.Triangle:
+			case MeshType.RightTriangle:
+				trianglesList.Add(0);
+				trianglesList.Add(1);
+				trianglesList.Add(2);
+
+				break;
+			case MeshType.EquilateralTriangle:
 				trianglesList.Add(0);
 				trianglesList.Add(1);
 				trianglesList.Add(2);
