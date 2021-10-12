@@ -439,11 +439,17 @@ public class MeshObject : MonoBehaviour {
 	}
 
 	private void UpdateTrail ( ) {
-		lastTrailPositions.Insert(0, Utils.SetVectZ(Position + (rigidBody.velocity * Time.fixedDeltaTime), (int) LayerType.Trail));
-		if (lastTrailPositions.Count > trailLength) {
-			lastTrailPositions.RemoveAt(trailLength);
+		if (ShowTrail) {
+			lastTrailPositions.Insert(0, Utils.SetVectZ(Position + (rigidBody.velocity * Time.fixedDeltaTime), (int) LayerType.Trail));
+			if (lastTrailPositions.Count > trailLength) {
+				lastTrailPositions.RemoveAt(trailLength);
+			}
+		} else {
+			if (lastTrailPositions.Count > 0) {
+				lastTrailPositions.RemoveAt(lastTrailPositions.Count - 1);
+			}
 		}
-
+		
 		trailRenderer.positionCount = lastTrailPositions.Count;
 		trailRenderer.SetPositions(lastTrailPositions.ToArray( ));
 	}

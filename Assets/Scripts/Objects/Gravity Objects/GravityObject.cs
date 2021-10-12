@@ -31,10 +31,12 @@ public abstract class GravityObject : MeshObject {
 			updateGravity = false;
 			hasCollided = true;
 			DisableSolidColliders = true;
+			ShowTrail = false;
 		}
 	}
 
 	private float teleportBufferTimer;
+	private bool teleportInitialShowTrail;
 	private Vector2 teleportInitialVelocity;
 	private Vector2 travelToPortalPoint;
 	private ParticleSystemObject teleportParticleSystem;
@@ -49,6 +51,7 @@ public abstract class GravityObject : MeshObject {
 			if (teleportal == null) {
 				updateGravity = true;
 				EnableCollisions = true;
+				ShowTrail = teleportInitialShowTrail;
 				rigidBody.velocity = teleportInitialVelocity;
 				meshRenderer.enabled = true;
 				teleportBufferTimer = Constants.TELEPORT_BUFFER_TIME;
@@ -62,6 +65,8 @@ public abstract class GravityObject : MeshObject {
 			updateGravity = false;
 			hasCollided = true;
 			EnableCollisions = false;
+			teleportInitialShowTrail = ShowTrail;
+			ShowTrail = false;
 			teleportInitialVelocity = rigidBody.velocity;
 			rigidBody.velocity = Vector2.zero;
 			meshRenderer.enabled = false;
@@ -94,6 +99,7 @@ public abstract class GravityObject : MeshObject {
 			if (Teleportal == null) {
 				Transform portal = collision.transform.parent;
 				Teleportal = portal.parent.GetComponent<Teleportal>( );
+				Position = portal.position;
 				travelToPortalPoint = Teleportal.GetTeleportPosition(Position, portal);
 			}
 		}

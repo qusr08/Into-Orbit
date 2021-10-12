@@ -153,6 +153,6 @@ public class Teleportal : MonoBehaviour {
 
 	public Vector2 GetTeleportPosition (Vector2 objectPosition, Transform portal) {
 		Vector2 positionOffset = objectPosition - (Vector2) portal.position;
-		return (portal == portal1 ? Portal2Position : Portal1Position) + positionOffset;
+		return (portal == portal1 ? Portal2Position : Portal1Position);// + positionOffset;
 	}
 }

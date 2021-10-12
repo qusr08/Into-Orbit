@@ -69,7 +69,7 @@ MonoBehaviour:
   size: 2
   sizeToMassRatio: 25
   meshPrecision: 20
-  meshRoughness: 0.1
+  meshRoughness: 0.025
   baseTrailColorOffMesh: 0
   trailStartColor:
     colorValues: ff000000ff000000ff000000ff000000
