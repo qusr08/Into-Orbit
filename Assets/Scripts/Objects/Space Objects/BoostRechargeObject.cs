@@ -12,7 +12,7 @@ public class BoostRechargeObject : SpaceObject {
 		}
 	}
 
-	protected override void OnObjectCollision ( ) {
-
+	public override void OnObjectCollision ( ) {
+		DoQuickSpin(15);
 	}
 }

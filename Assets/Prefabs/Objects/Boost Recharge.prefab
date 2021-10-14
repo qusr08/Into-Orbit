@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4116596838443212620}
   m_Layer: 0
   m_Name: Environment Glow Back
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 4074349726389134211}
   m_Layer: 0
   m_Name: Boost Recharge
-  m_TagString: Boost Recharge
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 4116596839460349643}
   m_Layer: 0
   m_Name: Environment Glow Front
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 4116596839529616778}
   m_Layer: 0
   m_Name: Inside
-  m_TagString: Untagged
+  m_TagString: Boost Recharge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -684,7 +684,7 @@ MonoBehaviour:
   showTrail: 0
   isLocked: 1
   disableSolidColliders: 1
-  enableCollisions: 0
+  enableCollisions: 1
   color:
     colorValues: a40000002700000000000000
   meshType: 4
@@ -777,7 +777,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4116596839529616884}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 4116596839717957415}
   m_Layer: 0
   m_Name: Outside
-  m_TagString: Untagged
+  m_TagString: Boost Recharge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -966,7 +966,7 @@ MonoBehaviour:
   showTrail: 0
   isLocked: 1
   disableSolidColliders: 1
-  enableCollisions: 0
+  enableCollisions: 1
   color:
     colorValues: ea0000003700000000000000
   meshType: 4
@@ -1059,7 +1059,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4116596839717957409}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -1204,7 +1204,7 @@ GameObject:
   - component: {fileID: 4116596840102986794}
   m_Layer: 0
   m_Name: Middle
-  m_TagString: Untagged
+  m_TagString: Boost Recharge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   showTrail: 0
   isLocked: 1
   disableSolidColliders: 1
-  enableCollisions: 0
+  enableCollisions: 1
   color:
     colorValues: c60000002e00000000000000
   meshType: 4
@@ -1341,7 +1341,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4116596840102986772}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

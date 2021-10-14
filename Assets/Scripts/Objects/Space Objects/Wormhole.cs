@@ -12,7 +12,7 @@ public class Wormhole : SpaceObject {
 		}
 	}
 
-	protected override void OnObjectCollision ( ) {
+	public override void OnObjectCollision ( ) {
 		
 	}
 }

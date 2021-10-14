@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5536204022870434132}
   m_Layer: 0
   m_Name: Environment Glow Front
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 5536204023056546350}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Button
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 5536204023303558515}
   m_Layer: 0
   m_Name: Inside
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,7 +401,7 @@ MonoBehaviour:
   showTrail: 0
   isLocked: 1
   disableSolidColliders: 1
-  enableCollisions: 0
+  enableCollisions: 1
   color:
     colorValues: 6a0000008b00000000000000
   meshType: 2
@@ -494,7 +494,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5536204023303558513}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 5536204023488493394}
   m_Layer: 0
   m_Name: Environment Glow Back
-  m_TagString: Untagged
+  m_TagString: Space Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -967,7 +967,7 @@ MonoBehaviour:
   showTrail: 0
   isLocked: 1
   disableSolidColliders: 1
-  enableCollisions: 0
+  enableCollisions: 1
   color:
     colorValues: 7d000000a400000000000000
   meshType: 2
@@ -1060,7 +1060,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5536204024428866125}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

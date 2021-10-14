@@ -7,7 +7,7 @@ public class GateObject : SpaceObject {
 		throw new System.NotImplementedException( );
 	}
 
-	protected override void OnObjectCollision ( ) {
+	public override void OnObjectCollision ( ) {
 		throw new System.NotImplementedException( );
 	}
 }

@@ -102,6 +102,10 @@ public abstract class GravityObject : MeshObject {
 				Position = portal.position;
 				travelToPortalPoint = Teleportal.GetTeleportPosition(Position, portal);
 			}
+		} else if (collisionTag.Equals("Button")) {
+			collision.transform.parent.GetComponent<ButtonObject>( ).OnObjectCollision( );
+		} else if (collisionTag.Equals("Boost Recharge")) {
+			collision.transform.parent.GetComponent<BoostRechargeObject>( ).OnObjectCollision( );
 		}
 	}
 

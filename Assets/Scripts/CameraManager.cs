@@ -27,7 +27,9 @@ public class CameraManager : MonoBehaviour {
 
 	protected void OnValidate ( ) {
 		if (Target == null) {
-			Target = FindObjectOfType<Ship>( ).transform;
+			if (FindObjectOfType<Ship>( ) != null) {
+				Target = FindObjectOfType<Ship>( ).transform;
+			}
 		} else {
 			transform.position = Utils.SetVectZ(Target.position, transform.position.z);
 		}

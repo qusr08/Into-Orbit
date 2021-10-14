@@ -12,7 +12,7 @@ public class TeleportalPortal : SpaceObject {
 		}
 	}
 
-	protected override void OnObjectCollision ( ) {
-		throw new System.NotImplementedException( );
+	public override void OnObjectCollision ( ) {
+
 	}
 }
