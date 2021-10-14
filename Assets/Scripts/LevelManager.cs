@@ -17,6 +17,9 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
 	[SerializeField] private List<Teleportal> teleportals = new List<Teleportal>( );
 	[SerializeField] private List<Asteroid> asteroids = new List<Asteroid>( );
+	[SerializeField] private List<ButtonObject> buttons = new List<ButtonObject>( );
+	[SerializeField] private List<GateObject> gates = new List<GateObject>( );
+	[SerializeField] private List<BoostRechargeObject> boostRecharges = new List<BoostRechargeObject>( );
 	[Separator("Constants")]
 	[SerializeField] private float G = 0.75f;
 
@@ -32,6 +35,15 @@ public class LevelManager : Singleton<LevelManager> {
 
 		asteroids.Clear( );
 		asteroids.AddRange(FindObjectsOfType<Asteroid>( ));
+
+		buttons.Clear( );
+		buttons.AddRange(FindObjectsOfType<ButtonObject>( ));
+
+		gates.Clear( );
+		gates.AddRange(FindObjectsOfType<GateObject>( ));
+
+		boostRecharges.Clear( );
+		boostRecharges.AddRange(FindObjectsOfType<BoostRechargeObject>( ));
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {

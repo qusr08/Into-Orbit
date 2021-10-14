@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
-	[Separator("Camera Controller")]
+public class CameraManager : MonoBehaviour {
+	[Separator("Camera Manager")]
 	[SerializeField] public Transform Target;
 	[Separator("Constants")]
 	[SerializeField] [Range(0f, 1f)] private float stiffness;

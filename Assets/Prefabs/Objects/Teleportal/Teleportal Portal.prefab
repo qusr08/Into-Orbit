@@ -649,10 +649,11 @@ MonoBehaviour:
   - {fileID: 3761491783369276192}
   - {fileID: 3761491785411448970}
   - {fileID: 262581795799516427}
+  scaleChange: 0.01
+  randomScaleStartingAngle: 1
+  randomRotationStartingAngle: 1
   scaleSpeed: 0.01
   rotationSpeed: 0.01
-  scaleChange: 0.075
-  xScale: 0.75
 --- !u!1 &3761491785352075974
 GameObject:
   m_ObjectHideFlags: 0

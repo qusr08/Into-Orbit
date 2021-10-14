@@ -16,7 +16,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] protected MeshRenderer meshRenderer;
 	[SerializeField] protected PolygonCollider2D polyCollider;
 	[SerializeField] protected LevelManager levelManager;
-	[SerializeField] protected CameraController cameraController;
+	[SerializeField] protected CameraManager cameraController;
 	[Space]
 	[SerializeField] private bool showTrail = false;
 	[SerializeField] private bool isLocked = false;
@@ -175,6 +175,15 @@ public class MeshObject : MonoBehaviour {
 			transform.localScale = new Vector2(Utils.Limit(value.x, 0, 100), Utils.Limit(value.y, 0, 100));
 		}
 	}
+	public float Rotation {
+		get {
+			return transform.rotation.z;
+		}
+
+		set {
+			transform.rotation = Quaternion.Euler(0, 0, value);
+		}
+	}
 
 	protected void OnValidate ( ) => UnityEditor.EditorApplication.delayCall += _OnValidate;
 	private void _OnValidate ( ) {
@@ -188,7 +197,7 @@ public class MeshObject : MonoBehaviour {
 			levelManager = FindObjectOfType<LevelManager>( );
 		}
 		if (cameraController == null) {
-			cameraController = FindObjectOfType<CameraController>( );
+			cameraController = FindObjectOfType<CameraManager>( );
 		}
 
 		if (rigidBody == null) {
@@ -448,7 +457,7 @@ public class MeshObject : MonoBehaviour {
 				lastTrailPositions.RemoveAt(lastTrailPositions.Count - 1);
 			}
 		}
-		
+
 		trailRenderer.positionCount = lastTrailPositions.Count;
 		trailRenderer.SetPositions(lastTrailPositions.ToArray( ));
 	}
