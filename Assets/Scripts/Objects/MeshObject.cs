@@ -417,7 +417,6 @@ public class MeshObject : MonoBehaviour {
 		LayerType = LayerType;
 		Color = Color;
 		Size = Size;
-		Mass = Mass;
 		SizeToMassRatio = SizeToMassRatio;
 		ShowTrail = ShowTrail;
 		IsLocked = IsLocked;

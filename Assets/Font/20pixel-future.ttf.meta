@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fed0d612f762f9b4eae7c8dffc2b2c54
+guid: c16fd2d5396b1c04ea30337806ef2ea6
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Designer Block
+  - 20Pixel Future
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
