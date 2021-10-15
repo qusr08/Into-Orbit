@@ -1,9 +1,13 @@
+using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+	[Separator("UI Manager")]
+	[SerializeField] private Animator animator;
+	[Space]
 	[SerializeField] private GameObject crashedText;
 	[SerializeField] private GameObject lostInSpaceText;
 	[SerializeField] private GameObject completeText;
@@ -16,8 +20,7 @@ public class UIManager : MonoBehaviour {
 
 	public bool HasCrashed {
 		set {
-			pauseScreen.SetActive(false);
-			endScreen.SetActive(value);
+			IsPlaying = false;
 
 			crashedText.SetActive(value);
 			lostInSpaceText.SetActive(false);
@@ -30,8 +33,7 @@ public class UIManager : MonoBehaviour {
 	}
 	public bool HasBeenLostInSpace {
 		set {
-			pauseScreen.SetActive(false);
-			endScreen.SetActive(value);
+			IsPlaying = false;
 
 			crashedText.SetActive(false);
 			lostInSpaceText.SetActive(value);
@@ -44,8 +46,7 @@ public class UIManager : MonoBehaviour {
 	}
 	public bool HasCompleted {
 		set {
-			pauseScreen.SetActive(false);
-			endScreen.SetActive(value);
+			IsPlaying = false;
 
 			crashedText.SetActive(false);
 			lostInSpaceText.SetActive(false);
@@ -56,12 +57,29 @@ public class UIManager : MonoBehaviour {
 			completeMenuButtons.SetActive(value);
 		}
 	}
-	public bool IsPaused {
+	public bool IsPlaying {
+		get {
+			return endScreen.GetComponent<CanvasGroup>( ).alpha == 0;
+		}
+
 		set {
-			if (!endScreen.activeSelf) {
-				pauseScreen.SetActive(value);
-				Time.timeScale = value ? 0 : 1;
-			}
+			animator.SetBool("End", !value);
+		}
+	}
+	public bool IsPaused {
+		get {
+			return pauseScreen.GetComponent<CanvasGroup>( ).alpha != 0;
+		}
+
+		set {
+			Time.timeScale = value ? 0 : 1;
+			animator.SetBool("Pause", value);
+		}
+	}
+
+	protected void Update ( ) {
+		if (IsPlaying && Input.GetKeyDown(KeyCode.Escape)) {
+			IsPaused = !IsPaused;
 		}
 	}
 

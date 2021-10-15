@@ -11,7 +11,7 @@ public class ButtonObject : SpaceObject {
 		}
 	}
 
-	public override void OnObjectCollision ( ) {
+	public override void OnObjectCollision (GameObject collisionObject) {
 		Shrink(0.5f);
 
 		ChangeColorOfRings(toInsideRingColor: new Color(152 / 255f, 198 / 255f, 0 / 255f),

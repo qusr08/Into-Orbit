@@ -53,4 +53,7 @@ public static class Constants {
 	public const int MAX_TRAJECTORY_ITERATIONS = 2000;
 
 	public const float PROPERTY_CHANGE_TIME = 0.3f;
+
+	public const float MIN_GRAVITY_INFLUENCE = 0.005f;
+	public const float MAX_CENTER_DISTANCE = 30f;
 }

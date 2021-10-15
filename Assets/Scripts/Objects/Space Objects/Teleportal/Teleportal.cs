@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Teleportal : MonoBehaviour {
 	[Separator("Teleportal")]
-	[SerializeField] private Transform portal1;
-	[SerializeField] private Transform portal2;
+	[SerializeField] private TeleportalPortal portal1;
+	[SerializeField] private TeleportalPortal portal2;
 	[SerializeField] private Transform connectorBack;
 	[SerializeField] private Transform connectorFront;
 	[SerializeField] private GameObject connectorSegmentPrefab;
@@ -18,13 +18,13 @@ public class Teleportal : MonoBehaviour {
 
 	public Vector2 Portal1Position {
 		get {
-			return portal1.localPosition;
+			return portal1.Position;
 		}
 	}
 
 	public Vector2 Portal2Position {
 		get {
-			return portal2.localPosition;
+			return portal2.Position;
 		}
 	}
 
@@ -151,8 +151,7 @@ public class Teleportal : MonoBehaviour {
 		}
 	}
 
-	public Vector2 GetTeleportPosition (Vector2 objectPosition, Transform portal) {
-		Vector2 positionOffset = objectPosition - (Vector2) portal.position;
-		return (portal == portal1 ? Portal2Position : Portal1Position);// + positionOffset;
+	public Vector2 GetTeleportPosition (TeleportalPortal portal) {
+		return (portal == portal1 ? Portal2Position : Portal1Position);
 	}
 }

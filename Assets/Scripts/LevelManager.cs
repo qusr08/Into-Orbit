@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : Singleton<LevelManager> {
+public class LevelManager : MonoBehaviour {
 	[Separator("Level Manager")]
 	[SerializeField] private GameObject meshGravityParticlePrefab;
 	[SerializeField] private GameObject meshStationaryParticlePrefab;
@@ -20,8 +20,9 @@ public class LevelManager : Singleton<LevelManager> {
 	[SerializeField] private List<ButtonObject> buttons = new List<ButtonObject>( );
 	[SerializeField] private List<GateObject> gates = new List<GateObject>( );
 	[SerializeField] private List<BoostRechargeObject> boostRecharges = new List<BoostRechargeObject>( );
-	[Separator("Constants")]
+	[Space]
 	[SerializeField] private float G = 0.75f;
+	[SerializeField] public Vector2 CenterOfMass;
 
 	protected void OnValidate ( ) {
 		planets.Clear( );
@@ -44,6 +45,12 @@ public class LevelManager : Singleton<LevelManager> {
 
 		boostRecharges.Clear( );
 		boostRecharges.AddRange(FindObjectsOfType<BoostRechargeObject>( ));
+
+		Vector2 totalPosition = Vector2.zero;
+		foreach (Planet planet in planets) {
+			totalPosition += planet.Position;
+		}
+		CenterOfMass = totalPosition / (planets.Count + 1f);
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {

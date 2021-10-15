@@ -166,7 +166,7 @@ public abstract class SpaceObject : MonoBehaviour {
 	}
 
 	protected abstract void Animate ( );
-	public abstract void OnObjectCollision ( );
+	public abstract void OnObjectCollision (GameObject collisionObject);
 
 	protected void Shrink (float scalingMod, bool stopAnimatingWhenDone = false) {
 		this.scalingMod = scalingMod;

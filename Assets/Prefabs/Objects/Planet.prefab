@@ -57,6 +57,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 223014123553274990}
   polyCollider: {fileID: 223014123553274985}
   levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1

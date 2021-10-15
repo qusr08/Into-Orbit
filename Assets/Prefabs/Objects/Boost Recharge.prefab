@@ -57,6 +57,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4116596838443212610}
   polyCollider: {fileID: 4116596838443212621}
   levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
@@ -336,6 +337,8 @@ MonoBehaviour:
   - {fileID: 4116596839717957432}
   - {fileID: 4116596839460349644}
   - {fileID: 4116596838443212609}
+  levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   randomScaleStartingAngle: 0
   randomRotationStartingAngle: 1
   randomScaleAngleDirection: 0
@@ -400,6 +403,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4116596839460349641}
   polyCollider: {fileID: 4116596839460349640}
   levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
@@ -682,6 +686,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4116596839529616776}
   polyCollider: {fileID: 4116596839529616779}
   levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
@@ -964,6 +969,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4116596839717957413}
   polyCollider: {fileID: 4116596839717957412}
   levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1
@@ -1246,6 +1252,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4116596840102986792}
   polyCollider: {fileID: 4116596840102986795}
   levelManager: {fileID: 0}
+  uiManager: {fileID: 0}
   cameraController: {fileID: 0}
   showTrail: 0
   isLocked: 1

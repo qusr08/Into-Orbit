@@ -94,18 +94,20 @@ public abstract class GravityObject : MeshObject {
 		if (collisionTag.Equals("Wormhole")) {
 			if (Wormhole == null) {
 				Wormhole = collision.transform.parent.GetComponent<Wormhole>( );
+				Wormhole.OnObjectCollision(gameObject);
 			}
 		} else if (teleportBufferTimer <= 0 && collisionTag.Equals("Teleportal")) {
 			if (Teleportal == null) {
-				Transform portal = collision.transform.parent;
-				Teleportal = portal.parent.GetComponent<Teleportal>( );
-				Position = portal.position;
-				travelToPortalPoint = Teleportal.GetTeleportPosition(Position, portal);
+				TeleportalPortal portal = collision.transform.parent.GetComponent<TeleportalPortal>( );
+				portal.OnObjectCollision(gameObject);
+				Teleportal = portal.transform.parent.GetComponent<Teleportal>( );
+				Position = portal.Position;
+				travelToPortalPoint = Teleportal.GetTeleportPosition(portal);
 			}
 		} else if (this is Ship && collisionTag.Equals("Button")) {
-			collision.transform.parent.GetComponent<ButtonObject>( ).OnObjectCollision( );
+			collision.transform.parent.GetComponent<ButtonObject>( ).OnObjectCollision(gameObject);
 		} else if (this is Ship && collisionTag.Equals("Boost Recharge")) {
-			collision.transform.parent.GetComponent<BoostRechargeObject>( ).OnObjectCollision( );
+			collision.transform.parent.GetComponent<BoostRechargeObject>( ).OnObjectCollision(gameObject);
 		}
 	}
 
@@ -126,7 +128,14 @@ public abstract class GravityObject : MeshObject {
 		// As long as the object is not locked, calculate the force that should be applied to it
 		if (!IsLocked && updateGravity) {
 			// Calculate the gravity that the ship will experience at the current position
-			rigidBody.AddForce(levelManager.CalculateGravityForce(this, onlyParents: parents), ForceMode2D.Force);
+			Vector2 force = levelManager.CalculateGravityForce(this, onlyParents: parents);
+
+			if (this is Ship && force.magnitude <= Constants.MIN_GRAVITY_INFLUENCE && Vector2.Distance(Position, levelManager.CenterOfMass) >= Constants.MAX_CENTER_DISTANCE && uiManager.IsPlaying) {
+				uiManager.HasBeenLostInSpace = true;
+				updateGravity = false;
+			}
+
+			rigidBody.AddForce(force, ForceMode2D.Force);
 		}
 
 		if (Wormhole != null) {

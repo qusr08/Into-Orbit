@@ -12,7 +12,7 @@ public class TeleportalPortal : SpaceObject {
 		}
 	}
 
-	public override void OnObjectCollision ( ) {
+	public override void OnObjectCollision (GameObject collisionObject) {
 
 	}
 }

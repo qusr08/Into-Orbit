@@ -11,7 +11,7 @@ public class BoostRechargeObject : SpaceObject {
 		}
 	}
 
-	public override void OnObjectCollision ( ) {
+	public override void OnObjectCollision (GameObject collisionObject) {
 		Shrink(0.5f);
 
 		ChangeColorOfRings(toInsideRingColor: new Color(128 / 255f, 30 / 255f, 0 / 255f),
