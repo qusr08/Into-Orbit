@@ -24,6 +24,8 @@ public class LevelManager : MonoBehaviour {
 	[SerializeField] private float G = 0.75f;
 	[SerializeField] public Vector2 CenterOfMass;
 
+	public int ActiveButtonCount;
+
 	protected void OnValidate ( ) {
 		planets.Clear( );
 		planets.AddRange(FindObjectsOfType<Planet>( ));

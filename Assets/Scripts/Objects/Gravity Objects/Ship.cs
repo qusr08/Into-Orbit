@@ -49,11 +49,11 @@ public class Ship : GravityObject {
 	protected void OnMouseOver ( ) {
 		// If the mouse is hovered over the ship and the left mouse button is pressed and it is not currently launching,
 		// begin to launch the ship
-		if (canLaunch && Input.GetMouseButtonDown(0) && !IsLaunching) {
+		if (canLaunch && Input.GetMouseButtonDown(0) && !IsLaunching && !uiManager.IsPaused && uiManager.IsPlaying) {
 			IsLaunching = true;
 			canLaunch = false;
 		}
-	}
+	} 
 
 	protected new void Start ( ) {
 		base.Start( );
@@ -98,6 +98,8 @@ public class Ship : GravityObject {
 
 					// Spawn launch explosion meshPieces
 					levelManager.SpawnParticleSystem(ParticleSystemType.Launch, Position, angle: 90 + Utils.GetAngleBetween(Position, launchDirection));
+				} else {
+					canLaunch = true;
 				}
 			}
 

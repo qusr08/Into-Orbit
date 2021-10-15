@@ -15,8 +15,8 @@ public class UIManager : MonoBehaviour {
 	[SerializeField] private GameObject deathMenuButtons;
 	[SerializeField] private GameObject completeMenuButtons;
 	[Space]
-	[SerializeField] private GameObject endScreen;
-	[SerializeField] private GameObject pauseScreen;
+	[SerializeField] private CanvasGroup endScreen;
+	[SerializeField] private CanvasGroup pauseScreen;
 
 	public bool HasCrashed {
 		set {
@@ -59,22 +59,31 @@ public class UIManager : MonoBehaviour {
 	}
 	public bool IsPlaying {
 		get {
-			return endScreen.GetComponent<CanvasGroup>( ).alpha == 0;
+			return endScreen.alpha == 0;
 		}
 
 		set {
+			endScreen.blocksRaycasts = !value;
+			if (!value) {
+				IsPaused = false;
+			}
 			animator.SetBool("End", !value);
 		}
 	}
 	public bool IsPaused {
 		get {
-			return pauseScreen.GetComponent<CanvasGroup>( ).alpha != 0;
+			return pauseScreen.alpha != 0;
 		}
 
 		set {
+			pauseScreen.blocksRaycasts = value;
 			Time.timeScale = value ? 0 : 1;
 			animator.SetBool("Pause", value);
 		}
+	}
+
+	protected void Awake ( ) {
+		IsPlaying = true;
 	}
 
 	protected void Update ( ) {
