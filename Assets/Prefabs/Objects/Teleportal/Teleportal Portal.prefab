@@ -649,9 +649,11 @@ MonoBehaviour:
   - {fileID: 3761491783369276192}
   - {fileID: 3761491785411448970}
   - {fileID: 262581795799516427}
-  scaleChange: 0.01
   randomScaleStartingAngle: 1
   randomRotationStartingAngle: 1
+  randomScaleAngleDirection: 1
+  randomRotationAngleDirection: 1
+  scaleChange: 0.01
   scaleSpeed: 0.01
   rotationSpeed: 0.01
 --- !u!1 &3761491785352075974

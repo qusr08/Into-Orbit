@@ -16,6 +16,7 @@ public class MeshObject : MonoBehaviour {
 	[SerializeField] protected MeshRenderer meshRenderer;
 	[SerializeField] protected PolygonCollider2D polyCollider;
 	[SerializeField] protected LevelManager levelManager;
+	[SerializeField] protected UIManager uiManager;
 	[SerializeField] protected CameraManager cameraController;
 	[Space]
 	[SerializeField] private bool showTrail = false;
@@ -196,6 +197,9 @@ public class MeshObject : MonoBehaviour {
 		if (levelManager == null) {
 			levelManager = FindObjectOfType<LevelManager>( );
 		}
+		if (uiManager == null) {
+			uiManager = FindObjectOfType<UIManager>( );
+		}
 		if (cameraController == null) {
 			cameraController = FindObjectOfType<CameraManager>( );
 		}
@@ -258,8 +262,8 @@ public class MeshObject : MonoBehaviour {
 				float x2;
 				float y2;
 				for (int i = 0; i < meshPrecision; i++) {
-					x2 = ((Size / 2) + Utils.RandFloat(-meshRoughness, meshRoughness)) * Mathf.Sin((2 * Mathf.PI * i) / meshPrecision);
-					y2 = ((Size / 2) + Utils.RandFloat(-meshRoughness, meshRoughness)) * Mathf.Cos((2 * Mathf.PI * i) / meshPrecision);
+					x2 = ((Size / 2) + Random.Range(-meshRoughness, meshRoughness)) * Mathf.Sin((2 * Mathf.PI * i) / meshPrecision);
+					y2 = ((Size / 2) + Random.Range(-meshRoughness, meshRoughness)) * Mathf.Cos((2 * Mathf.PI * i) / meshPrecision);
 
 					verticesList.Add(new Vector3(x2, y2, 0f));
 				}

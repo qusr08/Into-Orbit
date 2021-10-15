@@ -4817,6 +4817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f06f3ced8ccb4f448b18e8d29b348d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystemComponent: {fileID: 2881110983041004530}
   layerType: 15
+  IsEnabled: 1
   hasLifespan: 1
   lifespan: 1

@@ -111,10 +111,10 @@ public class TeleportalSegment : MonoBehaviour {
 
 	protected void FixedUpdate ( ) {
 		// If the current point is not equal to the point it should be, move the current point gradually based on the move time
-		if (!Utils.CloseEnough(currPoint1, toPoint1) && moveTime1 != 0) {
+		if (!Utils.Vect3CloseEnough(currPoint1, toPoint1) && moveTime1 != 0) {
 			currPoint1 = Vector2.Lerp(fromPoint1, toPoint1, 1 - (moveTimeRemaining1 / moveTime1));
 		}
-		if (!Utils.CloseEnough(currPoint2, toPoint2) && moveTime2 != 0) {
+		if (!Utils.Vect3CloseEnough(currPoint2, toPoint2) && moveTime2 != 0) {
 			currPoint2 = Vector2.Lerp(fromPoint2, toPoint2, 1 - (moveTimeRemaining2 / moveTime2));
 		}
 

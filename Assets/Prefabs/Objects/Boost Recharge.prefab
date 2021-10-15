@@ -66,7 +66,7 @@ MonoBehaviour:
     colorValues: 190000001900000019000000
   meshType: 4
   layerType: 95
-  size: 1.3
+  size: 2.5
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
@@ -89,7 +89,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1.3
+  m_Mass: 2.5
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -172,9 +172,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1.3}
-      - {x: 1.1258, y: -0.65}
-      - {x: -1.1258, y: -0.65}
+    - - {x: 0, y: 2.5}
+      - {x: 2.165, y: -1.25}
+      - {x: -2.165, y: -1.25}
 --- !u!120 &4116596838443212620
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.3
+        value: 2.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116596838817334000}
-  - component: {fileID: 4074349726389134211}
+  - component: {fileID: 9020972663004606715}
   m_Layer: 0
   m_Name: Boost Recharge
   m_TagString: Space Entity
@@ -318,7 +318,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4074349726389134211
+--- !u!114 &9020972663004606715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,11 +336,13 @@ MonoBehaviour:
   - {fileID: 4116596839717957432}
   - {fileID: 4116596839460349644}
   - {fileID: 4116596838443212609}
-  scaleChange: 0
   randomScaleStartingAngle: 0
   randomRotationStartingAngle: 1
+  randomScaleAngleDirection: 0
+  randomRotationAngleDirection: 0
+  scaleChange: 0
   scaleSpeed: 0
-  rotationSpeed: 0.004
+  rotationSpeed: 0.005
 --- !u!1 &4116596839460349493
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +409,7 @@ MonoBehaviour:
     colorValues: 210000002100000021000000
   meshType: 4
   layerType: 94
-  size: 1
+  size: 1.5
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
@@ -430,7 +432,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.5
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -513,9 +515,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: 0.866, y: -0.5}
-      - {x: -0.866, y: -0.5}
+    - - {x: 0, y: 1.5}
+      - {x: 1.299, y: -0.75}
+      - {x: -1.299, y: -0.75}
 --- !u!120 &4116596839460349643
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -567,7 +569,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 1.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -971,7 +973,7 @@ MonoBehaviour:
     colorValues: ea0000003700000000000000
   meshType: 4
   layerType: 82
-  size: 0.7
+  size: 0.6
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
@@ -994,7 +996,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.7
+  m_Mass: 0.6
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -1077,9 +1079,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.7}
-      - {x: 0.6062, y: -0.35}
-      - {x: -0.6062, y: -0.35}
+    - - {x: 0, y: 0.6}
+      - {x: 0.51960003, y: -0.3}
+      - {x: -0.51960003, y: -0.3}
 --- !u!120 &4116596839717957415
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1131,7 +1133,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.7
+        value: 0.6
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1253,7 +1255,7 @@ MonoBehaviour:
     colorValues: c60000002e00000000000000
   meshType: 4
   layerType: 81
-  size: 0.4
+  size: 0.35
   sizeToMassRatio: 1
   meshPrecision: 20
   meshRoughness: 0.1
@@ -1276,7 +1278,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.4
+  m_Mass: 0.35
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -1359,9 +1361,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.4}
-      - {x: 0.3464, y: -0.2}
-      - {x: -0.3464, y: -0.2}
+    - - {x: 0, y: 0.35}
+      - {x: 0.3031, y: -0.175}
+      - {x: -0.3031, y: -0.175}
 --- !u!120 &4116596840102986794
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1413,7 +1415,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.4
+        value: 0.35
         inSlope: 0
         outSlope: 0
         tangentMode: 0

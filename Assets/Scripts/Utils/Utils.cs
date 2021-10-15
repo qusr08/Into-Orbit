@@ -4,8 +4,6 @@ using System.Globalization;
 using UnityEngine;
 
 public static class Utils {
-	private static System.Random random = new System.Random( );
-
 	public static float Limit (float value, float min, float max) {
 		if (value < min) {
 			value = min;
@@ -18,12 +16,28 @@ public static class Utils {
 		return value;
 	}
 
+	public static float LoopRange (float value, float addedValue, float min, float max) {
+		if (value + addedValue > max) {
+			value = min + value + addedValue - max;
+		} else if (value + addedValue < min) {
+			value = max - value + addedValue - min;
+		} else {
+			value += addedValue;
+		}
+
+		return value;
+	}
+
 	public static float Map (float value, float rangeStart, float rangeEnd, float newRangeStart, float newRangeEnd) {
 		return newRangeStart + ((newRangeEnd - newRangeStart) / (rangeEnd - rangeStart)) * (value - rangeStart);
 	}
 
-	public static bool CloseEnough (Vector3 vector1, Vector3 vector2, float checkValue = 0.01f) {
+	public static bool Vect3CloseEnough (Vector3 vector1, Vector3 vector2, float checkValue = 0.01f) {
 		return Vector3.Distance(vector1, vector2) < checkValue;
+	}
+
+	public static bool ColorCloseEnough (Color color1, Color color2, float checkValue = 0.01f) {
+		return Vect3CloseEnough(Color2Vect3(color1), Color2Vect3(color2), checkValue);
 	}
 
 	public static Color Hex2Color (string hexString) {
@@ -55,18 +69,30 @@ public static class Utils {
 		return hexString;
 	}
 
+	public static Vector3 Color2Vect3 (Color color) {
+		return new Vector3(color.r, color.g, color.b);
+	}
+
+	public static Color Vect32Color (Vector3 vector) {
+		return new Color(vector.x, vector.y, vector.z);
+	}
+
+	public static Color ColorSmoothDamp (Color currentColor, Color toColor, ref Vector3 velocity, float smoothTime) { 
+		return Vect32Color(Vector3.SmoothDamp(Color2Vect3(currentColor), Color2Vect3(toColor), ref velocity, smoothTime));
+	}
+
 	#region Random Methods
 
-	public static float RandFloat (float min, float max) {
-		return (float) (random.NextDouble( ) * (max - min)) + min;
+	public static bool RandBool ( ) {
+		return Random.Range(0, 2) == 1;
 	}
 
 	public static Vector2 RandNormVect2 ( ) {
-		return new Vector2(RandFloat(-1, 1), RandFloat(-1, 1)).normalized;
+		return new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized;
 	}
 
 	public static Vector2 RandVect2OnArc (Vector2 arcCenter, float angleRangeDeg) {
-		float angleChange = Mathf.Deg2Rad * RandFloat(-angleRangeDeg / 2, angleRangeDeg / 2);
+		float angleChange = Mathf.Deg2Rad * Random.Range(-angleRangeDeg / 2, angleRangeDeg / 2);
 		float centerAngle = Mathf.Atan2(arcCenter.y, arcCenter.x) + (Mathf.PI / 2);
 
 		return new Vector2(Mathf.Cos(angleChange + centerAngle), Mathf.Sin(angleChange + centerAngle)) * arcCenter.magnitude;
@@ -76,11 +102,11 @@ public static class Utils {
 		float newR, newG, newB = 0;
 
 		if (!keepHue) {
-			newR = color.r + RandFloat(-maxOffset, maxOffset);
-			newG = color.g + RandFloat(-maxOffset, maxOffset);
-			newB = color.b + RandFloat(-maxOffset, maxOffset);
+			newR = color.r + Random.Range(-maxOffset, maxOffset);
+			newG = color.g + Random.Range(-maxOffset, maxOffset);
+			newB = color.b + Random.Range(-maxOffset, maxOffset);
 		} else {
-			float colorOffset = RandFloat(-maxOffset, maxOffset);
+			float colorOffset = Random.Range(-maxOffset, maxOffset);
 
 			newR = color.r + colorOffset;
 			newG = color.g + colorOffset;

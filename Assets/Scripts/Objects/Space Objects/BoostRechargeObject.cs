@@ -5,14 +5,17 @@ using UnityEngine;
 public class BoostRechargeObject : SpaceObject {
 	protected override void Animate ( ) {
 		for (int i = 0; i < rings.Count; i++) {
-			float offsetAngle = rotationAngle - (i / 10f);
-			float rotationValue = -Mathf.PI * Mathf.Cos(offsetAngle + Mathf.Cos(offsetAngle)) + Mathf.PI;
+			float rotationValue = rotationAngle - ((i / 10f) * rotationAngleMod);
 
 			rings[i].Rotation = Mathf.Rad2Deg * rotationValue;
 		}
 	}
 
 	public override void OnObjectCollision ( ) {
-		DoQuickSpin(15);
+		Shrink(0.5f);
+
+		ChangeColorOfRings(toInsideRingColor: new Color(128 / 255f, 30 / 255f, 0 / 255f),
+			toMiddleRingColor: new Color(139 / 255f, 33 / 255f, 0 / 255f),
+			toOutsideRingColor: new Color(151 / 255f, 36 / 255f, 0 / 255f));
 	}
 }

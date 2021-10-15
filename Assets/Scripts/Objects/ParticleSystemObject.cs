@@ -28,9 +28,7 @@ public class ParticleSystemObject : MonoBehaviour {
 		if (particleSystemComponent == null) {
 			particleSystemComponent = GetComponent<ParticleSystem>( );
 		}
-	}
 
-	protected void Start ( ) {
 		transform.position = Utils.SetVectZ(transform.position, (int) layerType);
 	}
 

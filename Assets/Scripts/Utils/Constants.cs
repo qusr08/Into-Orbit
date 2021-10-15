@@ -51,4 +51,6 @@ public static class Constants {
 	public const float MAX_SEGMENT_STARTLENGTH = 1f;
 
 	public const int MAX_TRAJECTORY_ITERATIONS = 2000;
+
+	public const float PROPERTY_CHANGE_TIME = 0.3f;
 }

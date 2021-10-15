@@ -81,7 +81,7 @@ public class Trajectory : MonoBehaviour {
 				}
 			}
 
-			if (i > 50 && Utils.CloseEnough(currPosition, InitialPosition, checkValue: 0.02f) && Utils.CloseEnough(currVelocity, InitialForce)) {
+			if (i > 50 && Utils.Vect3CloseEnough(currPosition, InitialPosition, checkValue: 0.02f) && Utils.Vect3CloseEnough(currVelocity, InitialForce)) {
 				Debug.Log($"Trajectory is an orbit! [{TotalFrames} total frames]");
 
 				lineRenderer.loop = true;

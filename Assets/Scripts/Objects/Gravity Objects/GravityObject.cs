@@ -102,9 +102,9 @@ public abstract class GravityObject : MeshObject {
 				Position = portal.position;
 				travelToPortalPoint = Teleportal.GetTeleportPosition(Position, portal);
 			}
-		} else if (collisionTag.Equals("Button")) {
+		} else if (this is Ship && collisionTag.Equals("Button")) {
 			collision.transform.parent.GetComponent<ButtonObject>( ).OnObjectCollision( );
-		} else if (collisionTag.Equals("Boost Recharge")) {
+		} else if (this is Ship && collisionTag.Equals("Boost Recharge")) {
 			collision.transform.parent.GetComponent<BoostRechargeObject>( ).OnObjectCollision( );
 		}
 	}
@@ -135,7 +135,7 @@ public abstract class GravityObject : MeshObject {
 			Scale = Vector2.SmoothDamp(Scale, Vector2.zero, ref refWormholeScaleVelocity, 0.5f);
 
 			// If the ship has reached the center and is stopped, then the player has won the level
-			if (Utils.CloseEnough(Position, Wormhole.Position) && Utils.CloseEnough(Scale, Vector2.zero)) {
+			if (Utils.Vect3CloseEnough(Position, Wormhole.Position) && Utils.Vect3CloseEnough(Scale, Vector2.zero)) {
 				Position = Wormhole.Position;
 				Scale = Vector2.zero;
 
@@ -146,7 +146,7 @@ public abstract class GravityObject : MeshObject {
 		if (Teleportal != null) {
 			Position = Vector2.MoveTowards(Position, travelToPortalPoint, Time.fixedDeltaTime * Constants.TELEPORT_SPEED);
 
-			if (Utils.CloseEnough(Position, travelToPortalPoint)) {
+			if (Utils.Vect3CloseEnough(Position, travelToPortalPoint)) {
 				Position = travelToPortalPoint;
 
 				Teleportal = null;

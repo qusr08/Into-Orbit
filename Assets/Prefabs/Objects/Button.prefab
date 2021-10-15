@@ -335,9 +335,11 @@ MonoBehaviour:
   - {fileID: 5536204024428866122}
   - {fileID: 5536204022870434131}
   - {fileID: 5536204023488493385}
-  scaleChange: 0
   randomScaleStartingAngle: 0
   randomRotationStartingAngle: 1
+  randomScaleAngleDirection: 0
+  randomRotationAngleDirection: 0
+  scaleChange: 0
   scaleSpeed: 0
   rotationSpeed: 0.01
 --- !u!1 &5536204023303558513
@@ -923,7 +925,7 @@ GameObject:
   - component: {fileID: 5536204024428866127}
   m_Layer: 0
   m_Name: Outside
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
