@@ -28,6 +28,7 @@ public abstract class SpaceObject : MonoBehaviour {
 
 	private bool doAnimation;
 	private bool stopAnimatingWhenDone;
+	protected bool isActive;
 
 	private bool isShrinking;
 	private float scalingMod;
@@ -109,6 +110,8 @@ public abstract class SpaceObject : MonoBehaviour {
 		}
 
 		doAnimation = true;
+		isActive = true;
+
 		scalingMod = 1;
 		startingScale = Scale;
 	}

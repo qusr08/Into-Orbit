@@ -13,6 +13,7 @@ public class Ship : GravityObject {
 	private Vector2 lastMousePosition;
 
 	// Whether or not the player is currently launching the ship
+	private bool canLaunch;
 	private bool IsLaunching {
 		get {
 			return launchingIndicator.gameObject.activeSelf;
@@ -20,6 +21,9 @@ public class Ship : GravityObject {
 
 		set {
 			launchingIndicator.gameObject.SetActive(value);
+
+			Time.timeScale = (value && !IsLocked) ? Constants.LAUNCHING_TIMESCALE : 1f;
+			Time.fixedDeltaTime = Constants.DEFAULT_FIXED_DELTA_TIME * Time.timeScale;
 
 			if (value) {
 				// Create meshPieces for the trail
@@ -40,13 +44,14 @@ public class Ship : GravityObject {
 			}
 		}
 	}
-	private List<MeshParticle> launchingDots; // All of the meshPieces that make up the trail while launching
+	private List<MeshParticle> launchingDots = new List<MeshParticle>( ); // All of the meshPieces that make up the trail while launching
 
 	protected void OnMouseOver ( ) {
 		// If the mouse is hovered over the ship and the left mouse button is pressed and it is not currently launching,
 		// begin to launch the ship
-		if (Input.GetMouseButtonDown(0) && !IsLaunching) {
+		if (canLaunch && Input.GetMouseButtonDown(0) && !IsLaunching) {
 			IsLaunching = true;
+			canLaunch = false;
 		}
 	}
 
@@ -54,6 +59,8 @@ public class Ship : GravityObject {
 		base.Start( );
 
 		lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		ResetLaunch( );
 	}
 
 	protected new void Update ( ) {
@@ -82,6 +89,8 @@ public class Ship : GravityObject {
 				if (launchMagnitude >= Constants.MIN_LAUNCH_DISTANCE) {
 					// Unlock the ship and add a force the is proportional to the distance the player dragged the mouse
 					IsLocked = false;
+
+					rigidBody.velocity = Vector2.zero;
 					rigidBody.AddForce(launchDirection * (launchMagnitude / Constants.MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
 
 					// Reset camera FOV
@@ -139,9 +148,9 @@ public class Ship : GravityObject {
 				Vector2 gravityAcc = gravityForce / Mass;
 
 				// Increment the velocity by the acceleration
-				currVelocity += gravityAcc * Time.fixedDeltaTime;
+				currVelocity += gravityAcc * Constants.DEFAULT_FIXED_DELTA_TIME;
 				// Increment the position by the velocity
-				currPosition += currVelocity * Time.fixedDeltaTime;
+				currPosition += currVelocity * Constants.DEFAULT_FIXED_DELTA_TIME;
 
 				// My Forum Post: https://forum.unity.com/threads/need-help-predicting-the-path-of-an-object-in-a-2d-gravity-simulation.1170098/
 
@@ -183,5 +192,10 @@ public class Ship : GravityObject {
 
 		// Destroy this ship gameobject
 		Destroy(gameObject);
+	}
+
+	public void ResetLaunch (bool forceStartLaunching = false) {
+		canLaunch = true;
+		IsLaunching = forceStartLaunching;
 	}
 }

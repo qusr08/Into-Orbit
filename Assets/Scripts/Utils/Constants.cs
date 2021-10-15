@@ -56,4 +56,7 @@ public static class Constants {
 
 	public const float MIN_GRAVITY_INFLUENCE = 0.005f;
 	public const float MAX_CENTER_DISTANCE = 30f;
+
+	public const float LAUNCHING_TIMESCALE = 0.1f;
+	public const float DEFAULT_FIXED_DELTA_TIME = 0.02f;
 }

@@ -13,8 +13,9 @@ public class Wormhole : SpaceObject {
 	}
 
 	public override void OnObjectCollision (GameObject collisionObject) {
-		if (collisionObject.GetComponent<Ship>() != null) {
+		if (isActive && collisionObject.GetComponent<Ship>() != null) {
 			uiManager.HasCompleted = true;
+			isActive = false;
 		}
 	}
 }
