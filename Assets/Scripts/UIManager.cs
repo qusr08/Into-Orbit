@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour {
 	[SerializeField] private CanvasGroup endScreen;
 	[SerializeField] private CanvasGroup pauseScreen;
 
-	private float timer;
+	private float timer = -1;
 
 	public bool HasCrashed {
 		set {
@@ -99,7 +99,9 @@ public class UIManager : MonoBehaviour {
 				IsPaused = !IsPaused;
 			}
 
-			timer += Time.unscaledDeltaTime;
+			if (timer >= 0) {
+				timer += Time.unscaledDeltaTime;
+			}
 		}
 	}
 
@@ -112,6 +114,13 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void RestartScene ( ) {
+		Debug.Log("RESTART");
 		SceneManager.LoadScene(SceneManager.GetActiveScene( ).buildIndex);
+	}
+
+	public void StartTimer ( ) {
+		if (timer < 0) {
+			timer = 0;
+		}
 	}
 }

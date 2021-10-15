@@ -99,6 +99,8 @@ public class Ship : GravityObject {
 					rigidBody.velocity = Vector2.zero;
 					rigidBody.AddForce(launchDirection * (launchMagnitude / Constants.MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
 
+					uiManager.StartTimer( );
+
 					// Spawn launch explosion meshPieces
 					levelManager.SpawnParticleSystem(ParticleSystemType.Launch, Position, angle: 90 + Utils.GetAngleBetween(Position, launchDirection));
 				} else {
@@ -132,7 +134,7 @@ public class Ship : GravityObject {
 		launchingIndicator.GetComponent<SpriteRenderer>( ).size = new Vector2(distance, height);
 
 		// Position the launching stats for the player
-		launchingStats.position = Position + p1;
+		launchingStats.position = Input.mousePosition;
 		powerText.text = $"Power: {System.Math.Round(distance, 2)}x";
 		angleText.text = $"Angle: {System.Math.Round(launchingIndicator.eulerAngles.z, 2)}*";
 	}
@@ -203,6 +205,8 @@ public class Ship : GravityObject {
 
 		IsLaunching = false;
 		uiManager.HasCrashed = true;
+
+		Debug.Log("DEATH");
 
 		// Destroy this ship gameobject
 		Destroy(gameObject);

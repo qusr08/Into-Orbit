@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour {
 	[Separator("Camera Manager")]
 	[SerializeField] public Transform Target;
+	[SerializeField] [ConditionalField("Target")] private bool repositionToTarget;
 	[Separator("Constants")]
 	[SerializeField] [Range(0f, 1f)] private float stiffness;
 
@@ -32,6 +33,10 @@ public class CameraManager : MonoBehaviour {
 			}
 		} else {
 			transform.position = Utils.SetVectZ(Target.position, transform.position.z);
+		
+			if (repositionToTarget) {
+				repositionToTarget = false;
+			}
 		}
 	}
 
