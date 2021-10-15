@@ -1,7 +1,9 @@
 using MyBox;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
@@ -17,6 +19,8 @@ public class UIManager : MonoBehaviour {
 	[Space]
 	[SerializeField] private CanvasGroup endScreen;
 	[SerializeField] private CanvasGroup pauseScreen;
+
+	private float timer;
 
 	public bool HasCrashed {
 		set {
@@ -53,6 +57,9 @@ public class UIManager : MonoBehaviour {
 			completeText.SetActive(value);
 			timeCompletedText.gameObject.SetActive(value);
 
+			TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+			timeCompletedText.text = $"Time Completed: {timeSpan.ToString(@"s\:fff")}";
+
 			deathMenuButtons.SetActive(false);
 			completeMenuButtons.SetActive(value);
 		}
@@ -87,8 +94,12 @@ public class UIManager : MonoBehaviour {
 	}
 
 	protected void Update ( ) {
-		if (IsPlaying && Input.GetKeyDown(KeyCode.Escape)) {
-			IsPaused = !IsPaused;
+		if (IsPlaying) {
+			if (Input.GetKeyDown(KeyCode.Escape)) {
+				IsPaused = !IsPaused;
+			}
+
+			timer += Time.unscaledDeltaTime;
 		}
 	}
 
@@ -101,6 +112,6 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void RestartScene ( ) {
-
+		SceneManager.LoadScene(SceneManager.GetActiveScene( ).buildIndex);
 	}
 }

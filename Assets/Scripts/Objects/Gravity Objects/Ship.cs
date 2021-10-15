@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Ship : GravityObject {
 	[Separator("Ship")]
+	[SerializeField] private Transform launchingStats;
+	[SerializeField] private Text angleText;
+	[SerializeField] private Text powerText;
+	[Space]
 	[SerializeField] private Transform launchingIndicator;
 	[SerializeField] private int launchDotCount = 20;
 	[SerializeField] private int launchDotDensity = 5;
@@ -21,6 +26,7 @@ public class Ship : GravityObject {
 
 		set {
 			launchingIndicator.gameObject.SetActive(value);
+			launchingStats.gameObject.SetActive(value);
 
 			Time.timeScale = (value && !IsLocked) ? Constants.LAUNCHING_TIMESCALE : 1f;
 			Time.fixedDeltaTime = Constants.DEFAULT_FIXED_DELTA_TIME * Time.timeScale;
@@ -53,7 +59,7 @@ public class Ship : GravityObject {
 			IsLaunching = true;
 			canLaunch = false;
 		}
-	} 
+	}
 
 	protected new void Start ( ) {
 		base.Start( );
@@ -93,14 +99,14 @@ public class Ship : GravityObject {
 					rigidBody.velocity = Vector2.zero;
 					rigidBody.AddForce(launchDirection * (launchMagnitude / Constants.MAX_LAUNCH_DISTANCE), ForceMode2D.Impulse);
 
-					// Reset camera FOV
-					cameraController.ResetFOV( );
-
 					// Spawn launch explosion meshPieces
 					levelManager.SpawnParticleSystem(ParticleSystemType.Launch, Position, angle: 90 + Utils.GetAngleBetween(Position, launchDirection));
 				} else {
 					canLaunch = true;
 				}
+
+				// Reset camera FOV
+				cameraController.ResetFOV( );
 			}
 
 			// Update the last mouse position
@@ -115,7 +121,7 @@ public class Ship : GravityObject {
 		transform.rotation = Quaternion.Euler(0, 0, Utils.GetAngleBetween(p1, p2) - 90);
 
 		// Set indicator to the midpoint between the mouse and the ship
-		Vector3 indicatorPosition = new Vector2(p1.x + p2.x, p1.y + p2.y) / 2;
+		Vector3 indicatorPosition = (p1 + p2) / 2;
 		launchingIndicator.position = Utils.SetVectZ(Utils.LimitVect3(Position, indicatorPosition, 0, Constants.MAX_LAUNCH_DISTANCE / 2), (int) LayerType + 1);
 
 		// Calculate rotation angle of this transform relative to the indicator
@@ -124,6 +130,11 @@ public class Ship : GravityObject {
 		// Set the size of the indicator based on the distance of the mouse from the ship
 		float height = launchingIndicator.GetComponent<SpriteRenderer>( ).size.y;
 		launchingIndicator.GetComponent<SpriteRenderer>( ).size = new Vector2(distance, height);
+
+		// Position the launching stats for the player
+		launchingStats.position = Position + p1;
+		powerText.text = $"Power: {System.Math.Round(distance, 2)}x";
+		angleText.text = $"Angle: {System.Math.Round(launchingIndicator.eulerAngles.z, 2)}*";
 	}
 
 	private void CreateDots (Vector2 direction, float magnitude) {
