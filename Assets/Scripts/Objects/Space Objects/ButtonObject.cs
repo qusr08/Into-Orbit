@@ -12,13 +12,13 @@ public class ButtonObject : SpaceObject {
 	}
 
 	public override void OnObjectCollision (GameObject collisionObject) {
-		Shrink(0.5f);
-
-		ChangeColorOfRings(toInsideRingColor: new Color(152 / 255f, 198 / 255f, 0 / 255f),
-			toOutsideRingColor: new Color(179 / 255f, 234 / 255f, 0 / 255f));
-
 		Ship ship = collisionObject.GetComponent<Ship>( );
 		if (isActive && ship != null) {
+			Shrink(0.5f);
+
+			ChangeColorOfRings(toInsideRingColor: new Color(152 / 255f, 198 / 255f, 0 / 255f),
+				toOutsideRingColor: new Color(179 / 255f, 234 / 255f, 0 / 255f));
+
 			levelManager.ActiveButtonCount++;
 			levelManager.SpawnParticleSystem(ParticleSystemType.Button, Position);
 

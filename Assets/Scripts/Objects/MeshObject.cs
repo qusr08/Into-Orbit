@@ -59,7 +59,7 @@ public class MeshObject : MonoBehaviour {
 			layerType = value;
 
 			// Update the layer
-			transform.position = new Vector3(transform.position.x, transform.position.y, (int) LayerType);
+			Position = Position;
 		}
 	}
 	public Color Color {
@@ -164,7 +164,7 @@ public class MeshObject : MonoBehaviour {
 		}
 
 		set {
-			transform.position = new Vector3(value.x, value.y, transform.position.z);
+			transform.position = new Vector3(value.x, value.y, (int) LayerType);
 		}
 	}
 	public Vector2 Scale {

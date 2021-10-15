@@ -12,14 +12,14 @@ public class BoostRechargeObject : SpaceObject {
 	}
 
 	public override void OnObjectCollision (GameObject collisionObject) {
-		Shrink(0.5f);
-
-		ChangeColorOfRings(toInsideRingColor: new Color(128 / 255f, 30 / 255f, 0 / 255f),
-			toMiddleRingColor: new Color(139 / 255f, 33 / 255f, 0 / 255f),
-			toOutsideRingColor: new Color(151 / 255f, 36 / 255f, 0 / 255f));
-
 		Ship ship = collisionObject.GetComponent<Ship>( );
 		if (isActive && ship != null) {
+			Shrink(0.5f);
+
+			ChangeColorOfRings(toInsideRingColor: new Color(128 / 255f, 30 / 255f, 0 / 255f),
+				toMiddleRingColor: new Color(139 / 255f, 33 / 255f, 0 / 255f),
+				toOutsideRingColor: new Color(151 / 255f, 36 / 255f, 0 / 255f));
+
 			ship.ResetLaunch(true);
 			levelManager.SpawnParticleSystem(ParticleSystemType.BoostRecharge, Position);
 

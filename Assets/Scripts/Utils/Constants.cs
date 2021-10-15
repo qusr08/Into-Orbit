@@ -18,6 +18,7 @@ public enum LayerType {
 	EnvironmentDetailOutside = 82,
 	EnvironmentDetailMiddle = 81,
 	EnvironmentDetailInside = 80,
+	EnvironmentDetailFront = 76,
 	Trail = 75,
 	Environment = 70,
 	ShipDetail = 40,
@@ -57,7 +58,7 @@ public static class Constants {
 	public const float PROPERTY_CHANGE_TIME = 0.3f;
 
 	public const float MIN_GRAVITY_INFLUENCE = 0.005f;
-	public const float MAX_CENTER_DISTANCE = 20f;
+	public const float MAX_CENTER_DISTANCE = 15f;
 
 	public const float LAUNCHING_TIMESCALE = 0.1f;
 	public const float DEFAULT_FIXED_DELTA_TIME = 0.02f;

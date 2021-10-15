@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour {
 			timeCompletedText.gameObject.SetActive(value);
 
 			TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
-			timeCompletedText.text = $"Time Completed: {timeSpan.ToString(@"s\:fff")}";
+			timeCompletedText.text = $"Time Completed:    {timeSpan.ToString(@"s\:fff")}s";
 
 			deathMenuButtons.SetActive(false);
 			completeMenuButtons.SetActive(value);

@@ -201,6 +201,7 @@ public class Ship : GravityObject {
 		// Spawn explosion
 		levelManager.SpawnParticleSystem(ParticleSystemType.Explosion, Position);
 
+		IsLaunching = false;
 		uiManager.HasCrashed = true;
 
 		// Destroy this ship gameobject
