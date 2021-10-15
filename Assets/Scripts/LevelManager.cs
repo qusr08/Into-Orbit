@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour {
 	[SerializeField] private GameObject collisionParticleSystemPrefab;
 	[SerializeField] private GameObject teleportParticleSystemPrefab;
 	[SerializeField] private GameObject launchParticleSystemPrefab;
+	[SerializeField] private GameObject boostRechargeParticleSystemPrefab;
+	[SerializeField] private GameObject buttonParticleSystemPrefab;
 	[Space]
 	[SerializeField] private List<Planet> planets = new List<Planet>( );
 	[SerializeField] private List<Wormhole> wormholes = new List<Wormhole>( );
@@ -25,6 +27,11 @@ public class LevelManager : MonoBehaviour {
 	[SerializeField] public Vector2 CenterOfMass;
 
 	public int ActiveButtonCount;
+	public bool GatesOpen {
+		get {
+			return ActiveButtonCount == buttons.Count;
+		}
+	}
 
 	protected void OnValidate ( ) {
 		planets.Clear( );
@@ -47,12 +54,22 @@ public class LevelManager : MonoBehaviour {
 
 		boostRecharges.Clear( );
 		boostRecharges.AddRange(FindObjectsOfType<BoostRechargeObject>( ));
+	}
 
+	protected void Start ( ) {
 		Vector2 totalPosition = Vector2.zero;
 		foreach (Planet planet in planets) {
 			totalPosition += planet.Position;
 		}
 		CenterOfMass = totalPosition / (planets.Count + 1f);
+	}
+
+	protected void Update ( ) {
+		if (GatesOpen) {
+			foreach (GateObject gate in gates) {
+				gate.IsOpen = true;
+			}
+		}
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {
@@ -139,6 +156,12 @@ public class LevelManager : MonoBehaviour {
 				break;
 			case ParticleSystemType.Teleport:
 				system = Instantiate(teleportParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
+				break;
+			case ParticleSystemType.BoostRecharge:
+				system = Instantiate(boostRechargeParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
+				break;
+			case ParticleSystemType.Button:
+				system = Instantiate(buttonParticleSystemPrefab, position, Quaternion.Euler(0, 0, angle));
 				break;
 		}
 

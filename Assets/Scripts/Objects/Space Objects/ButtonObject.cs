@@ -16,5 +16,13 @@ public class ButtonObject : SpaceObject {
 
 		ChangeColorOfRings(toInsideRingColor: new Color(152 / 255f, 198 / 255f, 0 / 255f),
 			toOutsideRingColor: new Color(179 / 255f, 234 / 255f, 0 / 255f));
+
+		Ship ship = collisionObject.GetComponent<Ship>( );
+		if (isActive && ship != null) {
+			levelManager.ActiveButtonCount++;
+			levelManager.SpawnParticleSystem(ParticleSystemType.Button, Position);
+
+			isActive = false;
+		}
 	}
 }

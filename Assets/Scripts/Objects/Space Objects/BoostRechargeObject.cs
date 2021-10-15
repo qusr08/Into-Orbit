@@ -21,6 +21,8 @@ public class BoostRechargeObject : SpaceObject {
 		Ship ship = collisionObject.GetComponent<Ship>( );
 		if (isActive && ship != null) {
 			ship.ResetLaunch(true);
+			levelManager.SpawnParticleSystem(ParticleSystemType.BoostRecharge, Position);
+
 			isActive = false;
 		}
 	}

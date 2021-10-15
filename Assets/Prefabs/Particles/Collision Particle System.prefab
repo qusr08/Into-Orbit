@@ -50,7 +50,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 1
-  useUnscaledTime: 1
+  useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
   startDelay:
@@ -4819,6 +4819,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystemComponent: {fileID: 2881110983041004530}
   layerType: 15
-  IsEnabled: 1
   hasLifespan: 1
   lifespan: 1

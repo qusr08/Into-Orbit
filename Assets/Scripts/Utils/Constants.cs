@@ -30,7 +30,9 @@ public enum ParticleSystemType {
 	Collision,
 	Launch,
 	Explosion,
-	Teleport
+	Teleport,
+	BoostRecharge,
+	Button
 }
 
 public static class Constants {
