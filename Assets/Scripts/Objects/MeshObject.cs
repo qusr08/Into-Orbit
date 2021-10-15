@@ -164,10 +164,6 @@ public class MeshObject : MonoBehaviour {
 		}
 
 		set {
-			if (this is Ship) {
-				Debug.Log(value);
-			}
-
 			transform.position = new Vector3(value.x, value.y, (int) LayerType);
 		}
 	}

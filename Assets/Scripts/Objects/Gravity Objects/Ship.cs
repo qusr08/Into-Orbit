@@ -102,7 +102,7 @@ public class Ship : GravityObject {
 					uiManager.StartTimer( );
 
 					// Spawn launch explosion meshPieces
-					levelManager.SpawnParticleSystem(ParticleSystemType.Launch, Position, angle: 90 + Utils.GetAngleBetween(Position, launchDirection));
+					levelManager.SpawnParticleSystem(ParticleSystemType.Launch, Position, angle: 157.5f + Utils.GetAngleBetween(Position, launchDirection));
 				} else {
 					canLaunch = true;
 				}

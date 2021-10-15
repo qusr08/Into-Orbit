@@ -91,6 +91,7 @@ public class UIManager : MonoBehaviour {
 
 	protected void Awake ( ) {
 		IsPlaying = true;
+		IsPaused = false;
 	}
 
 	protected void Update ( ) {
@@ -113,8 +114,8 @@ public class UIManager : MonoBehaviour {
 
 	}
 
-	public void RestartScene ( ) {
-		Debug.Log("RESTART");
+	public void RestartScene (string name) {
+		// Debug.Log(name);
 		SceneManager.LoadScene(SceneManager.GetActiveScene( ).buildIndex);
 	}
 
