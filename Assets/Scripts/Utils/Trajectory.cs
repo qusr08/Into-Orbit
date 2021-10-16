@@ -48,6 +48,8 @@ public class Trajectory : MonoBehaviour {
 		Vector2 currVelocity = InitialForce;
 
 		// Clear the line renderer's current positions
+		positions.Clear( );
+		velocities.Clear( );
 		lineRenderer.positionCount = 0;
 		lineRenderer.loop = false;
 
@@ -63,9 +65,9 @@ public class Trajectory : MonoBehaviour {
 			Vector2 gravityAcc = gravityForce / Mass;
 
 			// Increment the velocity by the acceleration
-			currVelocity += gravityAcc * Time.fixedDeltaTime;
+			currVelocity += gravityAcc * Constants.DEFAULT_FIXED_DELTA_TIME;
 			// Increment the position by the velocity
-			currPosition += currVelocity * Time.fixedDeltaTime;
+			currPosition += currVelocity * Constants.DEFAULT_FIXED_DELTA_TIME;
 
 			// My Forum Post: https://forum.unity.com/threads/need-help-predicting-the-path-of-an-object-in-a-2d-gravity-simulation.1170098/
 

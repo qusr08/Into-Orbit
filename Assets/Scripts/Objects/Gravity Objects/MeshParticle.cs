@@ -7,9 +7,7 @@ public class MeshParticle : GravityObject {
 	[Separator("Mesh Particle")]
 	[SerializeField] public bool IsInitialized;
 
-	protected new void Start ( ) {
-		base.Start( );
-
+	protected void Start ( ) {
 		// The meshPiece class must be itialized beforehand to make sure the parameters are correct
 		if (!IsInitialized) {
 			Debug.LogError("Cannot create mesh particle without initialization.");

@@ -113,10 +113,6 @@ public abstract class GravityObject : MeshObject {
 		}
 	}
 
-	protected void Start ( ) {
-		parents = new List<MeshObject>( );
-	}
-
 	protected void Update ( ) {
 		if (teleportBufferTimer > 0) {
 			teleportBufferTimer -= Time.deltaTime;
@@ -128,7 +124,7 @@ public abstract class GravityObject : MeshObject {
 		base.FixedUpdate( );
 
 		// As long as the object is not locked, calculate the force that should be applied to it
-		if (!IsLocked && updateGravity) {
+		if (!IsLocked && updateGravity && levelManager != null) {
 			// Calculate the gravity that the ship will experience at the current position
 			Vector2 force = levelManager.CalculateGravityForce(this, onlyParents: parents);
 

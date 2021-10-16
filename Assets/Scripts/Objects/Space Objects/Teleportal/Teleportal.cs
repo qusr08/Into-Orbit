@@ -1,7 +1,6 @@
 using MyBox;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Teleportal : MonoBehaviour {
@@ -41,14 +40,18 @@ public class Teleportal : MonoBehaviour {
 		}
 	}
 
-	protected void OnValidate ( ) => EditorApplication.delayCall += _OnValidate;
-	private void _OnValidate ( ) {
+#if UNITY_EDITOR
+	protected void OnValidate ( ) => UnityEditor.EditorApplication.delayCall += _OnValidate;
+#endif
+	protected void _OnValidate ( ) {
+#if UNITY_EDITOR
 		// This is used to suppress warnings that Unity oh so kindy throws when editting meshes in OnValidate
-		EditorApplication.delayCall -= _OnValidate;
-		if (this == null || EditorApplication.isPlayingOrWillChangePlaymode) {
+		UnityEditor.EditorApplication.delayCall -= _OnValidate;
+		if (this == null || UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) {
 			return;
 		}
-
+#endif
+	
 		if (regenerateConnector) {
 			// Make sure the segments of the connector aren't too long
 			// This increases the segment density until they are less than the final length

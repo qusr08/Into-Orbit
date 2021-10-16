@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public Vector2 CalculateGravityForce (GravityObject gravityObject, List<MeshObject> onlyParents = null) {
-		return CalculateGravityForce(gravityObject.Position, gravityObject.Mass, onlyParents);
+		return CalculateGravityForce(gravityObject.Position, gravityObject.Mass, onlyParents: onlyParents);
 	}
 
 	public Vector2 CalculateGravityForce (Vector2 position, float mass, List<MeshObject> onlyParents = null) {

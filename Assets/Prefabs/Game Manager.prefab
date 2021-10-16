@@ -720,6 +720,7 @@ Transform:
   - {fileID: 6383488688073092476}
   - {fileID: 3130916018493186994}
   - {fileID: 111242951542710274}
+  - {fileID: 3755872101928914083}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -750,15 +751,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   wormholes:
   - {fileID: 0}
   teleportals: []
   asteroids: []
   buttons:
   - {fileID: 0}
-  - {fileID: 0}
   gates:
-  - {fileID: 0}
   - {fileID: 0}
   boostRecharges:
   - {fileID: 0}
@@ -1198,6 +1198,36 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1001 &447370276275908248
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6491601482367616714}
+    m_Modifications:
+    - target: {fileID: 3614957990022193723, guid: 6768adbef676c7f4098bd07b3e3e5cb6, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614957990022193723, guid: 6768adbef676c7f4098bd07b3e3e5cb6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614957990022193723, guid: 6768adbef676c7f4098bd07b3e3e5cb6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614957990022193723, guid: 6768adbef676c7f4098bd07b3e3e5cb6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6768adbef676c7f4098bd07b3e3e5cb6, type: 3}
+--- !u!4 &3755872101928914083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3614957990022193723, guid: 6768adbef676c7f4098bd07b3e3e5cb6, type: 3}
+  m_PrefabInstance: {fileID: 447370276275908248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1699607684895853120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2261,7 +2291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7509206571133165053, guid: b716dbeaf25b86c4ba7b888ded700cdf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509206571133165053, guid: b716dbeaf25b86c4ba7b888ded700cdf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2541,7 +2571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7509206571133165053, guid: b716dbeaf25b86c4ba7b888ded700cdf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7509206571133165053, guid: b716dbeaf25b86c4ba7b888ded700cdf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

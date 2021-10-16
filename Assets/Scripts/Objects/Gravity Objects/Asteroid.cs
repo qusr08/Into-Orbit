@@ -30,7 +30,11 @@ public class Asteroid : GravityObject {
 	}
 
 	protected new void OnValidate ( ) {
+#if UNITY_EDITOR
 		base.OnValidate( );
+#else
+		_OnValidate( );
+#endif
 
 		if (createTrajectoryObject) {
 			if (trajectory == null) {
@@ -66,9 +70,7 @@ public class Asteroid : GravityObject {
 		}
 	}
 
-	protected new void Start ( ) {
-		base.Start( );
-
+	protected void Start ( ) {
 		rigidBody.AddForce(initialVelocity, ForceMode2D.Impulse);
 	}
 

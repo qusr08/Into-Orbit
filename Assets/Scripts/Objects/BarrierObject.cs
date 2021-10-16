@@ -9,7 +9,11 @@ public class BarrierObject : MeshObject {
 	[SerializeField] private Planet planet2;
 
 	protected new void OnValidate ( ) {
+#if UNITY_EDITOR
 		base.OnValidate( );
+#else
+		_OnValidate( );
+#endif
 
 		if (planet1 != null && planet2 != null) {
 			Position = (planet1.Position + planet2.Position) / 2;

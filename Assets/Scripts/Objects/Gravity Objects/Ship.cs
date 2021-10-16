@@ -61,9 +61,7 @@ public class Ship : GravityObject {
 		}
 	}
 
-	protected new void Start ( ) {
-		base.Start( );
-
+	protected void Start ( ) {
 		lastMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		ResetLaunch( );
@@ -80,13 +78,15 @@ public class Ship : GravityObject {
 			float launchMagnitude = Utils.Limit(Vector2.Distance(p1, p2), 0, Constants.MAX_LAUNCH_DISTANCE);
 
 			// If the mouse position was moved, then recalculate the positions of the launch meshPieces/indicator
-			if (p1 != lastMousePosition) {
-				PositionIndicator(p1, p2, launchMagnitude);
-				CreateDots(launchDirection, launchMagnitude);
+			PositionIndicator(p1, p2, launchMagnitude);
+			CreateDots(launchDirection, launchMagnitude);
 
-				// Update the camera FOV based on the distance
-				cameraController.SetTargetFOV(Utils.Map(launchMagnitude, 0, Constants.MAX_LAUNCH_DISTANCE, Constants.MIN_CAMERA_FOV, Constants.MAX_CAMERA_FOV));
-			}
+			// Update the camera FOV based on the distance
+			cameraController.SetTargetFOV(Utils.Map(launchMagnitude, 0, Constants.MAX_LAUNCH_DISTANCE, Constants.MIN_CAMERA_FOV, Constants.MAX_CAMERA_FOV));
+			
+			
+			//if (p1 != lastMousePosition) {
+			//}
 
 			// If the left mouse button is unpressed, disable launching
 			if (Input.GetMouseButtonUp(0)) {
@@ -205,8 +205,6 @@ public class Ship : GravityObject {
 
 		IsLaunching = false;
 		uiManager.HasCrashed = true;
-
-		Debug.Log("DEATH");
 
 		// Destroy this ship gameobject
 		Destroy(gameObject);

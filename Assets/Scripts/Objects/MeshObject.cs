@@ -2,6 +2,7 @@ using MyBox;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MeshObject : MonoBehaviour {
 	[Separator("Mesh Object")]
@@ -186,13 +187,16 @@ public class MeshObject : MonoBehaviour {
 		}
 	}
 
-	protected void OnValidate ( ) => UnityEditor.EditorApplication.delayCall += _OnValidate;
-	private void _OnValidate ( ) {
+#if UNITY_EDITOR
+	protected void OnValidate ( ) => EditorApplication.delayCall += _OnValidate;
+#endif
+	protected void _OnValidate ( ) {
+#if UNITY_EDITOR
 		// This is used to suppress warnings that Unity oh so kindy throws when editting meshes in OnValidate
-		UnityEditor.EditorApplication.delayCall -= _OnValidate;
+		EditorApplication.delayCall -= _OnValidate;
 		if (this == null)
 			return;
-
+#endif
 		// Make sure all components of the object are not null
 		if (levelManager == null) {
 			levelManager = FindObjectOfType<LevelManager>( );

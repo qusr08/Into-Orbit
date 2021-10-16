@@ -107,16 +107,15 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void GoToMainMenu ( ) {
-
+		FindObjectOfType<TransitionManager>( ).TransitionToScene(0);
 	}
 
 	public void GoToLevelSelect ( ) {
-
+		FindObjectOfType<TransitionManager>( ).TransitionToScene(1);
 	}
 
-	public void RestartScene (string name) {
-		// Debug.Log(name);
-		SceneManager.LoadScene(SceneManager.GetActiveScene( ).buildIndex);
+	public void RestartScene () {
+		FindObjectOfType<TransitionManager>( ).TransitionToScene(SceneManager.GetActiveScene( ).buildIndex);
 	}
 
 	public void StartTimer ( ) {
